@@ -1,8 +1,9 @@
 import React from 'react'
 import numeral from 'numeral'
 import moment from 'moment'
-import { StyleSheet, View, ActivityIndicator, Text, ScrollView, Image } from 'react-native'
+import { StyleSheet, View, Button, ActivityIndicator, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi'
+import { connect } from 'react-redux'
 
 class FilmDetail extends React.Component {
 
@@ -23,6 +24,28 @@ class FilmDetail extends React.Component {
         })
     }
 
+    _displayFavoriteImage() {
+        var sourceImage = require('C:/ReactNative/MoviesAndMe/Images/ic_favorite_border.png')
+        if (this.props.favoritesFilm.findIndex(item => item.id === this.state.film.id) !== -1 ) {
+            sourceImage = require('C:/ReactNative/MoviesAndMe/Images/ic_favorite.png')
+        }
+        return (
+            <Image
+                source={sourceImage}
+                style={styles.favorite_image}
+            />
+        )
+    }
+
+    _toggleFavorite() {
+        const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
+        this.props.dispatch(action)
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.favoritesFilm);
+    }
+
     _displayFilm() {
         const film = this.state.film
         if (film != undefined) {
@@ -33,19 +56,24 @@ class FilmDetail extends React.Component {
                         source={{uri: getImageFromApi(film.backdrop_path)}}
                     />
                     <Text style={styles.title_text}>{film.title}</Text>
-            <Text style={styles.description_text}>{film.overview}</Text>
-            <Text style={styles.other_text}>Sorti le {moment(film.release_date).format('L')}</Text>
-            <Text style={styles.other_text}>Note : {film.vote_average}</Text>
-            <Text style={styles.other_text}>Nombre de votes : {film.vote_count}</Text>
-            <Text style={styles.other_text}>Budget : {numeral(film.budget).format('0,0[.]00 $')}</Text>
-            <Text style={styles.other_text}>Genre(s) : {film.genres.map(function(genre){
-                    return genre.name;
-                }).join(" / ")}
-            </Text>
-            <Text style={styles.other_text}>Compagnie(s) : {film.production_companies.map(function(company){
-                    return company.name;
-                }).join(" / ")}
-            </Text>
+                    <TouchableOpacity
+                        style={styles.favotite_container}
+                        onPress={ () => this._toggleFavorite()}>
+                        {this._displayFavoriteImage()}
+                    </TouchableOpacity>
+                    <Text style={styles.description_text}>{film.overview}</Text>
+                    <Text style={styles.other_text}>Sorti le {moment(film.release_date).format('L')}</Text>
+                    <Text style={styles.other_text}>Note : {film.vote_average}</Text>
+                    <Text style={styles.other_text}>Nombre de votes : {film.vote_count}</Text>
+                    <Text style={styles.other_text}>Budget : {numeral(film.budget).format('0,0[.]00 $')}</Text>
+                    <Text style={styles.other_text}>Genre(s) : {film.genres.map(function(genre){
+                            return genre.name;
+                        }).join(" / ")}
+                    </Text>
+                    <Text style={styles.other_text}>Compagnie(s) : {film.production_companies.map(function(company){
+                            return company.name;
+                        }).join(" / ")}
+                    </Text>
                 </ScrollView>
             )
         }
@@ -107,7 +135,19 @@ const styles = StyleSheet.create({
     },
     other_text: {
         fontSize: 14
+    },
+    favotite_container: {
+        alignItems: 'center'
+    },
+    favorite_image: {
+        width: 40,
+        height: 40
     }
 })
 
-export default FilmDetail
+const mapStateToProps = (state) => {
+    return {
+        favoritesFilm: state.favoritesFilm
+    }
+}
+export default connect(mapStateToProps)(FilmDetail)
