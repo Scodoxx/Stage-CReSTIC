@@ -114,9 +114,9 @@ const styles = StyleSheet.create ({
     }
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        favoritesFilms: state.favoritesFilm
+        favoritesFilm: state.favoritesFilm
     }
 }
 export default connect(mapStateToProps)(Search)

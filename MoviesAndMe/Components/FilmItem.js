@@ -5,11 +5,10 @@ import { getImageFromApi } from '../API/TMDBApi'
 class FilmItem extends React.Component {
 
     _displayFavorite() {
-        var sourceImage = require('C:/ReactNative/MoviesAndMe/Images/ic_favorite.png')
         if(this.props.isFavorite) {
             return (
                 <Image
-                    source={sourceImage}
+                    source={require('C:/ReactNative/MoviesAndMe/Images/ic_favorite.png')}
                     style={styles.favorite_image}
                 />
             )
@@ -90,8 +89,9 @@ const styles = StyleSheet.create({
         fontSize: 14
     },
     favorite_image: {
-        width: 20,
-        height: 20
+        width: 25,
+        height: 25,
+        marginRight: 5
     }
 })
 
