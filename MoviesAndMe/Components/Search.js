@@ -1,8 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Button, TextInput, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Button, TextInput, ActivityIndicator } from 'react-native'
 import FilmList from './FilmList'
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi'
-import { connect } from 'react-redux'
 
 
 class Search extends React.Component {
@@ -15,7 +14,7 @@ class Search extends React.Component {
             films: [],
             isLoading: false
         }
-        this.searchedText = ""
+        this._loadFilms = this._loadFilms.bind(this)
     }
 
     _loadFilms() {
@@ -71,6 +70,7 @@ class Search extends React.Component {
                     loadFilms={this._loadFilms}
                     page={this.page}
                     totalPages={this.totalPages}
+                    favoriteList={false}
                 />
                 {this._displayLoading()}
             </View>
@@ -103,9 +103,4 @@ const styles = StyleSheet.create ({
     }
 })
 
-const mapStateToProps = (state) => {
-    return {
-        favoritesFilm: state.favoritesFilm
-    }
-}
-export default connect(mapStateToProps)(Search)
+export default Search

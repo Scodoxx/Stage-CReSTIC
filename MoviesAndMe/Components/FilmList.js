@@ -1,4 +1,4 @@
-from React import 'react'
+import React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import FilmItem from './FilmItem'
 import { connect } from 'react-redux'
@@ -19,7 +19,7 @@ class FilmList extends React.Component {
 
     render() {
         return (
-            <Flatlist
+            <FlatList
                 style={styles.list}
                 data={this.props.films}
                 extraDatas={this.props.favoritesFilm}
@@ -29,15 +29,15 @@ class FilmList extends React.Component {
                             film={item}
                             isFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false}
                             displayDetailForFilm={this._displayDetailForFilm}
-                        />
+                    />
                 )}
                     onEndReachedThreshold={0.5}
                     onEndReached={() => {
-                        if (this.page < this.totalPages) {
-                            this._loadFilms()
+                        if (this.props.page < this.props.totalPages) {
+                            this.props.loadFilms()
                         }
                     }}
-                />
+            />
         )
     }
 
@@ -48,3 +48,11 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
+
+const mapStateToProps = state => {
+    return {
+        favoritesFilm: state.favoritesFilm
+    }
+}
+
+export default connect(mapStateToProps)(FilmList)
