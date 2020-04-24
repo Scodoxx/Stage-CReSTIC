@@ -2,13 +2,23 @@
 //Écran de chargement
 
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import * as firebase from 'firebase'
 
-export default class LoadingScreen extends React.Component {
+class LoadingScreen extends React.Component {
+    
+    //Une fois le chargement fini l'utilisateur est ramené vers l'authentification ou l'accueil si il est déjà connecté
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            this.props.navigation.navigate(user ? "App" : "Auth")
+        })
+    }
+
     render() {
         return (
             <View style={styles.main_container}>
-                <Text>Chargement</Text>
+                <Text>Chargement...</Text>
+                <ActivityIndicator size="large"/>
             </View>
         )
     }
