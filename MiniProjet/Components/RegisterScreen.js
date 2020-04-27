@@ -2,10 +2,16 @@
 //Écran d'inscription
 
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import *  as firebase from 'firebase'
 
 class RegisterScreen extends React.Component {
+
+    //On enlève l'entête sur l'écran "Inscripton"
+    static navigationOptions = {
+        headerShown: false
+    }
 
     state = {
         name: "",
@@ -30,8 +36,25 @@ class RegisterScreen extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <Text style={styles.welcome}>{"Pas encore inscrit ? C'est par ici !"}</Text>
-                
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    source={require("../Images/headerAuth.png")}
+                    style={{marginTop: -70}}
+                ></Image>
+
+                <Image
+                    source={require("../Images/headerAuth.png")}
+                    style={{position: "absolute"}}
+                ></Image>
+
+                <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
+                    <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
+                </TouchableOpacity>
+
+                <View style={styles.cadre}>
+                    <Text style={styles.welcome}>{"Pas encore inscrit ? C'est par ici !"}</Text>
+                </View>
+
                 <View style={styles.error_message}>
                     {this.state.errorMessage && <Text style={styles.error}></Text>}
                 </View>
@@ -90,11 +113,18 @@ const styles = StyleSheet.create({
     main_container: {
         flex: 1
     },
+    cadre: {
+        backgroundColor: "rgba(255,255,255,0.7)",
+        width: "50%",
+        borderWidth: 1,
+        alignSelf: "center",
+        borderRadius: 20
+    },
     welcome: {
-        marginTop: 32,
         fontSize: 18,
         fontWeight: '400',
-        textAlign: 'center'
+        textAlign: 'center',
+        padding: 5
     },
     error_message: {
         height: 72,
@@ -130,6 +160,17 @@ const styles = StyleSheet.create({
         height: 52,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    back: {
+        position: "absolute",
+        top: 48,
+        left: 28,
+        width: 50,
+        height: 50,
+        borderRadius: 24,
+        backgroundColor: "rgba(21, 22, 48, 0.7)",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })
 

@@ -7,8 +7,10 @@ import * as firebase from 'firebase'
 
 //Rendu de l'écran de connexion
 class LoginScreen extends React.Component {
+
+    //On enlève l'entête sur l'écran "Connexion"
     static navigationOptions = {
-        header: null
+        headerShown: false
     }
 
     state = {
@@ -29,6 +31,9 @@ class LoginScreen extends React.Component {
     }
 
     render() {
+
+        LayoutAnimation.easeInEaseOut
+
         return (
             <View style={styles.main_container}>
                 <StatusBar barStyle="light-content"></StatusBar>
