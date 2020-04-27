@@ -2,54 +2,25 @@
 
 import React from 'react'
 import Navigation from './Navigation/Navigation'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
-import LoadingScreen from './Components/LoadingScreen'
-import LoginScreen from './Components/LoginScreen'
-import RegisterScreen from './Components/RegisterScreen'
-import HomeScreen from './Components/HomeScreen'
 //Base de données
-import firebase from 'firebase'
-
+import * as firebase from 'firebase'
 
 //Configuration de la base de données
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyDfW_YIF_jqVTAIvYfdTvBnWLr2bYnjkgs",
   authDomain: "miniprojet-be5b6.firebaseapp.com",
   databaseURL: "https://miniprojet-be5b6.firebaseio.com",
   projectId: "miniprojet-be5b6",
   storageBucket: "miniprojet-be5b6.appspot.com",
-  messagingSenderId: "450566010742"
+  messagingSenderId: "450566010742",
+  appId: "1:450566010742:web:b274e03f3c83f9568dac57"
 };
 
 //Initialisation de Firebase
-if(!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
+
+export default function App() {
+  return (
+    <Navigation/>
+  );
 }
-
-//On construit une navigation entre les différents écrans
-//Accueil
-const AppStack = createStackNavigator({
-  Accueil: HomeScreen
-})
-
-//Authentification
-const AuthStack = createStackNavigator({
-  Connexion: LoginScreen,
-  Inscription: RegisterScreen
-})
-
-//Création de la navigation
-//Par défaut sur l'écran de chargement
-export default createAppContainer(
-  createSwitchNavigator({
-      Chargement: LoadingScreen,
-      App: AppStack,
-      Auth: AuthStack
-  },
-  {
-      initialRouteName: "Chargement"
-  })
-)
-
-console.log(firebase.name)
