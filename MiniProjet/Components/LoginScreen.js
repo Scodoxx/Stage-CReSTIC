@@ -2,11 +2,14 @@
 //Écran d'authentification
 
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation } from 'react-native'
 import * as firebase from 'firebase'
 
 //Rendu de l'écran de connexion
 class LoginScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    }
 
     state = {
         email: "",
@@ -28,8 +31,26 @@ class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <Text style={styles.welcome_back}>{"Bonjour.\nRavi de vous revoir !"}</Text>
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    source={require("../Images/headerAuth.png")}
+                    style={{marginTop: -70}}
+                ></Image>
+
+                <Image
+                    source={require("../Images/headerAuth.png")}
+                    style={{position: "absolute"}}
+                ></Image>
+
+                <Image
+                    source={require("../Images/logo.png")}
+                    style={styles.logo}
+                ></Image>
                 
+                <View style={styles.cadre_welcome}>
+                    <Text style={styles.welcome_back}>{"Bonjour.\nRavi de vous revoir !"}</Text>
+                </View>
+
                 <View style={styles.error_message}>
                     {this.state.errorMessage && <Text style={styles.error}></Text>}
                 </View>
@@ -80,11 +101,31 @@ const styles = StyleSheet.create({
     main_container: {
         flex: 1
     },
-    welcome_back: {
+    cadre_welcome: {
         marginTop: 32,
+        backgroundColor: "rgba(255,255,255,0.7)",
+        width: "50%",
+        borderWidth: 1,
+        alignSelf: "center",
+        borderRadius: 20
+    },
+    welcome_back: {
         fontSize: 18,
         fontWeight: '400',
-        textAlign: 'center'
+        textAlign: 'center',
+        padding: 5
+    },
+    logo: {
+        borderRadius: 24,
+        marginTop: -120,
+        alignSelf: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.75,
+        shadowRadius: 10
     },
     error_message: {
         height: 72,
