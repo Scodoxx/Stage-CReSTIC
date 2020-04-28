@@ -1,17 +1,44 @@
 //Navigation.js
 
+//Navigation
+import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
+//Barre de navigation en bas
+import { createBottomNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
+
+//Îcones
+import { Ionicons } from '@expo/vector-icons'
+
+//Components
 import LoadingScreen from '../Components/LoadingScreen'
 import LoginScreen from '../Components/LoginScreen'
 import RegisterScreen from '../Components/RegisterScreen'
 import HomeScreen from '../Components/HomeScreen'
+import BirdsScreen from '../Components/BirdsScreen'
+import PlayerScreen from '../Components/PlayerScreen'
 
 //On construit une navigation entre les différents écrans
-//Accueil
-const AppStack = createStackNavigator({
-    Accueil: HomeScreen
-})
+//Barre de navigation une fois connecté
+const AppTabNavigator = createBottomTabNavigator(
+    {
+        Accueil: {
+            screen: HomeScreen,
+            navigationOptions: {
+                //Icône de maison pour la page home
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color={tintColor}></Ionicons>
+            }
+        },
+        Oiseaux: {
+            screen: BirdsScreen,
+            navigationOptions: {
+                //Icône de fleur pour la photo des oiseaux
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-flower" size={24} color={tintColor}></Ionicons>
+            }
+        }
+    },
+    {}
+)
 
 //Authentification
 const AuthStack = createStackNavigator({
@@ -24,7 +51,7 @@ const AuthStack = createStackNavigator({
 export default createAppContainer(
     createSwitchNavigator({
         Chargement: LoadingScreen,
-        App: AppStack,
+        App: AppTabNavigator,
         Auth: AuthStack
     },
     {
