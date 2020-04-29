@@ -17,6 +17,9 @@ import RegisterScreen from '../Components/RegisterScreen'
 import HomeScreen from '../Components/HomeScreen'
 import BirdsScreen from '../Components/BirdsScreen'
 import PlayerScreen from '../Components/PlayerScreen'
+import BlueAraSoundScreen from '../Components/BlueAraSoundScreen'
+import ToucanSoundScreen from '../Components/ToucanSoundScreen'
+import AraSoundScreen from '../Components/AraSoundScreen'
 
 //On construit une navigation entre les différents écrans
 //Barre de navigation une fois connecté
@@ -36,8 +39,7 @@ const AppTabNavigator = createBottomTabNavigator(
                 tabBarIcon: ({tintColor}) => <Ionicons name="ios-flower" size={24} color={tintColor}></Ionicons>
             }
         }
-    },
-    {}
+    }
 )
 
 //Authentification
@@ -46,13 +48,21 @@ const AuthStack = createStackNavigator({
     Inscription: RegisterScreen
 })
 
+const SoundStack = createStackNavigator({
+    Oiseaux: BirdsScreen,
+    Ara: AraSoundScreen,
+    Toucan: ToucanSoundScreen,
+    AraBleu: BlueAraSoundScreen
+})
+
 //Création de la navigation
 //Par défaut sur l'écran de chargement
 export default createAppContainer(
     createSwitchNavigator({
         Chargement: LoadingScreen,
         App: AppTabNavigator,
-        Auth: AuthStack
+        Auth: AuthStack,
+        Sound: SoundStack
     },
     {
         initialRouteName: "Chargement"

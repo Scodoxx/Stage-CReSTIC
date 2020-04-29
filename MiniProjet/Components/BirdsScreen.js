@@ -21,8 +21,7 @@ const birdsMap = [
         width: 107 * coefScreen,
         height: 258 * coefScreen,
         x1: 91 * coefScreen,
-        y1: 102 * coefScreen,
-        prefill: "red"
+        y1: 102 * coefScreen
     },
     {
         id: 2,
@@ -31,8 +30,7 @@ const birdsMap = [
         width: 192 * coefScreen,
         height: 172 * coefScreen,
         x1: 333 * coefScreen,
-        y1: 109 * coefScreen,
-        prefill: "blue"
+        y1: 109 * coefScreen
     },
     {
         id: 3,
@@ -41,8 +39,7 @@ const birdsMap = [
         width: 108 * coefScreen,
         height: 254 * coefScreen,
         x1: 275 * coefScreen,
-        y1: 301 * coefScreen,
-        prefill: "green"
+        y1: 301 * coefScreen
     }
 ]
 
@@ -50,6 +47,27 @@ const birdsMap = [
 const getUrlImg = require("../Images/tropicalBirds.jpg")
 
 class BirdsScreen extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedBirdId: null
+        }
+    }
+
+    //On récupère l'id de l'oiseau qui a été cliqué
+    _clickedBird(item, idx, event) {
+        console.log(item.id)
+        if (item.id === 1 ) {
+            this.props.navigation.navigate("AraBleu")
+        }
+        if (item.id === 2 ) {
+            this.props.navigation.navigate("Toucan")
+        }
+        if (item.id === 3 ) {
+            this.props.navigation.navigate("Ara")
+        }
+    }
 
     render() {
         return (
@@ -61,6 +79,8 @@ class BirdsScreen extends React.Component {
                     imgMap={birdsMap}
                     imgWidth={windowWidth}
                     imgHeight={windowWidth}
+                    onPress={(item, idx, event) => this._clickedBird(item, idx, event)}
+                    containerStyle={{justifyContent: "center"}}
                 />
             </View>
         )
