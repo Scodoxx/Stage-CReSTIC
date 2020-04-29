@@ -11,7 +11,7 @@ class ToucanSoundScreen extends React.Component {
 
         return (
             <View style={styles.main_container}>
-                <Text>Chant du Ara</Text>
+                <Text>Chant du Toucan</Text>
             </View>
         )
     }

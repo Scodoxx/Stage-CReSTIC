@@ -16,7 +16,6 @@ import LoginScreen from '../Components/LoginScreen'
 import RegisterScreen from '../Components/RegisterScreen'
 import HomeScreen from '../Components/HomeScreen'
 import BirdsScreen from '../Components/BirdsScreen'
-import PlayerScreen from '../Components/PlayerScreen'
 import BlueAraSoundScreen from '../Components/BlueAraSoundScreen'
 import ToucanSoundScreen from '../Components/ToucanSoundScreen'
 import AraSoundScreen from '../Components/AraSoundScreen'
@@ -49,7 +48,7 @@ const AuthStack = createStackNavigator({
 })
 
 const SoundStack = createStackNavigator({
-    Oiseaux: BirdsScreen,
+    Accueil: AppTabNavigator,
     Ara: AraSoundScreen,
     Toucan: ToucanSoundScreen,
     AraBleu: BlueAraSoundScreen
@@ -62,7 +61,8 @@ export default createAppContainer(
         Chargement: LoadingScreen,
         App: AppTabNavigator,
         Auth: AuthStack,
-        Sound: SoundStack
+        Son: SoundStack
+
     },
     {
         initialRouteName: "Chargement"

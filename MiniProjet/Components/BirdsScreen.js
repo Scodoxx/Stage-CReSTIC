@@ -55,7 +55,7 @@ class BirdsScreen extends React.Component {
         }
     }
 
-    //On récupère l'id de l'oiseau qui a été cliqué
+    //On récupère l'id de l'oiseau qui a été cliqué et on fait la redirection selon l'id de l'oiseau récupéré
     _clickedBird(item, idx, event) {
         console.log(item.id)
         if (item.id === 1 ) {
