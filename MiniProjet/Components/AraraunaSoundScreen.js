@@ -1,13 +1,14 @@
-//AraSound.js
+//AraraunaSound.js
 //Écran d'accueil
 
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native'
+//Pour le lecteur de son
+import { Player, Recorder, MediaStates } from '@react-native-community/audio-toolkit'
 //Icône pour la flèche de retour
 import { Ionicons } from '@expo/vector-icons'
-import *  as firebase from 'firebase'
 
-class BlueAraSoundScreen extends React.Component {
+class AraraunaSoundScreen extends React.Component {
 
     render() {
 
@@ -18,7 +19,7 @@ class BlueAraSoundScreen extends React.Component {
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
                 </TouchableOpacity>
 
-                <Text>Chant du Ara bleu</Text>
+                <Text>Chant de l'Ararauna</Text>
             </View>
         )
     }
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default BlueAraSoundScreen
+export default AraraunaSoundScreen

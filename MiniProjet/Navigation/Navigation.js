@@ -16,7 +16,7 @@ import LoginScreen from '../Components/LoginScreen'
 import RegisterScreen from '../Components/RegisterScreen'
 import HomeScreen from '../Components/HomeScreen'
 import BirdsScreen from '../Components/BirdsScreen'
-import BlueAraSoundScreen from '../Components/BlueAraSoundScreen'
+import AraraunaSoundScreen from '../Components/AraraunaSoundScreen'
 import ToucanSoundScreen from '../Components/ToucanSoundScreen'
 import AraSoundScreen from '../Components/AraSoundScreen'
 
@@ -66,8 +66,8 @@ const SoundStack = createStackNavigator({
             headerShown: false
         }
     },
-    AraBleu: {
-        screen: BlueAraSoundScreen,
+    Ararauna: {
+        screen: AraraunaSoundScreen,
         navigationOptions: {
             headerShown: false
         }

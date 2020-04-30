@@ -59,7 +59,7 @@ class BirdsScreen extends React.Component {
     _clickedBird(item, idx, event) {
         console.log(item.id)
         if (item.id === 1 ) {
-            this.props.navigation.navigate("AraBleu")
+            this.props.navigation.navigate("Ararauna")
         }
         if (item.id === 2 ) {
             this.props.navigation.navigate("Toucan")

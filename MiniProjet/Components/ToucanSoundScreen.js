@@ -2,12 +2,49 @@
 //Écran d'accueil
 
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native'
+//Pour le lecteur de son
+import { Player, Recorder, MediaStates } from '@react-native-community/audio-toolkit'
 //Icône pour la flèche de retour
 import { Ionicons } from '@expo/vector-icons'
-import *  as firebase from 'firebase'
+
+//On récupère l'audio du chant
+const getAudio = require("../Audio/Toucan.mp3")
 
 class ToucanSoundScreen extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            disabled: false
+        };
+    }
+
+    /*
+    //On lance l'audio quand la personne clique sur le bouton
+    _onPress() {
+        // Disable button while recording and playing back
+        this.setState({disabled: true});
+
+        // Start recording
+        let rec = new Recorder(getAudio).record();
+
+        // Stop recording after approximately 3 seconds
+        setTimeout(() => {
+            rec.stop((err) => {
+                // NOTE: In a real situation, handle possible errors here
+
+                // Play the file after recording has stopped
+                new Player(getAudio)
+                .play()
+                .on('ended', () => {
+                    // Enable button again after playback finishes
+                    this.setState({disabled: false});
+            });
+            });
+        }, 3000);
+    }
+    */
 
     render() {
 
@@ -17,7 +54,11 @@ class ToucanSoundScreen extends React.Component {
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
                 </TouchableOpacity>
 
-                <Text>Chant du Toucan</Text>
+                <TouchableHighlight disabled={this.state.disabled} onPress={() => this._onPress()}>
+                    <Text>
+                        Press me!
+                    </Text>
+                </TouchableHighlight>
             </View>
         )
     }
