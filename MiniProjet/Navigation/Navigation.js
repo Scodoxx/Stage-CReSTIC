@@ -48,10 +48,30 @@ const AuthStack = createStackNavigator({
 })
 
 const SoundStack = createStackNavigator({
-    Accueil: AppTabNavigator,
-    Ara: AraSoundScreen,
-    Toucan: ToucanSoundScreen,
-    AraBleu: BlueAraSoundScreen
+    Accueil: {
+        screen: AppTabNavigator,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
+    Ara: {
+        screen: AraSoundScreen,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
+    Toucan: {
+        screen: ToucanSoundScreen,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
+    AraBleu: {
+        screen: BlueAraSoundScreen,
+        navigationOptions: {
+            headerShown: false
+        }
+    }
 })
 
 //Création de la navigation

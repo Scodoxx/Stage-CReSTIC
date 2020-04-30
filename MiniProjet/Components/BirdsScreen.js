@@ -72,7 +72,7 @@ class BirdsScreen extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <Text>Cliquez sur un des oiseaux pour entendre son chant</Text>
+                <Text style={{marginTop: 100, fontSize: 14}}>Cliquez sur un des oiseaux pour entendre son chant</Text>
                 <ImageMapper
                     style={{justifyContent: "center"}}
                     imgSource={getUrlImg}

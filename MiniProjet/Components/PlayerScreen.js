@@ -1,9 +1,9 @@
-//PlayerScreen.js
+//Player.js
 
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-class PlayerScreen extends React.Component {
+class Player extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PlayerScreen
+export default Player
