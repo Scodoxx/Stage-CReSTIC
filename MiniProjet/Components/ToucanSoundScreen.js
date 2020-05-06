@@ -12,7 +12,8 @@ import { Ionicons } from '@expo/vector-icons'
 const audioToucan = [
     {
         title: "Toucan",
-        uri: "https://ia601009.us.archive.org/8/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3",
+        //J'upload l'audio avec mon nom de domaine car je n'ai pas trouvé de site qui fait la même  chose pour l'instant
+        uri: "http://www.antoinemarie.com/Toucan.mp3",
         imageSource: require("../Images/Toucan.jpg")
     }
 ]
