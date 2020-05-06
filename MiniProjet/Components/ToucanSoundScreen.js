@@ -9,11 +9,10 @@ import { Audio } from 'expo-av'
 //Icône pour la flèche de retour
 import { Ionicons } from '@expo/vector-icons'
 
-//On mets la liste des audios utilisés
 const audioToucan = [
     {
         title: "Toucan",
-        uri: require("../Audio/Toucan.mp3"),
+        uri: "https://ia601009.us.archive.org/8/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3",
         imageSource: require("../Images/Toucan.jpg")
     }
 ]
@@ -21,8 +20,10 @@ const audioToucan = [
 class ToucanSoundScreen extends React.Component {
 
     state = {
+        //Booléen si la musique est train d'être jouée
         isPlaying: false,
         playbackInstance: null,
+        //Numéro de la piste
         currentIndex: 0,
         volume: 1.0,
         isBuffering: false
@@ -113,18 +114,13 @@ class ToucanSoundScreen extends React.Component {
         }
     }
 
+    //Rendu du fichier audio (titre, source...) (Inutile dans ce cas là)
     renderFileInfo() {
         const { playbackInstance, currentIndex } = this.state
         return playbackInstance ? (
             <View style={styles.trackInfo}>
                 <Text style={[styles.trackInfoText, styles.largeText]}>
                     {audioToucan[currentIndex].title}
-                </Text>
-                <Text style={[styles.trackInfoText, styles.smallText]}>
-                    {audioToucan[currentIndex].author}
-                </Text>
-                <Text style={[styles.trackInfoText, styles.smallText]}>
-                    {audioToucan[currentIndex].source}
                 </Text>
             </View>
         ) : null
