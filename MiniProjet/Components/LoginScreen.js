@@ -65,7 +65,6 @@ class LoginScreen extends React.Component {
                         <Text style={styles.input_title}>Adresse mail</Text>
                         <TextInput 
                             style={styles.input}
-                            autoCapitalize="none"
                             onChangeText={email => this.setState({ email })}
                             value={this.state.email}
                         ></TextInput>
@@ -76,7 +75,6 @@ class LoginScreen extends React.Component {
                         <TextInput
                             style={styles.input}
                             secureTextEntry
-                            autoCapitalize="none"
                             onChangeText={ password => this.setState({ password })}
                             value={this.state.password}
                         ></TextInput>
