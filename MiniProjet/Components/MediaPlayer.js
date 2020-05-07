@@ -25,7 +25,7 @@ const audioBirds = [
     {
         title: "Ara",
         //J'upload l'audio avec mon nom de domaine car je n'ai pas trouvé de site qui fait la même  chose pour l'instant
-        uri: "http://www.antoinemarie.com/Toucan.mp3",
+        uri: "http://www.antoinemarie.com/Ara.mp3",
         imageSource: require("../Images/Ara.jpg")
     }
 ]
@@ -39,7 +39,7 @@ class MediaPlayer extends React.Component {
             isPlaying: false,
             playbackInstance: null,
             //Numéro de la piste
-            currentIndex: 0,
+            currentIndex: this.props.currentIndex,
             volume: 1.0,
             isBuffering: false
         }
@@ -62,6 +62,10 @@ class MediaPlayer extends React.Component {
         } catch (e) {
             console.log(e)
         }
+    }
+
+    async componentWillUnmount() {
+        //Il faudrait stopper l'audio quand on pas a un autre écran
     }
 
     onPlaybackStatusUpdate = status => {
@@ -130,7 +134,7 @@ class MediaPlayer extends React.Component {
         }
     }
 
-    //Rendu du fichier audio (titre, source...) (Inutile dans ce cas là)
+    //Rendu du fichier audio (titre, source...) (Ne se mets pas a jour et reste sur le toucan)
     renderFileInfo() {
         const { playbackInstance, currentIndex } = this.state
         return playbackInstance ? (
@@ -144,6 +148,7 @@ class MediaPlayer extends React.Component {
 
     render() {
         const { currentIndex } = this.props
+        console.log(audioBirds[currentIndex].title)
         return (
             <View style={styles.container}>
 
@@ -152,8 +157,8 @@ class MediaPlayer extends React.Component {
                     source={audioBirds[currentIndex].imageSource}
                 />
                 <View style={styles.controls}>
-                    <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
-                        <Ionicons name='ios-skip-backward' size={48} color='#444' />
+                    <TouchableOpacity style={styles.control}>
+                        <Ionicons name='ios-skip-backward' size={48} color='#C3BCBB' />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.control} onPress={this.handlePlayPause}>
                         {this.state.isPlaying ? (
@@ -162,8 +167,8 @@ class MediaPlayer extends React.Component {
                         <Ionicons name='ios-play-circle' size={48} color='#444' />
                         )}
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.control} onPress={this.handleNextTrack}>
-                        <Ionicons name='ios-skip-forward' size={48} color='#444' />
+                    <TouchableOpacity style={styles.control}>
+                        <Ionicons name='ios-skip-forward' size={48} color='#C3BCBB' />
                     </TouchableOpacity>
                 </View>
             {this.renderFileInfo()}
