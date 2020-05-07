@@ -19,7 +19,7 @@ const audioBirds = [
     {
         title: "Ararauna",
         //J'upload l'audio avec mon nom de domaine car je n'ai pas trouvé de site qui fait la même  chose pour l'instant
-        uri: "http://www.antoinemarie.com/Toucan.mp3",
+        uri: "http://www.antoinemarie.com/Ararauna.mp3",
         imageSource: require("../Images/Ararauna.jpg")
     },
     {
@@ -62,10 +62,6 @@ class MediaPlayer extends React.Component {
         } catch (e) {
             console.log(e)
         }
-    }
-
-    async componentWillUnmount() {
-        //Il faudrait stopper l'audio quand on pas a un autre écran
     }
 
     onPlaybackStatusUpdate = status => {
