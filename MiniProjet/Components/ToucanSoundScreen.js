@@ -2,7 +2,7 @@
 //Écran d'accueil
 
 import React from 'react'
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 
 //On importe le composant MediaPlayer pour afficher le lecteur audio
 import MediaPlayer from './MediaPlayer'
@@ -10,9 +10,11 @@ import MediaPlayer from './MediaPlayer'
 //Icône pour la flèche de retour
 import { Ionicons } from '@expo/vector-icons'
 
+//Redux
+import { connect } from 'react-redux'
+
 class ToucanSoundScreen extends React.Component {
 
-    //On défini le type d'oiseau pour adapter l'audio
     constructor(props) {
         super(props)
         this.state = {
@@ -28,7 +30,7 @@ class ToucanSoundScreen extends React.Component {
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
                 </TouchableOpacity>
 
-                <MediaPlayer currentIndex={0}/>
+                <MediaPlayer currentIndex={this.state.currentIndex}/>
             </View>
         )
     }
@@ -54,4 +56,9 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ToucanSoundScreen
+const mapStateToProps = (state) => {
+    return {
+        currentIndex: state.currentIndex
+    }
+}
+export default connect(mapStateToProps)(ToucanSoundScreen)

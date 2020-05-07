@@ -4,6 +4,9 @@ import React from 'react'
 import Navigation from './Navigation/Navigation'
 //Base de données
 import * as firebase from 'firebase'
+//redux
+import { Provider } from 'react-redux'
+import Store from './Store/configureStore'
 
 //Configuration de la base de données
 var firebaseConfig = {
@@ -23,6 +26,8 @@ if (!firebase.apps.length) {
 
 export default function App() {
   return (
-    <Navigation/>
+    <Provider store={Store}>
+      <Navigation/>
+    </Provider>
   );
 }

@@ -143,6 +143,7 @@ class MediaPlayer extends React.Component {
     }
 
     render() {
+        const { currentIndex } = this.props
         return (
             <View style={styles.container}>
 

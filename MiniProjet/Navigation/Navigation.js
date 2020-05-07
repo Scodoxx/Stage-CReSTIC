@@ -82,7 +82,6 @@ export default createAppContainer(
         App: AppTabNavigator,
         Auth: AuthStack,
         Son: SoundStack
-
     },
     {
         initialRouteName: "Chargement"

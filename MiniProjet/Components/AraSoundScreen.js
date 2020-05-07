@@ -5,7 +5,6 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
 //Icône pour la flèche de retour
 import { Ionicons } from '@expo/vector-icons'
-import *  as firebase from 'firebase'
 
 class AraSoundScreen extends React.Component {
 
