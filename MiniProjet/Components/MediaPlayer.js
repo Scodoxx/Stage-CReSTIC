@@ -181,7 +181,8 @@ const styles = StyleSheet.create({
     },
     albumCover: {
         width: 250,
-        height: 250
+        height: 250,
+        borderRadius: 20
     },
     trackInfoText: {
         textAlign: 'center',
