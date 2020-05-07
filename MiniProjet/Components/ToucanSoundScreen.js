@@ -1,5 +1,5 @@
 //ToucanSound.js
-//Écran d'accueil
+//Page du player pour le toucan
 
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 
 class ToucanSoundScreen extends React.Component {
 
+    //On met le currentIndex a 0, ce qui correspond au Toucan
     constructor(props) {
         super(props)
         this.state = {
