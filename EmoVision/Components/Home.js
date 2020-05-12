@@ -9,29 +9,63 @@ class Home extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <Text style={styles.title}>{"Bienvenue\nsur"}</Text>
-                <View style={styles.logo}>
+
+                <TouchableOpacity style={[styles.register_login_button, {marginTop: 300}]} onPress={() => this.props.navigation.navigate("Connexion")}>
+                    <Text style={styles.button_text}>Créer un compte</Text>
                     <Image
-                        source={require("../Images/logoEmovisionBlue.jpg")}
-                        style={styles.logo_img}
-                    ></Image>
-                    <Text style={styles.logo_title}>EmoVision</Text>
-                </View>
-                <View style={styles.contact_container}>
-                    <Text style={styles.contact_text}>{"Contact"}</Text>
-                </View>
-
-                <View style={styles.names_container}>
-                    <Text style={styles.names_text}>{"Odyle Pérot & Éric Bittar"}  </Text>
-                </View>
-
-                <View style={styles.slogan_container}>
-                    <Text style={styles.slogan_text}>{"Au cœur de la Présence"}</Text>
-                </View>
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button_text}>Continuer</Text>
+                        source={require("../Images/register.png")}
+                        style={styles.register_icon}
+                    />
                 </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.register_login_button, {marginTop: 10}]} onPress={() => this.props.navigation.navigate("Inscription")}>
+                    <Text style={styles.button_text}>Se connecter</Text>
+                    <Image
+                        source={require("../Images/login.png")}
+                        style={styles.login_icon}
+                    />
+                </TouchableOpacity>
+
+                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
+                    <View style={{flex: 1, height: 1, backgroundColor: 'white', marginLeft: 70, marginRight: 10}} />
+                    <View>
+                        <Text style={{fontSize: 18, textAlign: 'center', color: 'white'}}>ou</Text>
+                    </View>
+                    <View style={{flex: 1, height: 1, backgroundColor: 'white', marginRight: 70, marginLeft: 10}} />
+                </View>
+
+                <View style={[styles.contact_container, {marginTop: 20}]}>
+                    <Text style={{color: 'white', fontSize: 20}}>{"Se connecter avec"}</Text>
+                </View>
+
+                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#4267B2'}]}>
+                    <Image
+                        source={require("../Images/facebook.png")}
+                        style={{width: 10, height: 20, alignSelf: 'center', marginRight: 16}}
+                    />
+                    <Text style={styles.button_text}>Facebook</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#FD183E'}]}>
+                    <Image
+                        source={require("../Images/google.png")}
+                        style={{width: 17, height: 18, alignSelf: 'center', marginRight: 10}}
+                    />
+                    <Text style={styles.button_text}>Google</Text>
+                </TouchableOpacity>
+                
+                <View style={{marginTop: 20}}>
+                    <Text style={{color: 'white', fontSize: 20}}>{"Comment ça marche ?"}</Text>
+                </View>
+
+                <TouchableOpacity style={[styles.video_button, {marginTop: 20}]}>
+                    <Text style={styles.video_button_text}>Vidéo</Text>
+                </TouchableOpacity>
+
+                <View style={{marginTop: 20, alignItems: 'center'}}>
+                    <Text style={{color: 'white', fontSize: 45}}>Welcome</Text>
+                    <Text style={{color: 'white', fontSize: 16}}>to your World</Text>
+                </View>
 
             </View>
         )
@@ -41,137 +75,59 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: '#BCF8A2' //en attendant le linear-gradient
-    },
-    title: {
-        position: 'absolute',
-        width: 327,
-        height: 118,
-        left: 24,
-        top: 80,
-        //font-family à rajouter
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 48,
-        lineHeight: 59,
-        textAlign: 'center'
-    },
-    logo: {
-        position: 'absolute',
-        alignSelf: 'center',
-        top: 206,
-    },
-    logo_img: {
-        width: 225,
-        height: 230.4,
-        position: 'absolute',
-        alignSelf: 'center',
-        borderRadius: 112.5
-    },
-    logo_title: {
-        top: 171,
-        alignItems: 'flex-end',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 48,
-        lineHeight: 59,
-        textAlign: 'center',
-        color: '#3373F0',
-    },
-    contact_container: {
-        //Pour le faire apparaître en premier avant les contacts
-        transform: [{'translate': [0,0, 1]}],
-        position: 'absolute',
-        width: 72,
-        height: 72,
-        left: 15,
-        top: 517,
-        backgroundColor: 'white',
-        borderRadius: 50,
+        backgroundColor: '#BCF8A2', //en attendant le linear-gradient
         alignItems: 'center'
     },
-    contact_text: {
-        width: 68,
-        height: 20,
-        top: 24,
-        textAlign: 'center',
-        //font-family à rajouter
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 16,
-        lineHeight: 20,
-        color: 'black'
-    },
-    names_container: {
-        position: 'absolute',
-        width: 289,
-        height: 68,
-        left: 43,
-        top: 566,
-        backgroundColor: '#3C5094',
-        borderRadius: 30,
-        alignItems: 'center'
-    },
-    names_text: {
-        position: 'absolute',
-        width: 196,
-        height: 40,
-        textAlign: 'center',
-        top: 23,
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 16,
-        lineHeight: 20,
-        display: 'flex',
-        alignItems: 'center',
-        color: 'white'
-    },
-    slogan_container: {
-        position: 'absolute',
-        width: 289,
-        height: 68,
-        left: 43,
-        top: 642,
-        backgroundColor: '#3C5094',
-        borderRadius: 30,
-        alignItems: 'center'
-    },
-    slogan_text: {
-        position: 'absolute',
-        width: 196,
-        height: 40,
-        textAlign: 'center',
-        top: 23,
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 16,
-        lineHeight: 20,
-        display: 'flex',
-        alignItems: 'center',
-        color: 'white'
-    },
-    button: {
-        position: 'absolute',
-        width: 118,
-        height: 30,
-        left: 227,
-        top: 758,
-        backgroundColor: '#3F9BAF',
-        borderRadius: 30,
-        alignItems: 'center'
+    register_login_button: {
+        flexDirection: 'row',
+        width: 236,
+        height: 42,
+        backgroundColor: 'rgba(196, 196, 196, 0.4)',
+        justifyContent: 'space-around',
+        borderRadius: 8
     },
     button_text: {
-        position: 'absolute',
-        width: 144.21,
-        height: 16.96,
-        top: 6,
-        //font-family à rajouter
-        fontStyle: 'normal',
-        fontWeight: 'bold',
         fontSize: 14,
-        lineHeight: 17,
-        textAlign: 'center',
-        color: 'white'
+        fontStyle: 'normal',
+        color: 'white',
+        alignSelf: 'center'
+    },
+    register_icon: {
+        width: 38,
+        height: 33,
+        alignSelf: 'center'
+    },
+    login_icon: {
+        width: 38,
+        height: 33,
+        alignSelf: 'center'
+    },
+    or_container: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    fb_gl_button: {
+        flexDirection: 'row',
+        width: 246,
+        height: 32,
+        borderRadius: 20,
+        paddingLeft: 10
+    },
+    video_button: {
+        flexDirection: 'row',
+        backgroundColor: '#E6A648',
+        width: 86,
+        height: 36,
+        borderColor: '#C6A2A2',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    video_button_text: {
+        fontSize: 14,
+        color: 'white',
+        alignSelf: 'center',
+        fontWeight: 'bold'
     }
 })
 
