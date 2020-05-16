@@ -1,71 +1,49 @@
-//Home.js
-//Écran d'accueil
+//Landing.js
+//Écran de lancement
 
 import React from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
 
-class Home extends React.Component {
+class Landing extends React.Component {
 
     render() {
+
+        LayoutAnimation.easeInEaseOut
+
         return (
             <View style={styles.main_container}>
 
-                <TouchableOpacity style={[styles.register_login_button, {marginTop: 300}]} onPress={() => this.props.navigation.navigate("Connexion")}>
-                    <Text style={styles.button_text}>Créer un compte</Text>
-                    <Image
-                        source={require("../Images/register.png")}
-                        style={styles.register_icon}
-                    />
-                </TouchableOpacity>
+                <Image
+                    source={require("../Images/banner_test_2.png")}
+                    style={{marginTop: -80, marginBottom: -120}}
+                ></Image>
 
-                <TouchableOpacity style={[styles.register_login_button, {marginTop: 10}]} onPress={() => this.props.navigation.navigate("Inscription")}>
-                    <Text style={styles.button_text}>Se connecter</Text>
-                    <Image
-                        source={require("../Images/login.png")}
-                        style={styles.login_icon}
-                    />
-                </TouchableOpacity>
+                <Image
+                        source={require("../Images/logoEmovisionBlue.jpg")}
+                        style={styles.logo_img}
+                ></Image>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
-                    <View style={{flex: 1, height: 1, backgroundColor: 'white', marginLeft: 70, marginRight: 10}} />
-                    <View>
-                        <Text style={{fontSize: 18, textAlign: 'center', color: 'white'}}>ou</Text>
+                <Text style={[styles.title, { marginTop: 40}]}>Bienvenue</Text>
+                <Text style={styles.title}>dans le monde</Text>
+                <Text style={[styles.title, { color: '#3373F0', fontSize: 48, marginTop: 20 }]}>EmoVision</Text>
+
+                <View style={[styles.cards_container, { marginTop: 40 }]}>
+                    <View style={styles.contact_container}>
+                        <Text style={styles.text}>Contact</Text>
                     </View>
-                    <View style={{flex: 1, height: 1, backgroundColor: 'white', marginRight: 70, marginLeft: 10}} />
+
+                    <View style={[styles.container, { backgroundColor: '#3C5094' }]}>
+                        <Text style={[styles.text, { color: 'white' }]}>{"Odyle Pérot & Éric Bittar"}  </Text>
+                    </View>
+
+                    <View style={[styles.container, { backgroundColor: '#51629A', marginTop: 10 }]}>
+                        <Text style={[styles.text, { color: 'white' }]}>{"Au cœur de la Présence"}</Text>
+                    </View>
                 </View>
 
-                <View style={[styles.contact_container, {marginTop: 20}]}>
-                    <Text style={{color: 'white', fontSize: 20}}>{"Se connecter avec"}</Text>
-                </View>
-
-                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#4267B2'}]}>
-                    <Image
-                        source={require("../Images/facebook.png")}
-                        style={{width: 10, height: 20, alignSelf: 'center', marginRight: 16}}
-                    />
-                    <Text style={styles.button_text}>Facebook</Text>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Connexion")}>
+                    <Text style={[styles.text, { color: 'white', fontWeight: 'bold' }]}>Continuer</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#FD183E'}]}>
-                    <Image
-                        source={require("../Images/google.png")}
-                        style={{width: 17, height: 18, alignSelf: 'center', marginRight: 10}}
-                    />
-                    <Text style={styles.button_text}>Google</Text>
-                </TouchableOpacity>
-                
-                <View style={{marginTop: 20}}>
-                    <Text style={{color: 'white', fontSize: 20}}>{"Comment ça marche ?"}</Text>
-                </View>
-
-                <TouchableOpacity style={[styles.video_button, {marginTop: 20}]}>
-                    <Text style={styles.video_button_text}>Vidéo</Text>
-                </TouchableOpacity>
-
-                <View style={{marginTop: 20, alignItems: 'center'}}>
-                    <Text style={{color: 'white', fontSize: 45}}>Welcome</Text>
-                    <Text style={{color: 'white', fontSize: 16}}>to your World</Text>
-                </View>
 
             </View>
         )
@@ -75,60 +53,74 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: '#BCF8A2', //en attendant le linear-gradient
         alignItems: 'center'
     },
-    register_login_button: {
+    title: {
+        width: 327,
+        //font-family à rajouter
+        fontWeight: 'bold',
+        fontSize: 36,
+        color: '#414959',
+        textAlign: 'center'
+    },
+    logo_img: {
+        width: 180,
+        height: 180,
+        alignSelf: 'center',
+        borderRadius: 112.5,
+        borderWidth: 1,
+        borderColor: '#414959'
+    },
+    logo_title: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        fontWeight: 'bold',
+        fontSize: 48,
+        textAlign: 'center',
+        color: '#3373F0',
+    },
+    cards_container: {
+        paddingTop: 40,
+        paddingLeft: 30,
+        paddingRight: 30
+    },
+    contact_container: {
+        position: 'absolute',
         flexDirection: 'row',
-        width: 236,
-        height: 42,
-        backgroundColor: 'rgba(196, 196, 196, 0.4)',
-        justifyContent: 'space-around',
-        borderRadius: 8
-    },
-    button_text: {
-        fontSize: 14,
-        fontStyle: 'normal',
-        color: 'white',
-        alignSelf: 'center'
-    },
-    register_icon: {
-        width: 38,
-        height: 33,
-        alignSelf: 'center'
-    },
-    login_icon: {
-        width: 38,
-        height: 33,
-        alignSelf: 'center'
-    },
-    or_container: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
-    fb_gl_button: {
-        flexDirection: 'row',
-        width: 246,
-        height: 32,
-        borderRadius: 20,
-        paddingLeft: 10
-    },
-    video_button: {
-        flexDirection: 'row',
-        backgroundColor: '#E6A648',
-        width: 86,
-        height: 36,
-        borderColor: '#C6A2A2',
-        borderRadius: 20,
-        alignItems: 'center',
+        //Pour le faire apparaître en premier avant les contacts
+        transform: [{'translate': [0,0, 1]}],
+        borderWidth: 1,
+        borderColor: '#414959',
+        width: 72,
+        height: 72,
+        backgroundColor: 'white',
+        borderRadius: 50,
+        textAlign: 'center',
         justifyContent: 'center'
     },
-    video_button_text: {
-        fontSize: 14,
-        color: 'white',
+    text: {
         alignSelf: 'center',
-        fontWeight: 'bold'
+        justifyContent: 'center',
+        fontSize: 16
+    },
+    container: {
+        flexDirection: 'row',
+        width: 289,
+        height: 68,
+        borderRadius: 30,
+        textAlign: 'center',
+        justifyContent: 'center'
+    },
+    button: {
+        marginTop: 40,
+        marginRight: 20,
+        width: 118,
+        height: 30,
+        backgroundColor: '#3F9BAF',
+        borderRadius: 30,
+        alignSelf: 'flex-end',
+        justifyContent: 'center'
     }
 })
 
-export default Home
+export default Landing

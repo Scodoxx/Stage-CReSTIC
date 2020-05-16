@@ -11,7 +11,6 @@ import { createBottomNavigator, createBottomTabNavigator } from 'react-navigatio
 import { Ionicons } from '@expo/vector-icons'
 
 //Components
-import Landing from '../Components/Landing'
 import Home from '../Components/Home'
 import Loading from '../Components/Loading'
 import Login from '../Components/Login'
@@ -27,8 +26,7 @@ const AuthStack = createStackNavigator({
 //Par défaut sur l'écran de chargement
 export default createAppContainer(
     createSwitchNavigator({
-        Lancement: Landing,
-        Accueil: Home,
+        Lancement: Home,
         Chargement: Loading,
         Auth: AuthStack
     },

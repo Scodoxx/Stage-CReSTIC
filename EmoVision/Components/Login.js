@@ -1,12 +1,13 @@
-//LoginScreen.js
-//Écran d'authentification
+//Home.js
+//Écran d'accueil
 
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation } from 'react-native'
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, LayoutAnimation } from 'react-native'
+
+//Pour connecter avec la base de données
 import * as firebase from 'firebase'
 
-//Rendu de l'écran de connexion
-class Login extends React.Component {
+class Home extends React.Component {
 
     //On enlève l'entête sur l'écran "Connexion"
     static navigationOptions = {
@@ -36,15 +37,11 @@ class Login extends React.Component {
 
         return (
             <View style={styles.main_container}>
-                <StatusBar barStyle="light-content"></StatusBar>
-                
-                <View style={styles.cadre_welcome}>
-                    <Text style={styles.welcome_back}>{"Bonjour.\nRavi de vous revoir !"}</Text>
-                </View>
 
-                <View style={styles.error_message}>
-                    {this.state.errorMessage && <Text style={styles.error}></Text>}
-                </View>
+                <Image
+                    source={require("../Images/banner_test_2.png")}
+                    style={{marginTop: -80}}
+                ></Image>
 
                 <View style={styles.form}>
                     <View>
@@ -68,68 +65,71 @@ class Login extends React.Component {
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={this._handleLogin}>
-                    <Text style={{ color: '#FFF', fontWeight: '500' }}>Se connecter</Text>
+                    <Text style={{ color: '#FFF', fontWeight: 'bold' }}>Se connecter</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={{ alignSelf: 'center', marginTop: 32 }}
+                    style={{ alignSelf: 'center', marginTop: 20 }}
                     onPress={() => this.props.navigation.navigate("Inscription")}>
-                    <Text style={{ color: '#414959', fontSize: 13 }}>
-                        Nouveau ? <Text style={{ fontWeight: '500', color: '#E9446A' }}>S'inscrire</Text>
+                    <Text style={{ color: '#414959', fontSize: 14 }}>
+                        Nouveau ? <Text style={{ fontWeight: '500', color: '#3F9BAF' }}>S'inscrire</Text>
                     </Text>
                 </TouchableOpacity>
+
+                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+                    <View style={{flex: 1, height: 1, backgroundColor: '#414959', marginLeft: 70, marginRight: 10}} />
+                    <View>
+                        <Text style={{fontSize: 14, textAlign: 'center', color: '#414959'}}>ou</Text>
+                    </View>
+                    <View style={{flex: 1, height: 1, backgroundColor: '#414959', marginRight: 70, marginLeft: 10}} />
+                </View>
+
+                <View style={{marginTop: 20}}>
+                    <Text style={{color: '#414959', fontSize: 14}}>Se connecter avec</Text>
+                </View>
+
+                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#4267B2'}]}>
+                    <Image
+                        source={require("../Images/facebook.png")}
+                        style={{width: 10, height: 20, alignSelf: 'center', marginRight: 16}}
+                    />
+                    <Text style={styles.button_text}>Facebook</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#FD183E'}]}>
+                    <Image
+                        source={require("../Images/google.png")}
+                        style={{width: 17, height: 18, alignSelf: 'center', marginRight: 10}}
+                    />
+                    <Text style={styles.button_text}>Google</Text>
+                </TouchableOpacity>
+                
+                <View style={{marginTop: 20}}>
+                    <Text style={{color: '#414959', fontSize: 14}}>Comment ça marche ?</Text>
+                </View>
+
+                <TouchableOpacity style={[styles.video_button, {marginTop: 20}]}>
+                    <Text style={styles.video_button_text}>Vidéo</Text>
+                </TouchableOpacity>
+
+                <View style={{marginTop: 10, alignItems: 'center'}}>
+                    <Text style={{color: '#414959', fontSize: 45}}>Welcome</Text>
+                    <Text style={{color: '#414959', fontSize: 16}}>to your World</Text>
+                </View>
 
             </View>
         )
     }
 }
 
-
-//Styles
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: '#BCF8A2' //en attendant le linear-gradient
-    },
-    cadre_welcome: {
-        marginTop: 32,
-        backgroundColor: "rgba(255,255,255,0.7)",
-        width: "50%",
-        borderWidth: 1,
-        alignSelf: "center",
-        borderRadius: 20
-    },
-    welcome_back: {
-        fontSize: 18,
-        fontWeight: '400',
-        textAlign: 'center',
-        padding: 5
-    },
-    logo: {
-        borderRadius: 24,
-        marginTop: -120,
-        alignSelf: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.75,
-        shadowRadius: 10
-    },
-    error_message: {
-        height: 72,
-        justifyContent: 'center',
-        marginHorizontal: 30
-    },
-    error: {
-        color: '#E9446A',
-        fontSize: 13,
-        fontWeight: '600',
-        textAlign: 'center'
+        alignItems: 'center'
     },
     form: {
-        marginBottom: 45,
+        width: 236,
+        marginBottom: 30,
         marginHorizontal: 30
     },
     input_title: {
@@ -145,13 +145,56 @@ const styles = StyleSheet.create({
         color: '#161F3D'
     },
     button: {
-        marginHorizontal: 30,
-        backgroundColor: '#E9446A',
-        borderRadius: 4,
-        height: 52,
+        width: 118,
+        height: 30,
+        alignSelf: 'center',
+        backgroundColor: '#3F9BAF',
+        borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    button_text: {
+        fontSize: 14,
+        fontStyle: 'normal',
+        color: 'white',
+        alignSelf: 'center'
+    },
+    register_icon: {
+        width: 38,
+        height: 33,
+        alignSelf: 'center'
+    },
+    login_icon: {
+        width: 38,
+        height: 33,
+        alignSelf: 'center'
+    },
+    or_container: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    fb_gl_button: {
+        flexDirection: 'row',
+        width: 246,
+        height: 32,
+        borderRadius: 20,
+        paddingLeft: 10
+    },
+    video_button: {
+        flexDirection: 'row',
+        backgroundColor: '#E6A648',
+        width: 86,
+        height: 36,
+        borderColor: '#C6A2A2',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    video_button_text: {
+        fontSize: 14,
+        color: 'white',
+        fontWeight: 'bold'
     }
 })
 
-export default Login
+export default Home

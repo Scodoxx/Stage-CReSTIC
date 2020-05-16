@@ -3,8 +3,15 @@
 
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native'
+
+//Îcones
 import { Ionicons } from '@expo/vector-icons'
+
+//Base de données
 import *  as firebase from 'firebase'
+
+//Calendrier
+import DatePicker from './DatePicker';
 
 class Register extends React.Component {
 
@@ -14,10 +21,26 @@ class Register extends React.Component {
     }
 
     state = {
+        currentDate: "", //Correspond à la date du jour
+        surname: "",
         name: "",
+        birthdate: "",
         email: "",
         password: "",
         errorMessage: null
+    }
+
+    //Permet d'avoir la date du jour (pas utilisée pour le moment)
+    componentDidMount() {
+        var that = this;
+        var month = new Date().getMonth() + 1; //Current Month
+        var day = new Date().getDay() + 10 ; //Current Day
+        var year = new Date().getFullYear(); //Current Year
+        that.setState({
+            //Setting the value of the date time
+            currentDate:
+                day + '-' + month + '-' + year,
+        });
     }
 
     //Permet de s'inscrire et que les données soient enregistrées dans la base de données
@@ -34,22 +57,18 @@ class Register extends React.Component {
     };
 
     render() {
+
         return (
             <View style={styles.main_container}>
                 <StatusBar barStyle="light-content"></StatusBar>
                 <Image
-                ></Image>
-
-                <Image
+                    source={require("../Images/banner_test_2.png")}
+                    style={{marginTop: -80, marginBottom: -70}}
                 ></Image>
 
                 <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
                 </TouchableOpacity>
-
-                <View style={styles.cadre}>
-                    <Text style={styles.welcome}>{"Pas encore inscrit ? C'est par ici !"}</Text>
-                </View>
 
                 <View style={styles.error_message}>
                     {this.state.errorMessage && <Text style={styles.error}></Text>}
@@ -66,6 +85,20 @@ class Register extends React.Component {
                     </View>
 
                     <View style={{marginTop: 32}}>
+                        <Text style={styles.input_title}>Prénom</Text>
+                        <TextInput 
+                            style={styles.input}
+                            onChangeText={surname => this.setState({ surname })}
+                            value={this.state.surname}
+                        ></TextInput>
+                    </View>
+
+                    <View style={{marginTop: 32}}>
+                        <Text style={styles.input_title}>Date de naissance</Text>
+                        <DatePicker/>
+                    </View>
+
+                    <View style={{marginTop: 32}}>
                         <Text style={styles.input_title}>Adresse mail</Text>
                         <TextInput 
                             style={styles.input}
@@ -76,6 +109,16 @@ class Register extends React.Component {
 
                     <View style={{marginTop: 32}}>
                         <Text style={styles.input_title}>Mot de passe</Text>
+                        <TextInput
+                            style={styles.input}
+                            secureTextEntry
+                            onChangeText={ password => this.setState({ password })}
+                            value={this.state.password}
+                        ></TextInput>
+                    </View>
+
+                    <View style={{marginTop: 32}}>
+                        <Text style={styles.input_title}>Confirmez votre mot de passe</Text>
                         <TextInput
                             style={styles.input}
                             secureTextEntry
@@ -104,7 +147,8 @@ class Register extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1
+        flex: 1,
+        alignItems: 'center'
     },
     cadre: {
         backgroundColor: "rgba(255,255,255,0.7)",
@@ -131,6 +175,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     form: {
+        width: 236,
         marginBottom: 45,
         marginHorizontal: 30
     },

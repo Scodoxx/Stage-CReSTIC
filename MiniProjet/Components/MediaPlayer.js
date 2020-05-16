@@ -31,6 +31,7 @@ const audioBirds = [
 ]
 
 class MediaPlayer extends React.Component {
+    _isMounted = false
 
     constructor(props) {
         super(props)
@@ -47,21 +48,29 @@ class MediaPlayer extends React.Component {
 
     //On configure le composant Audio
     async componentDidMount() {
-        try {
-            await Audio.setAudioModeAsync({
-                allowsRecordingIOS: false,
-                interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-                playsInSilentModeIOS: true,
-                interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-                shouldDuckAndroid: true,
-                staysActiveInBackground: true,
-                playThroughEarpieceAndroid: true
-            })
+        this._isMounted = true
+        if(this._isMounted) {
+            try {
+                await Audio.setAudioModeAsync({
+                    allowsRecordingIOS: false,
+                    interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+                    playsInSilentModeIOS: true,
+                    interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+                    shouldDuckAndroid: true,
+                    staysActiveInBackground: true,
+                    playThroughEarpieceAndroid: true
+                })
 
-            this.loadAudio()
-        } catch (e) {
-            console.log(e)
+                this.loadAudio()
+            } catch (e) {
+                console.log(e)
+            }
         }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
+        this.isPlaying = false
     }
 
     onPlaybackStatusUpdate = status => {
