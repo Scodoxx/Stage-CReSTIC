@@ -21,7 +21,7 @@ class Register extends React.Component {
     }
 
     state = {
-        currentDate: "", //Correspond à la date du jour
+        birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
         surname: "",
         name: "",
         birthdate: new Date(),
@@ -64,19 +64,29 @@ class Register extends React.Component {
         this.setState({ year: year, month: month, day: day })
     }
 
-    //Permet d'afficher la zone de sélection de la date de naissance
-    displayBirthdayPicker = () => {
-        console.log("à rélger")
-        return (
-            <BirthdayPicker
-                selectedYear={this.state.year}
-                selectedMonth={this.state.month}
-                selectedDay={this.state.day}
-                minYear={1900}
+    //Permet d'afficher la zone de sélection de la date de naissance quand on appuie sur le texte
+    displayBirthdayPicker() {
+        if(this.state.birthdayPickedIsPressed) {
+            return (
+                <BirthdayPicker
+                    selectedYear={this.state.year}
+                    selectedMonth={this.state.month}
+                    selectedDay={this.state.day}
+                    minYear={1900}
 
-                onValueChange={this.onBirthdayPickerValueChange}
-            />
-        )
+                    onValueChange={this.onBirthdayPickerValueChange}
+                />
+            )
+        }
+    }
+
+    _birthdayPickerIsPressed = () => {
+        if(!this.state.birthdayPickedIsPressed) {
+            this.setState({birthdayPickedIsPressed: true})
+        }
+        else {
+            this.setState({birthdayPickedIsPressed: false})
+        }
     }
 
     render() {
@@ -116,14 +126,16 @@ class Register extends React.Component {
                         ></TextInput>
                     </View>
 
-                    <View style={{marginTop: 32, flexDirection: "row"}}>
+                    <View style={{marginTop: 32}}>
                         <Text style={styles.input_title}>Date de naissance</Text>
-                        <TouchableOpacity onPress={this.displayBirthdayPicker}>
-                            <Text>
+                        <TouchableOpacity style={styles.input} onPress={this._birthdayPickerIsPressed}>
+                            <Text style={styles.input}>
                                 {this.state.day}/{this.state.month + 1}/{this.state.year}
                             </Text>
                         </TouchableOpacity>
                     </View>
+
+                    <View>{this.displayBirthdayPicker()}</View>
 
                     <View style={{marginTop: 32}}>
                         <Text style={styles.input_title}>Adresse mail</Text>
