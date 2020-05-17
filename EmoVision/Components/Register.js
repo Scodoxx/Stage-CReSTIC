@@ -12,6 +12,7 @@ import *  as firebase from 'firebase'
 
 //Calendrier
 import DatePicker from './DatePicker';
+import BirthdayPicker from './BirthdayPicker';
 
 class Register extends React.Component {
 
@@ -24,7 +25,10 @@ class Register extends React.Component {
         currentDate: "", //Correspond à la date du jour
         surname: "",
         name: "",
-        birthdate: "",
+        birthdate: new Date(),
+        year: 2000, //année par défaut
+        month: 0, //mois par défaut (0 = janvier)
+        day: 1, //jour par défaut
         email: "",
         password: "",
         errorMessage: null
@@ -55,6 +59,11 @@ class Register extends React.Component {
             })
             .catch(error => this.setState({ errorMessage: error.message }));
     };
+
+    //Fonction appelée quand l'utilisateur change la date de naissance
+    onBirthdayPickerValueChange = (year, month, day) => {
+        this.setState({ year: year, month: month, day: day })
+    }
 
     render() {
 
@@ -95,7 +104,14 @@ class Register extends React.Component {
 
                     <View style={{marginTop: 32}}>
                         <Text style={styles.input_title}>Date de naissance</Text>
-                        <DatePicker/>
+                        <BirthdayPicker
+                            selectedYear={this.state.year}
+                            selectedMonth={this.state.month}
+                            selectedDay={this.state.day}
+                            minYear={1900}
+
+                            onValueChange={this.onBirthdayPickerValueChange}
+                        />
                     </View>
 
                     <View style={{marginTop: 32}}>

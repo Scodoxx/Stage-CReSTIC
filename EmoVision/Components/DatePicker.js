@@ -17,10 +17,13 @@ const DatePicker = () => {
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         //a revoir
-        var formatedCurrentDate = format(currentDate, "dd/MM/yyyy");
+        const formatedCurrentDate = format(currentDate, "dd/MM/yyyy");
         console.log(formatedCurrentDate)
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
+        return (
+            <Text>{formatedCurrentDate}</Text>
+        )
     };
     
     //Permet de définir le mode date ou heure
