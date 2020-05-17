@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons'
 import *  as firebase from 'firebase'
 
 //Calendrier
-import DatePicker from './DatePicker';
 import BirthdayPicker from './BirthdayPicker';
 
 class Register extends React.Component {
@@ -65,6 +64,21 @@ class Register extends React.Component {
         this.setState({ year: year, month: month, day: day })
     }
 
+    //Permet d'afficher la zone de sélection de la date de naissance
+    displayBirthdayPicker = () => {
+        console.log("à rélger")
+        return (
+            <BirthdayPicker
+                selectedYear={this.state.year}
+                selectedMonth={this.state.month}
+                selectedDay={this.state.day}
+                minYear={1900}
+
+                onValueChange={this.onBirthdayPickerValueChange}
+            />
+        )
+    }
+
     render() {
 
         return (
@@ -102,16 +116,13 @@ class Register extends React.Component {
                         ></TextInput>
                     </View>
 
-                    <View style={{marginTop: 32}}>
+                    <View style={{marginTop: 32, flexDirection: "row"}}>
                         <Text style={styles.input_title}>Date de naissance</Text>
-                        <BirthdayPicker
-                            selectedYear={this.state.year}
-                            selectedMonth={this.state.month}
-                            selectedDay={this.state.day}
-                            minYear={1900}
-
-                            onValueChange={this.onBirthdayPickerValueChange}
-                        />
+                        <TouchableOpacity onPress={this.displayBirthdayPicker}>
+                            <Text>
+                                {this.state.day}/{this.state.month + 1}/{this.state.year}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{marginTop: 32}}>
