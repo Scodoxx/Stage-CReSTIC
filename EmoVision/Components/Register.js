@@ -2,7 +2,8 @@
 //Écran d'inscription
 
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, StatusBar, Dimensions } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 
 //Îcones
 import { Ionicons } from '@expo/vector-icons'
@@ -12,6 +13,9 @@ import *  as firebase from 'firebase'
 
 //Calendrier
 import BirthdayPicker from './BirthdayPicker';
+
+//Récupérer la largeur de l'écran (utilisé dans le style de scrollview)
+const screenWidth = Dimensions.get('window').width
 
 class Register extends React.Component {
 
@@ -103,81 +107,130 @@ class Register extends React.Component {
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
                 </TouchableOpacity>
 
-                <View style={styles.error_message}>
-                    {this.state.errorMessage && <Text style={styles.error}></Text>}
-                </View>
-
-                <View style={styles.form}>
-                    <View>
-                        <Text style={styles.input_title}>Nom</Text>
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={name => this.setState({ name })}
-                            value={this.state.name}
-                        ></TextInput>
+                <ScrollView style={styles.scrollview}> 
+                    <View style={styles.error_message}>
+                        {this.state.errorMessage && <Text style={styles.error}></Text>}
                     </View>
 
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Prénom</Text>
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={surname => this.setState({ surname })}
-                            value={this.state.surname}
-                        ></TextInput>
+                    <View style={styles.form}>
+                        <View>
+                            <Text style={styles.input_title}>Nom</Text>
+                            <TextInput 
+                                style={styles.input}
+                                onChangeText={name => this.setState({ name })}
+                                value={this.state.name}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Prénom</Text>
+                            <TextInput 
+                                style={styles.input}
+                                onChangeText={surname => this.setState({ surname })}
+                                value={this.state.surname}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Date de naissance</Text>
+                            <TouchableOpacity style={[styles.input, {paddingTop: 9}]} onPress={this._birthdayPickerIsPressed}>
+                                <Text style={styles.input}>
+                                    {this.state.day}/{this.state.month + 1}/{this.state.year}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View>{this.displayBirthdayPicker()}</View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Genre</Text>
+                            <View style={styles.genre}>
+                                <View style={{flexDirection: 'column'}}>
+                                    <CheckBox
+                                        center
+                                        title='Homme'
+                                        checkedIcon='dot-circle-o'
+                                        uncheckedIcon='circle-o'
+                                        containerStyle={[styles.radioButton, {width: 93}]}
+                                        textStyle={{fontSize: 14, fontWeight: 'normal'}}
+                                        checked={this.state.checked}
+                                    />
+
+                                    <CheckBox
+                                        center
+                                        title='Femme'
+                                        checkedIcon='dot-circle-o'
+                                        uncheckedIcon='circle-o'
+                                        containerStyle={[styles.radioButton, {width: 90}]}
+                                        textStyle={{fontSize: 14, fontWeight: 'normal'}}
+                                        checked={this.state.checked}
+                                    />
+                                </View>
+
+                                <CheckBox
+                                    center
+                                    title='Je ne souhaite pas préciser'
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    containerStyle={[styles.radioButton, {width: 150}]}
+                                    textStyle={{fontSize: 14, fontWeight: 'normal', textAlign: 'center'}}
+                                    checked={this.state.checked}
+                                />
+                            </View>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Adresse mail</Text>
+                            <TextInput 
+                                style={styles.input}
+                                onChangeText={email => this.setState({ email })}
+                                value={this.state.email}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Mot de passe</Text>
+                            <TextInput
+                                style={styles.input}
+                                secureTextEntry
+                                onChangeText={ password => this.setState({ password })}
+                                value={this.state.password}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Confirmez votre mot de passe</Text>
+                            <TextInput
+                                style={styles.input}
+                                secureTextEntry
+                                onChangeText={ password => this.setState({ password })}
+                                value={this.state.password}
+                            ></TextInput>
+                        </View>
                     </View>
 
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Date de naissance</Text>
-                        <TouchableOpacity style={styles.input} onPress={this._birthdayPickerIsPressed}>
-                            <Text style={styles.input}>
-                                {this.state.day}/{this.state.month + 1}/{this.state.year}
-                            </Text>
-                        </TouchableOpacity>
+                    <View style={styles.conditionsG}>
+                        <Text style={{textAlign: 'center'}}>
+                            J'accepte les conditions générales d'utilisation
+                        </Text>
+                        <CheckBox
+                            center
+                            checked={this.state.checked}
+                        />
                     </View>
 
-                    <View>{this.displayBirthdayPicker()}</View>
+                    <TouchableOpacity style={styles.button} onPress={this._handleSignUp}>
+                        <Text style={{ color: '#FFF', fontWeight: '500' }}>S'inscrire</Text>
+                    </TouchableOpacity>
 
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Adresse mail</Text>
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={email => this.setState({ email })}
-                            value={this.state.email}
-                        ></TextInput>
-                    </View>
-
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Mot de passe</Text>
-                        <TextInput
-                            style={styles.input}
-                            secureTextEntry
-                            onChangeText={ password => this.setState({ password })}
-                            value={this.state.password}
-                        ></TextInput>
-                    </View>
-
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Confirmez votre mot de passe</Text>
-                        <TextInput
-                            style={styles.input}
-                            secureTextEntry
-                            onChangeText={ password => this.setState({ password })}
-                            value={this.state.password}
-                        ></TextInput>
-                    </View>
-                </View>
-
-                <TouchableOpacity style={styles.button} onPress={this._handleSignUp}>
-                    <Text style={{ color: '#FFF', fontWeight: '500' }}>S'inscrire</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={{ alignSelf: 'center', marginTop: 32 }}
-                    onPress={() => this.props.navigation.navigate("Connexion")}>
-                    <Text style={{ color: '#414959', fontSize: 13 }}>
-                        Déjà inscrit ? <Text style={{ fontWeight: '500', color: '#E9446A' }}>Connecte toi</Text>
-                    </Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{ alignSelf: 'center', marginTop: 32, paddingBottom: 30 }}
+                        onPress={() => this.props.navigation.navigate("Connexion")}>
+                        <Text style={{ color: '#414959', fontSize: 13 }}>
+                            Déjà inscrit ? <Text style={{ fontWeight: '500', color: '#3F9BAF' }}>Connecte toi</Text>
+                        </Text>
+                    </TouchableOpacity>
+                </ScrollView>
 
             </View>
         )
@@ -189,18 +242,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    cadre: {
-        backgroundColor: "rgba(255,255,255,0.7)",
-        width: "50%",
-        borderWidth: 1,
-        alignSelf: "center",
-        borderRadius: 20
-    },
-    welcome: {
-        fontSize: 18,
-        fontWeight: '400',
-        textAlign: 'center',
-        padding: 5
+    scrollview: {
+        width: screenWidth
     },
     error_message: {
         height: 72,
@@ -216,7 +259,17 @@ const styles = StyleSheet.create({
     form: {
         width: 236,
         marginBottom: 45,
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        alignSelf: 'center'
+    },
+    genre: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    radioButton: {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent'
     },
     input_title: {
         color: '#8A8F9E',
@@ -230,11 +283,19 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#161F3D'
     },
+    conditionsG: {
+        flexDirection: 'row',
+        width: 300,
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
     button: {
         marginHorizontal: 30,
-        backgroundColor: '#E9446A',
+        backgroundColor: '#3F9BAF',
         borderRadius: 4,
+        width: 236,
         height: 52,
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center'
     },
