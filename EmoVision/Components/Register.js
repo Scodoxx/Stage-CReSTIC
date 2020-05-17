@@ -28,13 +28,19 @@ class Register extends React.Component {
         birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
         surname: "",
         name: "",
-        birthdate: new Date(),
         year: 2000, //année par défaut
         month: 0, //mois par défaut (0 = janvier)
         day: 1, //jour par défaut
+        birthdate: new Date(),
+        gender: null, //genre de la personne
         email: "",
         password: "",
-        errorMessage: null
+        errorMessage: null,
+
+        manChecked: false, //savoir si la checkBox "homme" a été coché
+        womanChecked: false, //savoir si la checkBox "femme" a été coché
+        otherChecked: false, //savoir si la checkBox "ne souhaite pas préciser" a été coché
+        termsChecked: false //savoir si les conditions générales d'utilisation ont été coché
     }
 
     //Permet d'avoir la date du jour (pas utilisée pour le moment)
@@ -90,6 +96,31 @@ class Register extends React.Component {
         }
         else {
             this.setState({birthdayPickedIsPressed: false})
+        }
+    }
+
+    //Sélectionne "Homme"
+    _toggleMan = () => {
+        this.setState({ manChecked: true, womanChecked: false, otherChecked: false, gender: "H"})
+    }
+
+    //Sélectionne "Femme"
+    _toggleWoman = () => {
+        this.setState({ womanChecked: true, otherChecked: false, manChecked: false, gender: "F"})
+    }
+
+    //Sélectionne "Je ne souhaite pas préciser"
+    _toggleOther = () => {
+        this.setState({otherChecked: true, manChecked: false, womanChecked: false, gender: null})
+    }
+
+    //coche ou décoche les conditions générales
+    _toggleTerms = () => {
+        if(!this.state.termsChecked) {
+            this.setState({termsChecked: true})
+        }
+        else {
+            this.setState({termsChecked: false})
         }
     }
 
@@ -153,7 +184,8 @@ class Register extends React.Component {
                                         uncheckedIcon='circle-o'
                                         containerStyle={[styles.radioButton, {width: 93}]}
                                         textStyle={{fontSize: 14, fontWeight: 'normal'}}
-                                        checked={this.state.checked}
+                                        checked={this.state.manChecked}
+                                        onPress={this._toggleMan}
                                     />
 
                                     <CheckBox
@@ -163,7 +195,8 @@ class Register extends React.Component {
                                         uncheckedIcon='circle-o'
                                         containerStyle={[styles.radioButton, {width: 90}]}
                                         textStyle={{fontSize: 14, fontWeight: 'normal'}}
-                                        checked={this.state.checked}
+                                        checked={this.state.womanChecked}
+                                        onPress={this._toggleWoman}
                                     />
                                 </View>
 
@@ -174,7 +207,8 @@ class Register extends React.Component {
                                     uncheckedIcon='circle-o'
                                     containerStyle={[styles.radioButton, {width: 150}]}
                                     textStyle={{fontSize: 14, fontWeight: 'normal', textAlign: 'center'}}
-                                    checked={this.state.checked}
+                                    checked={this.state.otherChecked}
+                                    onPress={this._toggleOther}
                                 />
                             </View>
                         </View>
@@ -215,7 +249,8 @@ class Register extends React.Component {
                         </Text>
                         <CheckBox
                             center
-                            checked={this.state.checked}
+                            checked={this.state.termsChecked}
+                            onPress={this._toggleTerms}
                         />
                     </View>
 
