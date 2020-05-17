@@ -85,8 +85,8 @@ class BirthdayPicker extends React.Component {
         for (var i = minYear; i <= maxYear; i++) {
             years.push(<Picker.Item key={i} label={i.toString()} value={i}/>)
         }
-        //Pour ne pas laisser l'année vide
-        years.push(<Picker.Item key={0} label={"----"} value={0}/>)
+        //Pour laisser une année vide (pas besoin dans ce cas on veut récupérer la date)
+        //years.push(<Picker.Item key={0} label={"----"} value={0}/>)
 
         return years
     }

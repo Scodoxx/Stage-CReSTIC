@@ -99,6 +99,34 @@ class Register extends React.Component {
         }
     }
 
+    //Affiche la date dans le formulaire (formatage pour avoir deux chiffres pour le jour et le mois)
+    _displayDate = () => {
+        var day = this.state.day
+        var month = this.state.month + 1
+        var year = this.state.year
+        //Un peu compliqué comme méthode je n'ai trouvé que celle là pour l'instant
+        if (day < 10 && month >= 10) {
+            return (
+                "0" + day + "/" + month + "/" + year
+            )
+        }
+        if (month < 10 && day >= 10) {
+            return (
+                day + "/0" + month + "/" + year
+            )
+        }
+        if (month < 10 && day < 10) {
+            return (
+                "0" + day + "/0" + month + "/" + year
+            )
+        }
+        else {
+            return (
+                day + "/" + month + "/" + year
+            )
+        }
+    }
+
     //Sélectionne "Homme"
     _toggleMan = () => {
         this.setState({ manChecked: true, womanChecked: false, otherChecked: false, gender: "H"})
@@ -114,13 +142,25 @@ class Register extends React.Component {
         this.setState({otherChecked: true, manChecked: false, womanChecked: false, gender: null})
     }
 
-    //coche ou décoche les conditions générales
+    //coche ou décoche les conditions générales et désactive ou active le bouton d'inscription
     _toggleTerms = () => {
         if(!this.state.termsChecked) {
             this.setState({termsChecked: true})
         }
         else {
             this.setState({termsChecked: false})
+        }
+    }
+
+    //a voir comment griser le bouton d'incription
+    _registerDisabled = () => {
+        if(this.state.termsChecked) {
+            return {
+                
+            }
+        }
+        else {
+            styles.conditionsG.backgroundColor = 'red'
         }
     }
 
@@ -166,7 +206,7 @@ class Register extends React.Component {
                             <Text style={styles.input_title}>Date de naissance</Text>
                             <TouchableOpacity style={[styles.input, {paddingTop: 9}]} onPress={this._birthdayPickerIsPressed}>
                                 <Text style={styles.input}>
-                                    {this.state.day}/{this.state.month + 1}/{this.state.year}
+                                    {this._displayDate()}
                                 </Text>
                             </TouchableOpacity>
                         </View>
@@ -175,7 +215,7 @@ class Register extends React.Component {
 
                         <View style={{marginTop: 32}}>
                             <Text style={styles.input_title}>Genre</Text>
-                            <View style={styles.genre}>
+                            <View style={[styles.genre, {borderBottomColor: '#8A8F9E', borderBottomWidth: StyleSheet.hairlineWidth}]}>
                                 <View style={{flexDirection: 'column'}}>
                                     <CheckBox
                                         center
@@ -244,8 +284,8 @@ class Register extends React.Component {
                     </View>
 
                     <View style={styles.conditionsG}>
-                        <Text style={{textAlign: 'center'}}>
-                            J'accepte les conditions générales d'utilisation
+                        <Text style={{textAlign: 'center', flex: 3}}>
+                            J'ai lu et accepte les conditions générales d'utilisation
                         </Text>
                         <CheckBox
                             center
@@ -254,7 +294,7 @@ class Register extends React.Component {
                         />
                     </View>
 
-                    <TouchableOpacity style={styles.button} onPress={this._handleSignUp}>
+                    <TouchableOpacity disabled={!this.state.termsChecked} style={styles.button} onPress={this._handleSignUp}>
                         <Text style={{ color: '#FFF', fontWeight: '500' }}>S'inscrire</Text>
                     </TouchableOpacity>
 
@@ -293,11 +333,13 @@ const styles = StyleSheet.create({
     },
     form: {
         width: 236,
-        marginBottom: 45,
+        marginBottom: 30,
         marginHorizontal: 30,
         alignSelf: 'center'
     },
     genre: {
+        width: 236,
+        justifyContent: 'center',
         flexDirection: 'row',
         alignSelf: 'center',
         alignItems: 'center'
@@ -320,14 +362,16 @@ const styles = StyleSheet.create({
     },
     conditionsG: {
         flexDirection: 'row',
+        flex: 1,
         width: 300,
         alignSelf: 'center',
         alignItems: 'center'
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor: '#3F9BAF',
         borderRadius: 4,
+        marginTop: 20,
+        backgroundColor: '#3F9BAF',
         width: 236,
         height: 52,
         alignSelf: 'center',
