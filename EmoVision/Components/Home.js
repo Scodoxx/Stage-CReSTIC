@@ -15,17 +15,15 @@ class Landing extends React.Component {
 
                 <Image
                     source={require("../Images/banner_test_2.png")}
-                    style={{marginTop: -80, marginBottom: -120}}
-                ></Image>
-
-                <Image
-                        source={require("../Images/logoEmovisionBlue.jpg")}
-                        style={styles.logo_img}
+                    style={{marginTop: -80, marginBottom: -60}}
                 ></Image>
 
                 <Text style={[styles.title, { marginTop: 40}]}>Bienvenue</Text>
                 <Text style={styles.title}>dans le monde</Text>
-                <Text style={[styles.title, { color: '#3373F0', fontSize: 48, marginTop: 20 }]}>EmoVision</Text>
+                <Image
+                        source={require("../Images/logo.png")}
+                        style={styles.logo_img}
+                ></Image>
 
                 <View style={[styles.cards_container, { marginTop: 40 }]}>
                     <View style={styles.contact_container}>
@@ -66,10 +64,9 @@ const styles = StyleSheet.create({
     logo_img: {
         width: 180,
         height: 180,
+        marginTop: 30,
         alignSelf: 'center',
-        borderRadius: 112.5,
-        borderWidth: 1,
-        borderColor: '#414959'
+        borderRadius: 112.5
     },
     logo_title: {
         position: 'absolute',
