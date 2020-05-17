@@ -45,7 +45,7 @@ class BirthdayPicker extends React.Component {
         var days = []
         //On insère dans le tableau days le nombre de jours correspondant au mois et à l'année sous forme d'éléments Picker
         for (var i = 1; i <= numDays; i++) {
-            days.push(<Picker.Item label={i.toString()} value={i}/>)
+            days.push(<Picker.Item key={i} label={i.toString()} value={i}/>)
         }
 
         return days
@@ -68,7 +68,7 @@ class BirthdayPicker extends React.Component {
         var nomDeMois = this.getMonthDate()
 
         return nomDeMois.map(function(month, index) {
-            return <Picker.Item label={month} value={index}/>
+            return <Picker.Item key={index} label={month} value={index}/>
         })
     }
 
@@ -83,10 +83,10 @@ class BirthdayPicker extends React.Component {
         //On créé un tableau vide d'année qu'on viendra remplir pour le return
         var years = []
         for (var i = minYear; i <= maxYear; i++) {
-            years.push(<Picker.Item label={i.toString()} value={i}/>)
+            years.push(<Picker.Item key={i} label={i.toString()} value={i}/>)
         }
         //Pour ne pas laisser l'année vide
-        years.push(<Picker.Item label={"----"} value={0}/>)
+        years.push(<Picker.Item key={0} label={"----"} value={0}/>)
 
         return years
     }
