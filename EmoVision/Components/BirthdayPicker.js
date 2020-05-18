@@ -103,7 +103,12 @@ class BirthdayPicker extends React.Component {
         //nombre de jours pour une année précise dans un mois donné (celui qui vient d'être sélectionné)
         var maxDays = this.getNumDaysInMonth(this.state.year, month)
         //si le jour sélectionné est maintenant trop haut par rapport à ceux du mois de l'année qui vient d'être sélectionnée, le jour revient à la valeur maxDays, sinon ne change pas
-        var day = [this.state.day > maxDays] ? maxDays : this.state.day
+        if (this.state.day > maxDays) {
+            var day = maxDays
+        }
+        else {
+            var day = this.state.day
+        }
 
         this.setState({ month: month, day: day }, () => {
             this.props.onValueChange(this.state.year, this.state.month, this.state.day)
@@ -115,7 +120,12 @@ class BirthdayPicker extends React.Component {
         //nombre de jours dans un mois précis pour une année donnée (celle qui vient d'être sélectionnée)
         var maxDays = this.getNumDaysInMonth(year, this.state.month)
         //si le jour sélectionné est maintenant trop haut par rapport à ceux du mois de l'année qui vient d'être sélectionnée, le jour revient à la valeur maxDays, sinon ne change pas
-        var day = [this.state.day > maxDays] ? maxDays : this.state.day
+        if (this.state.day > maxDays) {
+            var day = maxDays
+        }
+        else {
+            var day = this.state.day
+        }
 
         this.setState({ year: year, day: day }, () => {
             this.props.onValueChange(this.state.year, this.state.month, this.state.day)
