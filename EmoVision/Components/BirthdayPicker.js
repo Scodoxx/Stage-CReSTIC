@@ -118,7 +118,7 @@ class BirthdayPicker extends React.Component {
     //Quand l'année est changée par l'utilisateur
     onYearValueChanged = (year) => {
         //nombre de jours dans un mois précis pour une année donnée (celle qui vient d'être sélectionnée)
-        var maxDays = this.getNumDaysInMonth(year, this.state.month)
+        var maxDays = this.getNumDaysInMonth(this.state.month, year)
         //si le jour sélectionné est maintenant trop haut par rapport à ceux du mois de l'année qui vient d'être sélectionnée, le jour revient à la valeur maxDays, sinon ne change pas
         if (this.state.day > maxDays) {
             var day = maxDays
