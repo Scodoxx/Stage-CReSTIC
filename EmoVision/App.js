@@ -6,13 +6,14 @@ import * as firebase from 'firebase'
 
 //Configuration de la base de données (la même base que celle du MiniProjet)
 var firebaseConfig = {
-  apiKey: "AIzaSyDfW_YIF_jqVTAIvYfdTvBnWLr2bYnjkgs",
-  authDomain: "miniprojet-be5b6.firebaseapp.com",
-  databaseURL: "https://miniprojet-be5b6.firebaseio.com",
-  projectId: "miniprojet-be5b6",
-  storageBucket: "miniprojet-be5b6.appspot.com",
-  messagingSenderId: "450566010742",
-  appId: "1:450566010742:web:b274e03f3c83f9568dac57"
+  apiKey: "AIzaSyCIcI535870dRbWe7G_NN9vAxamuY9Wals",
+  authDomain: "emovision-49b33.firebaseapp.com",
+  databaseURL: "https://emovision-49b33.firebaseio.com",
+  projectId: "emovision-49b33",
+  storageBucket: "emovision-49b33.appspot.com",
+  messagingSenderId: "922397930915",
+  appId: "1:922397930915:web:84c4a977a2c969e3621616",
+  measurementId: "G-X59WSCJ3N7"
 };
 
 //Initialisation de Firebase

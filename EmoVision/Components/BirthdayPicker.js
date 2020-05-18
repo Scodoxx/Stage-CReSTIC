@@ -30,7 +30,7 @@ class BirthdayPicker extends React.Component {
     //les paramètres month et year sont des entiers
     getNumDaysInMonth(month, year) {
         //Si le mois est égal à février et l'année inconnue, return le nombre de jours max de février
-        if (year == 0 && month == 1) {
+        if (year == 0 && month === 1) {
             return 29
         }
 
@@ -101,7 +101,7 @@ class BirthdayPicker extends React.Component {
     //Quand le mois est changé par l'utilisateur
     onMonthValueChanged = (month) => {
         //nombre de jours pour une année précise dans un mois donné (celui qui vient d'être sélectionné)
-        var maxDays = this.getNumDaysInMonth(this.state.year, month)
+        var maxDays = this.getNumDaysInMonth(month, this.state.year)
         //si le jour sélectionné est maintenant trop haut par rapport à ceux du mois de l'année qui vient d'être sélectionnée, le jour revient à la valeur maxDays, sinon ne change pas
         if (this.state.day > maxDays) {
             var day = maxDays
