@@ -13,7 +13,7 @@ class Loading extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             //Rechanger le premier Auth avec App (évite de faire un chargement infini pendant le dvpmt)
-            this.props.navigation.navigate(user ? "Auth" : "Auth")
+            this.props.navigation.navigate(user ? "App" : "Lancement")
         })
     }
 

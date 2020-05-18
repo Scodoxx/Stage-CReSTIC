@@ -33,6 +33,7 @@ class Register extends React.Component {
         day: 1, //jour par défaut
         birthdate: new Date(),
         gender: null, //genre de la personne
+        confidential: false, //l'utilisateur accepte ou non de partager ses données en lien avec l'application
         email: "",
         password: "",
         errorMessage: null,
@@ -43,18 +44,18 @@ class Register extends React.Component {
         termsChecked: false //savoir si les conditions générales d'utilisation ont été coché
     }
 
-    //Permet d'avoir la date du jour (pas utilisée pour le moment)
-    componentDidMount() {
-        var that = this;
-        var month = new Date().getMonth() + 1; //Current Month
-        var day = new Date().getDay() + 10 ; //Current Day
-        var year = new Date().getFullYear(); //Current Year
-        that.setState({
-            //Setting the value of the date time
-            currentDate:
-                day + '-' + month + '-' + year,
-        });
-    }
+    //Permet de s'inscrire et que les données soient enregistrées dans la base de données
+    _handleSignUp = () => {
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(userCredentials => {
+                return userCredentials.user.updateProfile({
+                    displayName: this.state.surname
+                });
+            })
+            .catch(error => this.setState({ errorMessage: error.message }));
+    };
 
     //Permet de s'inscrire et que les données soient enregistrées dans la base de données
     _handleSignUp = () => {
@@ -142,6 +143,15 @@ class Register extends React.Component {
         this.setState({otherChecked: true, manChecked: false, womanChecked: false, gender: null})
     }
 
+    _toggleConfidential = () => {
+        if(!this.state.confidential) {
+            this.setState({confidential: true})
+        }
+        else {
+            this.setState({confidential: false})
+        }
+    }
+
     //coche ou décoche les conditions générales et désactive ou active le bouton d'inscription
     _toggleTerms = () => {
         if(!this.state.termsChecked) {
@@ -185,20 +195,20 @@ class Register extends React.Component {
 
                     <View style={styles.form}>
                         <View>
-                            <Text style={styles.input_title}>Nom</Text>
-                            <TextInput 
-                                style={styles.input}
-                                onChangeText={name => this.setState({ name })}
-                                value={this.state.name}
-                            ></TextInput>
-                        </View>
-
-                        <View style={{marginTop: 32}}>
                             <Text style={styles.input_title}>Prénom</Text>
                             <TextInput 
                                 style={styles.input}
                                 onChangeText={surname => this.setState({ surname })}
                                 value={this.state.surname}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 32}}>
+                            <Text style={styles.input_title}>Nom</Text>
+                            <TextInput 
+                                style={styles.input}
+                                onChangeText={name => this.setState({ name })}
+                                value={this.state.name}
                             ></TextInput>
                         </View>
 
@@ -277,10 +287,20 @@ class Register extends React.Component {
                             <TextInput
                                 style={styles.input}
                                 secureTextEntry
-                                onChangeText={ password => this.setState({ password })}
                                 value={this.state.password}
                             ></TextInput>
                         </View>
+                    </View>
+
+                    <View style={styles.conditionsG}>
+                        <Text style={{textAlign: 'center'}}>
+                            En cochant cette case vous acceptez de partager vos données
+                        </Text>
+                        <CheckBox
+                            center
+                            checked={this.state.confidential}
+                            onPress={this._toggleConfidential}
+                        />
                     </View>
 
                     <View style={styles.conditionsG}>

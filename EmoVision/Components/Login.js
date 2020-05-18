@@ -22,6 +22,7 @@ class Home extends React.Component {
 
     //Permet de s'identifier en appuyant sur le bouton "Se connecter"
     _handleLogin = () => {
+        console.log(this.state)
         const {email, password} = this.state
 
         //Tester la correspondance des identifiants avec la base de données
