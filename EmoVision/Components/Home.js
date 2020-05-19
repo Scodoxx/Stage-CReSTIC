@@ -4,6 +4,9 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
+//Barre de sélection
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
+
 //Base de données
 import *  as firebase from 'firebase'
 
@@ -11,7 +14,10 @@ class Home extends React.Component {
 
     //Prénom de l'utilisateur
     state = {
-        displayName: "A"
+        displayName: "A",
+        setSliderOneChanging: false,
+        sliderOneValue: [5],
+        multiSliderValue: [3, 7]
     }
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
@@ -21,6 +27,12 @@ class Home extends React.Component {
         this.setState({ email, displayName })
     }
 
+    sliderOneValuesChangeStart = () => this.setState({ sliderOneChanging: true })
+
+    sliderOneValuesChange = values => this.setState({ sliderOneValue: values })
+
+    sliderOneValuesChangeFinish = () => setSliderOneChanging(false);
+
     //Permet à l'utilisateur de se déconnecter (sera dans le menu déroulant plus tard)
     _signOutUser = () => {
         firebase.auth().signOut()
@@ -29,16 +41,24 @@ class Home extends React.Component {
     render() {
         console.log(firebase.auth().currentUser)
         return(
-            <View>
+            <View style={styles.main_container}>
                 <Text>Bonjour {this.state.displayName}</Text>
                 <Text>Comment allez vous ?</Text>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button_text}>OK</Text>
-                </TouchableOpacity>
+                <MultiSlider
+                    values={5}
+                    sliderLength={310}
+                    onValuesChangeStart={this.sliderOneValuesChangeStart}
+                    onValuesChange={this.sliderOneValuesChange}
+                    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
+                />
 
                 <TouchableOpacity style={{marginTop: 32}} onPress={this._signOutUser}>
                     <Text>Se déconnecter</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.button_text}>OK</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -46,13 +66,17 @@ class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    main_container: {
+        flex: 1,
+        alignItems: 'center'
+    },
     button: {
         width: 50,
         height: 30,
         alignSelf: 'center',
         backgroundColor: '#3F9BAF',
         borderRadius: 30,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center'
     },
     button_text: {
