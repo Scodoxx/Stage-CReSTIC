@@ -45,14 +45,6 @@ class Home extends React.Component {
                 <Text>Bonjour {this.state.displayName}</Text>
                 <Text>Comment allez vous ?</Text>
 
-                <MultiSlider
-                    values={5}
-                    sliderLength={310}
-                    onValuesChangeStart={this.sliderOneValuesChangeStart}
-                    onValuesChange={this.sliderOneValuesChange}
-                    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
-                />
-
                 <TouchableOpacity style={{marginTop: 32}} onPress={this._signOutUser}>
                     <Text>Se déconnecter</Text>
                 </TouchableOpacity>
