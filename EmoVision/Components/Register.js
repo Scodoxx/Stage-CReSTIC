@@ -26,8 +26,8 @@ class Register extends React.Component {
 
     state = {
         birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
+        firstname: "",
         surname: "",
-        name: "",
         year: 2000, //année par défaut
         month: 0, //mois par défaut (0 = janvier)
         day: 1, //jour par défaut
@@ -51,7 +51,7 @@ class Register extends React.Component {
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(userCredentials => {
                 return userCredentials.user.updateProfile({
-                    displayName: this.state.surname
+                    displayName: this.state.firstname
                 });
             })
             .catch(error => this.setState({ errorMessage: error.message }));
@@ -185,8 +185,8 @@ class Register extends React.Component {
                             <Text style={styles.input_title}>Prénom</Text>
                             <TextInput 
                                 style={styles.input}
-                                onChangeText={surname => this.setState({ surname })}
-                                value={this.state.surname}
+                                onChangeText={firstname => this.setState({ firstname })}
+                                value={this.state.firstname}
                             ></TextInput>
                         </View>
 
@@ -194,8 +194,8 @@ class Register extends React.Component {
                             <Text style={styles.input_title}>Nom</Text>
                             <TextInput 
                                 style={styles.input}
-                                onChangeText={name => this.setState({ name })}
-                                value={this.state.name}
+                                onChangeText={surname => this.setState({ surname })}
+                                value={this.state.surname}
                             ></TextInput>
                         </View>
 
