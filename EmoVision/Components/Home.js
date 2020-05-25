@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import ResponsiveImage from 'react-native-responsive-image'
 
 //Barre de sélection
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
@@ -12,12 +13,10 @@ import *  as firebase from 'firebase'
 
 class Home extends React.Component {
 
-    //Prénom de l'utilisateur
     state = {
         displayName: "A",
-        setSliderOneChanging: false,
-        sliderOneValue: [5],
-        multiSliderValue: [3, 7]
+        leftValue: 0,
+        rightValue: 0.5
     }
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
@@ -27,16 +26,8 @@ class Home extends React.Component {
         this.setState({ email, displayName })
     }
 
-    sliderOneValuesChangeStart = () => this.setState({ sliderOneChanging: true })
-
-    sliderOneValuesChange = values => this.setState({ sliderOneValue: values })
-
-    sliderOneValuesChangeFinish = () => setSliderOneChanging(false);
-
-    //Permet à l'utilisateur de se déconnecter (sera dans le menu déroulant plus tard)
-    _signOutUser = () => {
-        firebase.auth().signOut()
-    }
+    enableScroll = () => this.setState({ scrollEnabled: true });
+    disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
         console.log(firebase.auth().currentUser)
@@ -45,9 +36,36 @@ class Home extends React.Component {
                 <Text>Bonjour {this.state.displayName}</Text>
                 <Text>Comment allez vous ?</Text>
 
-                <TouchableOpacity style={{marginTop: 32}} onPress={this._signOutUser}>
-                    <Text>Se déconnecter</Text>
-                </TouchableOpacity>
+                <View>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <ResponsiveImage
+                            source={require("../Images/sad.png")}
+                            initWidth="30"
+                            initHeight="30"
+                        />
+                        <ResponsiveImage
+                            source={require("../Images/meh.png")}
+                            initWidth="30"
+                            initHeight="30"
+                        />
+                        <ResponsiveImage
+                            source={require("../Images/smile.png")}
+                            initWidth="30"
+                            initHeight="30"
+                        />
+                    </View>
+                    <MultiSlider
+                        trackWidth = {300}
+                        defaultTrackColor = {'#e3e3e3'}
+                        leftThumbColor = {'red'}
+                        rightThumbColor = {'blue'}
+                        rangeColor = {'pink'}
+                        leftValue = {this.state.leftValue}
+                        rightValue = {this.state.rightValue}
+                        onLeftValueChange = {(leftValue) => this.setState({leftValue})}
+                        onRightValueChange = {(rightValue) => this.setState({rightValue})}
+                    />
+                </View>
 
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.button_text}>OK</Text>
@@ -59,8 +77,9 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
-        alignItems: 'center'
+        flex: 0.5,
+        alignItems: 'center',
+        justifyContent: 'space-around'
     },
     button: {
         width: 50,

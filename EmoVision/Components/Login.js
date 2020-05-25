@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, LayoutAnimation } from 'react-native'
+import ResponsiveImage from 'react-native-responsive-image'
 
 //Pour connecter avec la base de données
 import * as firebase from 'firebase'
@@ -39,10 +40,12 @@ class Home extends React.Component {
         return (
             <View style={styles.main_container}>
 
-                <Image
+                <ResponsiveImage
                     source={require("../Images/banner_test_2.png")}
-                    style={{marginTop: -80}}
-                ></Image>
+                    style={{marginTop: -80, marginBottom: -10}}
+                    initWidth="600"
+                    initHeight="287"
+                />
 
                 <View style={styles.form}>
                     <View>
@@ -70,14 +73,14 @@ class Home extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={{ alignSelf: 'center', marginTop: 20 }}
+                    style={{ alignSelf: 'center' }}
                     onPress={() => this.props.navigation.navigate("Inscription")}>
                     <Text style={{ color: '#414959', fontSize: 14 }}>
                         Nouveau ? <Text style={{ fontWeight: '500', color: '#3F9BAF' }}>S'inscrire</Text>
                     </Text>
                 </TouchableOpacity>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex: 1, height: 1, backgroundColor: '#414959', marginLeft: 70, marginRight: 10}} />
                     <View>
                         <Text style={{fontSize: 14, textAlign: 'center', color: '#414959'}}>ou</Text>
@@ -85,7 +88,7 @@ class Home extends React.Component {
                     <View style={{flex: 1, height: 1, backgroundColor: '#414959', marginRight: 70, marginLeft: 10}} />
                 </View>
 
-                <View style={{marginTop: 20}}>
+                <View>
                     <Text style={{color: '#414959', fontSize: 14}}>Se connecter avec</Text>
                 </View>
 
@@ -97,7 +100,7 @@ class Home extends React.Component {
                     <Text style={styles.button_text}>Facebook</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.fb_gl_button, {marginTop: 15, backgroundColor: '#FD183E'}]}>
+                <TouchableOpacity style={[styles.fb_gl_button, {backgroundColor: '#FD183E'}]}>
                     <Image
                         source={require("../Images/google.png")}
                         style={{width: 17, height: 18, alignSelf: 'center', marginRight: 10}}
@@ -105,17 +108,17 @@ class Home extends React.Component {
                     <Text style={styles.button_text}>Google</Text>
                 </TouchableOpacity>
                 
-                <View style={{marginTop: 20}}>
+                <View>
                     <Text style={{color: '#414959', fontSize: 14}}>Comment ça marche ?</Text>
                 </View>
 
-                <TouchableOpacity style={[styles.video_button, {marginTop: 20}]}>
+                <TouchableOpacity style={styles.video_button}>
                     <Text style={styles.video_button_text}>Vidéo</Text>
                 </TouchableOpacity>
 
-                <View style={{marginTop: 10, alignItems: 'center'}}>
+                <View style={{alignItems: 'center'}}>
                     <Text style={{color: '#414959', fontSize: 45}}>Welcome</Text>
-                    <Text style={{color: '#414959', fontSize: 16}}>to your World</Text>
+                    <Text style={{color: '#414959', fontSize: 16, marginBottom: 10}}>to your World</Text>
                 </View>
 
             </View>
@@ -126,11 +129,11 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     form: {
         width: 236,
-        marginBottom: 30,
         marginHorizontal: 30
     },
     input_title: {

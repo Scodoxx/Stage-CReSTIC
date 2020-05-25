@@ -22,6 +22,8 @@ import Perception from '../Components/Perception'
 import Profile from '../Components/Profile'
 import ProfileSettings from '../Components/ProfileSettings'
 import AppSettings from '../Components/AppSettings'
+import Tools from '../Components/Tools'
+import HowItWorks from '../Components/HowItWorks'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -40,6 +42,16 @@ const HomeStack = createStackNavigator({
 const ProfileStack = createStackNavigator({
     Profil: Profile,
     "Modifier le profil": ProfileSettings
+})
+
+//Accéder aux différents outils pour EmoVision
+const ToolsStack = createStackNavigator({
+    Outils : Tools
+})
+
+//Comment est-ce que l'application fonctionne ?
+const HowItWorksStack = createStackNavigator({
+    "Comment ça marche": HowItWorks
 })
 
 //Modifier certains paramètres de l'application
@@ -73,6 +85,24 @@ const AppNavigator = createDrawerNavigator({
             //Icône de personnage pour le profil
             drawerIcon: ({ profile }) => (
                 <Ionicons name="md-person" size={24} color={'black'}/>
+            )
+        }
+    },
+    Outils: {
+        screen: ToolsStack,
+        navigationOptions: {
+            //Icône de personnage pour le profil
+            drawerIcon: ({ profile }) => (
+                <Ionicons name="md-build" size={24} color={'black'}/>
+            )
+        }
+    },
+    "Comment ça marche": {
+        screen: HowItWorksStack,
+        navigationOptions: {
+            //Icône de personnage pour le profil
+            drawerIcon: ({ profile }) => (
+                <Ionicons name="md-help" size={24} color={'black'}/>
             )
         }
     },

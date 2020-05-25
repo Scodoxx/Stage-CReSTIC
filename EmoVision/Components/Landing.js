@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
+import ResponsiveImage from 'react-native-responsive-image'
 
 class Landing extends React.Component {
 
@@ -13,19 +14,25 @@ class Landing extends React.Component {
         return (
             <View style={styles.main_container}>
 
-                <Image
+                <ResponsiveImage
                     source={require("../Images/banner_test_2.png")}
                     style={{marginTop: -80, marginBottom: -60}}
-                ></Image>
+                    initWidth="600"
+                    initHeight="287"
+                />
 
-                <Text style={[styles.title, { marginTop: 40}]}>Bienvenue</Text>
-                <Text style={styles.title}>dans le monde</Text>
-                <Image
-                        source={require("../Images/logo.png")}
-                        style={styles.logo_img}
-                ></Image>
+                <View style={{ flex: 0.5 }}>
+                    <Text style={styles.title}>Bienvenue</Text>
+                    <Text style={styles.title}>dans le monde</Text>
+                    <ResponsiveImage
+                            source={require("../Images/logo.png")}
+                            style={styles.logo_img}
+                            initWidth="180"
+                            initHeight="180"
+                    />
+                </View>
 
-                <View style={[styles.cards_container, { marginTop: 40 }]}>
+                <View style={styles.cards_container}>
                     <View style={styles.contact_container}>
                         <Text style={styles.text}>Contact</Text>
                     </View>
@@ -34,14 +41,16 @@ class Landing extends React.Component {
                         <Text style={[styles.text, { color: 'white' }]}>{"Odyle Pérot & Éric Bittar"}  </Text>
                     </View>
 
-                    <View style={[styles.container, { backgroundColor: '#51629A', marginTop: 10 }]}>
+                    <View style={[styles.container, { backgroundColor: '#51629A'}]}>
                         <Text style={[styles.text, { color: 'white' }]}>{"Au cœur de la Présence"}</Text>
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Connexion")}>
-                    <Text style={[styles.text, { color: 'white', fontWeight: 'bold' }]}>Continuer</Text>
-                </TouchableOpacity>
+                <View style={{ alignSelf: 'flex-end' }}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Connexion")}>
+                        <Text style={[styles.text, { color: 'white', fontWeight: 'bold' }]}>Continuer</Text>
+                    </TouchableOpacity>
+                </View>
 
             </View>
         )
@@ -51,6 +60,7 @@ class Landing extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     title: {
@@ -62,8 +72,6 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     logo_img: {
-        width: 180,
-        height: 180,
         marginTop: 30,
         alignSelf: 'center',
         borderRadius: 112.5
@@ -77,6 +85,8 @@ const styles = StyleSheet.create({
         color: '#3373F0',
     },
     cards_container: {
+        flex: 0.25,
+        justifyContent: 'space-around',
         paddingTop: 40,
         paddingLeft: 30,
         paddingRight: 30
@@ -109,13 +119,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     button: {
-        marginTop: 40,
         marginRight: 20,
         width: 118,
         height: 30,
         backgroundColor: '#3F9BAF',
         borderRadius: 30,
-        alignSelf: 'flex-end',
         justifyContent: 'center'
     }
 })

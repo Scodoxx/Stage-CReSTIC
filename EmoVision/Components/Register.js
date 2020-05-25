@@ -57,19 +57,6 @@ class Register extends React.Component {
             .catch(error => this.setState({ errorMessage: error.message }));
     };
 
-    //Permet de s'inscrire et que les données soient enregistrées dans la base de données
-    _handleSignUp = () => {
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(userCredentials => {
-                return userCredentials.user.updateProfile({
-                    displayName: this.state.name
-                });
-            })
-            .catch(error => this.setState({ errorMessage: error.message }));
-    };
-
     //Fonction appelée quand l'utilisateur change la date de naissance
     onBirthdayPickerValueChange = (year, month, day) => {
         this.setState({ year: year, month: month, day: day })
