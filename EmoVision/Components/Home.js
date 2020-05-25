@@ -26,6 +26,11 @@ class Home extends React.Component {
         this.setState({ email, displayName })
     }
 
+    //Permet à l'utilisateur de se déconnecter (sera dans le menu déroulant plus tard)
+    _signOutUser = () => {
+        firebase.auth().signOut()
+    }
+
     enableScroll = () => this.setState({ scrollEnabled: true });
     disableScroll = () => this.setState({ scrollEnabled: false });
 
