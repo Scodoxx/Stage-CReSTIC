@@ -67,6 +67,10 @@ class Home extends React.Component {
                     />
                 </View>
 
+                <TouchableOpacity style={styles.button} onPress={this._signOutUser}>
+                    <Text style={styles.button_text}>Se déconnecter</Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.button_text}>OK</Text>
                 </TouchableOpacity>
