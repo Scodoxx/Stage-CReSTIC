@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons'
 import *  as firebase from 'firebase'
 
 //Calendrier
+import { TextInputMask } from 'react-native-masked-text'
 import BirthdayPicker from './BirthdayPicker';
 
 //Style
@@ -32,10 +33,7 @@ class Register extends React.Component {
         birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
         name: "", //prénom
         surname: "",
-        year: 2000, //année par défaut
-        month: 0, //mois par défaut (0 = janvier)
-        day: 1, //jour par défaut
-        birthdate: new Date(),
+        birthdate: '',
         gender: null, //genre de la personne
         confidential: false, //l'utilisateur accepte ou non de partager ses données en lien avec l'application
         email: "",
@@ -75,64 +73,6 @@ class Register extends React.Component {
                 }
             )
     };
-
-    //Fonction appelée quand l'utilisateur change la date de naissance
-    onBirthdayPickerValueChange = (year, month, day) => {
-        this.setState({ year: year, month: month, day: day })
-    }
-
-    //Permet d'afficher la zone de sélection de la date de naissance quand on appuie sur le texte
-    displayBirthdayPicker() {
-        if(this.state.birthdayPickedIsPressed) {
-            return (
-                <BirthdayPicker
-                    selectedYear={this.state.year}
-                    selectedMonth={this.state.month}
-                    selectedDay={this.state.day}
-                    minYear={1900}
-
-                    onValueChange={this.onBirthdayPickerValueChange}
-                />
-            )
-        }
-    }
-
-    _birthdayPickerIsPressed = () => {
-        if(!this.state.birthdayPickedIsPressed) {
-            this.setState({birthdayPickedIsPressed: true})
-        }
-        else {
-            this.setState({birthdayPickedIsPressed: false})
-        }
-    }
-
-    //Affiche la date dans le formulaire (formatage pour avoir deux chiffres pour le jour et le mois)
-    _displayDate = () => {
-        var day = this.state.day
-        var month = this.state.month + 1
-        var year = this.state.year
-        //Un peu compliqué comme méthode je n'ai trouvé que celle là pour l'instant
-        if (day < 10 && month >= 10) {
-            return (
-                "0" + day + "/" + month + "/" + year
-            )
-        }
-        if (month < 10 && day >= 10) {
-            return (
-                day + "/0" + month + "/" + year
-            )
-        }
-        if (month < 10 && day < 10) {
-            return (
-                "0" + day + "/0" + month + "/" + year
-            )
-        }
-        else {
-            return (
-                day + "/" + month + "/" + year
-            )
-        }
-    }
 
     //Sélectionne "Homme"
     _toggleMan = () => {
@@ -220,14 +160,20 @@ class Register extends React.Component {
 
                         <View style={{marginTop: 32}}>
                             <Text style={styles.input_title}>Date de naissance</Text>
-                            <TouchableOpacity style={[styles.input, {paddingTop: 9}]} onPress={this._birthdayPickerIsPressed}>
-                                <Text style={styles.input}>
-                                    {this._displayDate()}
-                                </Text>
-                            </TouchableOpacity>
+                            <TextInputMask
+                                type={'datetime'}
+                                style={styles.input}
+                                options={{
+                                    format: 'DD/MM/YYYY'
+                                }}
+                                value={this.state.dt}
+                                onChangeText={text => {
+                                    this.setState({
+                                    birthdate: text
+                                    })
+                                }}
+                            />
                         </View>
-
-                        <View>{this.displayBirthdayPicker()}</View>
 
                         <View style={{marginTop: 32}}>
                             <Text style={styles.input_title}>Genre</Text>
