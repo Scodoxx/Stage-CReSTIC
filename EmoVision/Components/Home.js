@@ -17,7 +17,8 @@ import { buttons } from '../styles'
 class Home extends React.Component {
 
     state = {
-        displayName: "A",
+        uid: '',
+        name: '',
         isChanged: false, //le slider a été changé au moins une fois
         leftValue: 0,
         rightValue: 0.5
@@ -25,9 +26,27 @@ class Home extends React.Component {
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
-        const { email, displayName } = firebase.auth().currentUser;
+        const { uid, email } = firebase.auth().currentUser;
 
-        this.setState({ email, displayName })
+        this.setState({ uid, email })
+
+        this._getName()
+    }
+
+    _displayName() {
+        return(this._getName())
+    }
+
+    _getName() {
+        firebase
+            .database()
+            .ref('utilisateurs')
+            .orderByKey()
+            .equalTo(this.state.uid)
+            .on('child_added', (data) => {
+                console.log(data)
+                this.setState({ name: data.toJSON().prenom })
+            })
     }
 
     _sliderIsChanged = () => {
@@ -48,9 +67,10 @@ class Home extends React.Component {
     disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
+        console.log(this.state.name)
         return(
             <View style={styles.main_container}>
-                <Text>Bonjour {this.state.displayName}</Text>
+                <Text>Bonjour {this.state.name}</Text>
                 <Text>Comment allez vous ?</Text>
 
                 <View>

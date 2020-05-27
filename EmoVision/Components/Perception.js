@@ -15,15 +15,30 @@ class Perception extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <TouchableOpacity style={buttons.perception_button}>
-                    <Text style={buttons.button_text}>Je me sens ...</Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity style={buttons.perception_button}>
-                    <Text style={buttons.button_text}>Je raconte ...</Text>
-                </TouchableOpacity>
+                <View style={styles.perception_container}>
+                    <TouchableOpacity style={buttons.perception_button}>
+                        <Text style={buttons.button_text}>Je me sens ...</Text>
+                    </TouchableOpacity>
+                    <ResponsiveImage
+                                source={require("../Images/im_feeling_person.png")}
+                                initWidth="95"
+                                initHeight="145"
+                    />
+                </View>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.perception_container}>
+                    <TouchableOpacity style={buttons.perception_button}>
+                        <Text style={buttons.button_text}>Je raconte ...</Text>
+                    </TouchableOpacity>
+                    <ResponsiveImage
+                                source={require("../Images/telling_person.png")}
+                                initWidth="95"
+                                initHeight="145"
+                    />
+                </View>
+
+                <View style={styles.perception_container}>
                     <TouchableOpacity style={buttons.perception_button}>
                         <Text style={buttons.button_text}>Je ressens ...</Text>
                     </TouchableOpacity>
@@ -34,7 +49,7 @@ class Perception extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={buttons.button}>
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]}>
                     <Text style={buttons.button_text}>J'y vais</Text>
                 </TouchableOpacity>
             </View>
@@ -44,9 +59,16 @@ class Perception extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.5,
+        flex: 0.8,
         alignItems: 'center',
         justifyContent: 'space-around'
+    },
+    perception_container: {
+        flex: 1,
+        width: "80%",
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
 
