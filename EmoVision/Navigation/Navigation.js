@@ -47,18 +47,46 @@ const HomeStack = createStackNavigator({
 
 //Consulter et modifier son profil
 const ProfileStack = createStackNavigator({
-    Profil: Profile,
-    "Modifier le profil": ProfileSettings
+    Profil: {
+        screen: Profile,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    },
+    "Modifier le profil": {
+        screen: ProfileSettings,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    }
 })
 
 //Accéder aux différents outils pour EmoVision
 const ToolsStack = createStackNavigator({
-    Outils : Tools
+    Outils: {
+        screen: Tools,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    }
 })
 
 //Comment est-ce que l'application fonctionne ?
 const HowItWorksStack = createStackNavigator({
-    "Comment ça marche": HowItWorks
+    "Comment ça marche ?": {
+        screen: HowItWorks,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    }
 })
 
 //Modifier certains paramètres de l'application
