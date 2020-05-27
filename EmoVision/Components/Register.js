@@ -31,7 +31,7 @@ class Register extends React.Component {
     }
 
     state = {
-        id: '', //id de l'utilsisateur
+        id: 'TEST', //id de l'utilsisateur
         birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
         name: "", //prénom
         surname: "",
@@ -54,26 +54,30 @@ class Register extends React.Component {
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(userCredentials => {
+                //On change l'id vide en l'id de l'utilisateur
+                this.setState({ id: userCredentials.user.uid })
+                //On insère les données récoltées dans les input pour les stocker dans firebase
+                firebase
+                    .database()
+                    .ref(`utilisateurs/${this.state.id}`)
+                    .set(
+                        {
+                            nom: this.state.surname,
+                            prenom: this.state.name,
+                            dateNaissance: this.state.birthdate,
+                            genre: this.state.gender,
+                            confidentialite: this.state.confidential
+                        }
+                    )
                 return userCredentials.user.updateProfile({
                     displayName: this.state.name
                 });
             })
             .catch(error => this.setState({ errorMessage: error.message }));
 
-        //a voir comment récupérer l'id de l'utilisateur
+            console.log(`utilisateur/${this.state.id}`)
 
-        firebase
-            .database()
-            .ref('utilisateur/' + this.state.id)
-            .set(
-                {
-                    nom: this.state.surname,
-                    prenom: this.state.name,
-                    dateNaissance: this.state.birthdate,
-                    genre: this.state.gender,
-                    confidentialite: this.state.confidential
-                }
-            )
+        //a voir comment récupérer l'id de l'utilisateur
     };
 
     //Sélectionne "Homme"
