@@ -2,8 +2,11 @@
 //Écran de lancement
 
 import React from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, LayoutAnimation, StatusBar } from 'react-native'
 import ResponsiveImage from 'react-native-responsive-image'
+
+//Style
+import { buttons } from '../styles'
 
 class Landing extends React.Component {
 
@@ -14,16 +17,16 @@ class Landing extends React.Component {
         return (
             <View style={styles.main_container}>
 
+                <StatusBar barStyle="light-content"></StatusBar>
+
                 <ResponsiveImage
                     source={require("../Images/banner_test_2.png")}
-                    style={{marginTop: -80, marginBottom: -60}}
+                    style={{marginTop: -80, marginBottom: 10}}
                     initWidth="600"
                     initHeight="287"
                 />
 
-                <View style={{ flex: 0.5 }}>
-                    <Text style={styles.title}>Bienvenue</Text>
-                    <Text style={styles.title}>dans le monde</Text>
+                <View style={{ flex: 0.4 }}>
                     <ResponsiveImage
                             source={require("../Images/logo.png")}
                             style={styles.logo_img}
@@ -47,8 +50,8 @@ class Landing extends React.Component {
                 </View>
 
                 <View style={{ alignSelf: 'flex-end' }}>
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Connexion")}>
-                        <Text style={[styles.text, { color: 'white', fontWeight: 'bold' }]}>Continuer</Text>
+                    <TouchableOpacity style={[buttons.button, {marginRight: 20}]} onPress={() => this.props.navigation.navigate("Connexion")}>
+                        <Text style={[buttons.button_text, { color: 'white', fontWeight: 'bold' }]}>Continuer</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -116,14 +119,6 @@ const styles = StyleSheet.create({
         height: 68,
         borderRadius: 30,
         textAlign: 'center',
-        justifyContent: 'center'
-    },
-    button: {
-        marginRight: 20,
-        width: 118,
-        height: 30,
-        backgroundColor: '#3F9BAF',
-        borderRadius: 30,
         justifyContent: 'center'
     }
 })

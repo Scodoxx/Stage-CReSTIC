@@ -4,6 +4,9 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
+//Style
+import { buttons } from '../styles'
+
 class ProfileSettings extends React.Component {
 
     render() {
@@ -11,8 +14,8 @@ class ProfileSettings extends React.Component {
             <View>
                 <Text>Modification de vos informations</Text>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button_text}>Valider les changements</Text>
+                <TouchableOpacity style={buttons.button}>
+                    <Text style={buttons.button_text}>Valider les changements</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -20,20 +23,7 @@ class ProfileSettings extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        height: 30,
-        alignSelf: 'center',
-        backgroundColor: '#3F9BAF',
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    button_text: {
-        fontSize: 14,
-        fontStyle: 'normal',
-        color: 'white',
-        alignSelf: 'center'
-    }
+    
 })
 
 export default ProfileSettings

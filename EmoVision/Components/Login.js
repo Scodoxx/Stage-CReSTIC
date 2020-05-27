@@ -8,6 +8,9 @@ import ResponsiveImage from 'react-native-responsive-image'
 //Pour connecter avec la base de données
 import * as firebase from 'firebase'
 
+//Style
+import { buttons } from '../styles'
+
 class Home extends React.Component {
 
     //On enlève l'entête sur l'écran "Connexion"
@@ -68,8 +71,8 @@ class Home extends React.Component {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={this._handleLogin}>
-                    <Text style={{ color: '#FFF', fontWeight: 'bold' }}>Se connecter</Text>
+                <TouchableOpacity style={buttons.button} onPress={this._handleLogin}>
+                    <Text style={buttons.button_text}>Se connecter</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -97,7 +100,7 @@ class Home extends React.Component {
                         source={require("../Images/facebook.png")}
                         style={{width: 10, height: 20, alignSelf: 'center', marginRight: 16}}
                     />
-                    <Text style={styles.button_text}>Facebook</Text>
+                    <Text style={buttons.button_text}>Facebook</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={[styles.fb_gl_button, {backgroundColor: '#FD183E'}]}>
@@ -105,7 +108,7 @@ class Home extends React.Component {
                         source={require("../Images/google.png")}
                         style={{width: 17, height: 18, alignSelf: 'center', marginRight: 10}}
                     />
-                    <Text style={styles.button_text}>Google</Text>
+                    <Text style={buttons.button_text}>Google</Text>
                 </TouchableOpacity>
                 
                 <View>
@@ -113,13 +116,8 @@ class Home extends React.Component {
                 </View>
 
                 <TouchableOpacity style={styles.video_button}>
-                    <Text style={styles.video_button_text}>Vidéo</Text>
+                    <Text style={buttons.button_text}>Vidéo</Text>
                 </TouchableOpacity>
-
-                <View style={{alignItems: 'center'}}>
-                    <Text style={{color: '#414959', fontSize: 45}}>Welcome</Text>
-                    <Text style={{color: '#414959', fontSize: 16, marginBottom: 10}}>to your World</Text>
-                </View>
 
             </View>
         )
@@ -148,21 +146,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#161F3D'
     },
-    button: {
-        width: 118,
-        height: 30,
-        alignSelf: 'center',
-        backgroundColor: '#3F9BAF',
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    button_text: {
-        fontSize: 14,
-        fontStyle: 'normal',
-        color: 'white',
-        alignSelf: 'center'
-    },
     register_icon: {
         width: 38,
         height: 33,
@@ -189,15 +172,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#E6A648',
         width: 86,
         height: 36,
+        marginBottom: 10,
         borderColor: '#C6A2A2',
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    video_button_text: {
-        fontSize: 14,
-        color: 'white',
-        fontWeight: 'bold'
     }
 })
 

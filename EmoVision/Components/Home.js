@@ -11,10 +11,14 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider'
 //Base de données
 import *  as firebase from 'firebase'
 
+//Style
+import { buttons } from '../styles'
+
 class Home extends React.Component {
 
     state = {
         displayName: "A",
+        isChanged: false, //le slider a été changé au moins une fois
         leftValue: 0,
         rightValue: 0.5
     }
@@ -26,16 +30,24 @@ class Home extends React.Component {
         this.setState({ email, displayName })
     }
 
-    //Permet à l'utilisateur de se déconnecter (sera dans le menu déroulant plus tard)
-    _signOutUser = () => {
-        firebase.auth().signOut()
+    _sliderIsChanged = () => {
+        this.setState({ isChanged: true })
+    }
+
+    _moodIsSet() {
+        if(this.state.isChanged) {
+            return (
+                <TouchableOpacity style={buttons.button}>
+                        <Text style={buttons.button_text}>OK</Text>
+                </TouchableOpacity>
+            )
+        }
     }
 
     enableScroll = () => this.setState({ scrollEnabled: true });
     disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
-        console.log(firebase.auth().currentUser)
         return(
             <View style={styles.main_container}>
                 <Text>Bonjour {this.state.displayName}</Text>
@@ -67,18 +79,16 @@ class Home extends React.Component {
                         rangeColor = {'pink'}
                         leftValue = {this.state.leftValue}
                         rightValue = {this.state.rightValue}
+                        onValuesChangeFinish = {this._sliderIsChanged}
                         onLeftValueChange = {(leftValue) => this.setState({leftValue})}
                         onRightValueChange = {(rightValue) => this.setState({rightValue})}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={this._signOutUser}>
-                    <Text style={styles.button_text}>Se déconnecter</Text>
-                </TouchableOpacity>
+                <View>
+                    {this._moodIsSet()}
+                </View>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button_text}>OK</Text>
-                </TouchableOpacity>
             </View>
         )
     }

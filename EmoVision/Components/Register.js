@@ -14,6 +14,9 @@ import *  as firebase from 'firebase'
 //Calendrier
 import BirthdayPicker from './BirthdayPicker';
 
+//Style
+import { buttons } from '../styles'
+
 //Récupérer la largeur de l'écran (utilisé dans le style de scrollview)
 const screenWidth = Dimensions.get('window').width
 
@@ -25,8 +28,9 @@ class Register extends React.Component {
     }
 
     state = {
+        id: '', //id de l'utilsisateur
         birthdayPickedIsPressed: false, //permet d'afficher ou non le sélecteur de la date
-        firstname: "",
+        name: "", //prénom
         surname: "",
         year: 2000, //année par défaut
         month: 0, //mois par défaut (0 = janvier)
@@ -51,10 +55,25 @@ class Register extends React.Component {
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(userCredentials => {
                 return userCredentials.user.updateProfile({
-                    displayName: this.state.firstname
+                    displayName: this.state.name
                 });
             })
             .catch(error => this.setState({ errorMessage: error.message }));
+
+        //a voir comment récupérer l'id de l'utilisateur
+
+        firebase
+            .database()
+            .ref('utilisateur/' + this.state.id)
+            .set(
+                {
+                    nom: this.state.surname,
+                    prenom: this.state.name,
+                    dateNaissance: this.state.birthdate,
+                    genre: this.state.gender,
+                    confidentialite: this.state.confidential
+                }
+            )
     };
 
     //Fonction appelée quand l'utilisateur change la date de naissance
@@ -185,8 +204,8 @@ class Register extends React.Component {
                             <Text style={styles.input_title}>Prénom</Text>
                             <TextInput 
                                 style={styles.input}
-                                onChangeText={firstname => this.setState({ firstname })}
-                                value={this.state.firstname}
+                                onChangeText={name => this.setState({ name })}
+                                value={this.state.name}
                             ></TextInput>
                         </View>
 
@@ -302,7 +321,7 @@ class Register extends React.Component {
                     </View>
 
                     <TouchableOpacity disabled={!this.state.termsChecked} style={styles.button} onPress={this._handleSignUp}>
-                        <Text style={{ color: '#FFF', fontWeight: '500' }}>S'inscrire</Text>
+                        <Text style={buttons.button_text}>S'inscrire</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
