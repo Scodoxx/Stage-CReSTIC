@@ -37,7 +37,7 @@ class Home extends React.Component {
     _moodIsSet() {
         if(this.state.isChanged) {
             return (
-                <TouchableOpacity style={buttons.button}>
+                <TouchableOpacity style={buttons.button} onPress={() => this.props.navigation.navigate("Perception")}>
                         <Text style={buttons.button_text}>OK</Text>
                 </TouchableOpacity>
             )
@@ -99,21 +99,6 @@ const styles = StyleSheet.create({
         flex: 0.5,
         alignItems: 'center',
         justifyContent: 'space-around'
-    },
-    button: {
-        width: 50,
-        height: 30,
-        alignSelf: 'center',
-        backgroundColor: '#3F9BAF',
-        borderRadius: 30,
-        alignItems: 'flex-end',
-        justifyContent: 'center'
-    },
-    button_text: {
-        fontSize: 14,
-        fontStyle: 'normal',
-        color: 'white',
-        alignSelf: 'center'
     }
 })
 

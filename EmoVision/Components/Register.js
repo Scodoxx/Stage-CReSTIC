@@ -8,12 +8,14 @@ import { CheckBox } from 'react-native-elements'
 //Îcones
 import { Ionicons } from '@expo/vector-icons'
 
+//Images responsives
+import ResponsiveImage from 'react-native-responsive-image'
+
 //Base de données
 import *  as firebase from 'firebase'
 
-//Calendrier
+//Choisir la date de naissance
 import { TextInputMask } from 'react-native-masked-text'
-import BirthdayPicker from './BirthdayPicker';
 
 //Style
 import { buttons } from '../styles'
@@ -125,10 +127,12 @@ class Register extends React.Component {
         return (
             <View style={styles.main_container}>
                 <StatusBar barStyle="light-content"></StatusBar>
-                <Image
+                <ResponsiveImage
                     source={require("../Images/banner_test_2.png")}
-                    style={{marginTop: -80, marginBottom: -70}}
-                ></Image>
+                    style={{marginTop: -80, marginBottom: 10}}
+                    initWidth="600"
+                    initHeight="287"
+                />
 
                 <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
                     <Ionicons name="ios-arrow-round-back" size={50} color="#FFF"></Ionicons>
@@ -166,7 +170,7 @@ class Register extends React.Component {
                                 options={{
                                     format: 'DD/MM/YYYY'
                                 }}
-                                value={this.state.dt}
+                                value={this.state.birthdate}
                                 onChangeText={text => {
                                     this.setState({
                                     birthdate: text

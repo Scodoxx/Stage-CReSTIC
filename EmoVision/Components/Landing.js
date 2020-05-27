@@ -3,6 +3,8 @@
 
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, LayoutAnimation, StatusBar } from 'react-native'
+
+//Images responsinves
 import ResponsiveImage from 'react-native-responsive-image'
 
 //Style

@@ -35,7 +35,14 @@ const HomeStack = createStackNavigator({
             ),
         }
     },
-    Perception: Perception
+    Perception: {
+        screen: Perception,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    },
 })
 
 //Consulter et modifier son profil

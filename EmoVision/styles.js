@@ -21,6 +21,15 @@ const buttons = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
         alignSelf: 'center'
+    },
+    //Boutons pour la page Perception.js
+    perception_button: {
+        width: 175,
+        height: 47,
+        borderRadius: 20,
+        backgroundColor: '#FB9999',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 
