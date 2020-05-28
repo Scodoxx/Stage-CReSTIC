@@ -43,10 +43,7 @@ const HomeStack = createStackNavigator({
                 <Ionicons name="md-menu" size={24} color={'black'}/>
             ),
         }
-    }
-})
-
-const TellingStack = createStackNavigator({
+    },
     "Je raconte": {
         screen: Telling,
         navigationOptions: {
@@ -177,7 +174,6 @@ export default createAppContainer(
         Lancement: Landing,
         Chargement: Loading,
         App: AppNavigator,
-        Telling: TellingStack,
         Auth: AuthStack
     },
     {

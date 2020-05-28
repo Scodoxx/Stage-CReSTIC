@@ -2,7 +2,7 @@
 //L'utilisateur va raconter ce qu'il ressent
 
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 
 //Style
 import { buttons } from '../styles'
@@ -13,7 +13,8 @@ class Telling extends React.Component {
         return(
             <View style={styles.main_container}>
 
-                
+                <Text>Que s'est-il passé ?</Text>
+                <TextInput style={styles.input} multiline={true}></TextInput>
                 <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]}>
                     <Text style={buttons.button_text}>J'y vais</Text>
                 </TouchableOpacity>
@@ -28,12 +29,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around'
     },
-    perception_container: {
-        flex: 1,
-        width: "80%",
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        alignItems: 'center'
+    input: {
+        borderWidth: 1,
+        borderColor: 'black',
+        width: '80%',
+        height: '50%',
+        borderRadius: 20
     }
 })
 
