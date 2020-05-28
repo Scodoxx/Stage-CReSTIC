@@ -24,6 +24,7 @@ import ProfileSettings from '../Components/ProfileSettings'
 import AppSettings from '../Components/AppSettings'
 import Tools from '../Components/Tools'
 import HowItWorks from '../Components/HowItWorks'
+import Telling from '../Components/Telling'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -42,7 +43,18 @@ const HomeStack = createStackNavigator({
                 <Ionicons name="md-menu" size={24} color={'black'}/>
             ),
         }
-    },
+    }
+})
+
+const TellingStack = createStackNavigator({
+    "Je raconte": {
+        screen: Telling,
+        navigationOptions: {
+            headerLeft: () => (
+                <Ionicons name="md-menu" size={24} color={'black'}/>
+            ),
+        }
+    }
 })
 
 //Consulter et modifier son profil
@@ -165,6 +177,7 @@ export default createAppContainer(
         Lancement: Landing,
         Chargement: Loading,
         App: AppNavigator,
+        Telling: TellingStack,
         Auth: AuthStack
     },
     {

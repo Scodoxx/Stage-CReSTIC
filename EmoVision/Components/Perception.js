@@ -12,6 +12,20 @@ import ResponsiveImage from 'react-native-responsive-image'
 
 class Perception extends React.Component {
 
+    state = {
+        tellingIsPressed: false, //redirige ou pas vers "je raconte"
+    }
+
+    _buttonIsPressed() {
+        if(this.state.tellingIsPressed) {
+            return (
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Je raconte") }>
+                    <Text style={buttons.button_text}>J'y vais</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
     render() {
         return(
             <View style={styles.main_container}>
@@ -28,7 +42,7 @@ class Perception extends React.Component {
                 </View>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button}>
+                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ tellingIsPressed: true })}>
                         <Text style={buttons.button_text}>Je raconte ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
@@ -49,9 +63,10 @@ class Perception extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]}>
-                    <Text style={buttons.button_text}>J'y vais</Text>
-                </TouchableOpacity>
+                <View>
+                    {this._buttonIsPressed()}
+                </View>
+
             </View>
         )
     }

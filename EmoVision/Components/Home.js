@@ -51,7 +51,7 @@ class Home extends React.Component {
     _buttonIsPressed = () => {
         firebase
             .database()
-            .ref(`utilisateurs/${this.state.id}/historique`)
+            .ref(`utilisateurs/${this.state.uid}/historique`)
             .set(
                 {
                     degreAvant: this.state.sliderValue
@@ -66,7 +66,7 @@ class Home extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text>Bonjour {this.state.displayName}</Text>
+                <Text style={{ fontSize: 20 }}>Bonjour {this.state.displayName}</Text>
                 <Text>Comment allez vous ?</Text>
 
                 <Text>{this.state.sliderValue}</Text>
@@ -95,7 +95,7 @@ class Home extends React.Component {
                         min={0}
                         max={10}
                         step={1}
-                        defaultTrackColor = {'#e3e3e3'}
+                        defaultTrackColor = {'#3F9BAF'}
                         onValuesChange = {(values) => this._sliderIsChanged(values)}
                         onValuesChangeFinish = {this._sliderIsChangedFinish}
                     />
