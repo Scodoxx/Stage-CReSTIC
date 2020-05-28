@@ -17,61 +17,59 @@ import { buttons } from '../styles'
 class Home extends React.Component {
 
     state = {
-        uid: '',
-        name: '',
+        uid: '', //id unique de firebase
+        displayName: '', //Prénom affiché
         isChanged: false, //le slider a été changé au moins une fois
-        leftValue: 0,
-        rightValue: 0.5
+        sliderValue: 0 //valeur du slider
     }
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
-        const { uid, email } = firebase.auth().currentUser;
-
-        this.setState({ uid, email })
-
-        this._getName()
+        const utilisateur = firebase.auth().currentUser
+        this.setState({ displayName: utilisateur.displayName, uid: utilisateur.uid })
     }
 
-    _displayName() {
-        return(this._getName())
+    _sliderIsChanged = (values) => {
+        this.setState({ sliderValue: values })
     }
 
-    _getName() {
-        firebase
-            .database()
-            .ref('utilisateurs')
-            .orderByKey()
-            .equalTo(this.state.uid)
-            .on('child_added', (data) => {
-                console.log(data)
-                this.setState({ name: data.toJSON().prenom })
-            })
-    }
-
-    _sliderIsChanged = () => {
+    _sliderIsChangedFinish = () => {
         this.setState({ isChanged: true })
     }
 
     _moodIsSet() {
         if(this.state.isChanged) {
             return (
-                <TouchableOpacity style={buttons.button} onPress={() => this.props.navigation.navigate("Perception")}>
+                <TouchableOpacity style={buttons.button} onPress={this._buttonIsPressed}>
                         <Text style={buttons.button_text}>OK</Text>
                 </TouchableOpacity>
             )
         }
     }
 
+    //Appelée quand on appuie sur le bouton pour passer à la page suivante
+    _buttonIsPressed = () => {
+        firebase
+            .database()
+            .ref(`utilisateurs/${this.state.id}/historique`)
+            .set(
+                {
+                    degreAvant: this.state.sliderValue
+                }
+            )
+        this.props.navigation.navigate("Perception")
+    }
+
     enableScroll = () => this.setState({ scrollEnabled: true });
     disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
-        console.log(this.state.name)
         return(
             <View style={styles.main_container}>
-                <Text>Bonjour {this.state.name}</Text>
+                <Text>Bonjour {this.state.displayName}</Text>
                 <Text>Comment allez vous ?</Text>
+
+                <Text>{this.state.sliderValue}</Text>
 
                 <View>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -93,15 +91,13 @@ class Home extends React.Component {
                     </View>
                     <MultiSlider
                         trackWidth = {300}
+                        value={this.state.sliderValue}
+                        min={0}
+                        max={10}
+                        step={1}
                         defaultTrackColor = {'#e3e3e3'}
-                        leftThumbColor = {'red'}
-                        rightThumbColor = {'blue'}
-                        rangeColor = {'pink'}
-                        leftValue = {this.state.leftValue}
-                        rightValue = {this.state.rightValue}
-                        onValuesChangeFinish = {this._sliderIsChanged}
-                        onLeftValueChange = {(leftValue) => this.setState({leftValue})}
-                        onRightValueChange = {(rightValue) => this.setState({rightValue})}
+                        onValuesChange = {(values) => this._sliderIsChanged(values)}
+                        onValuesChangeFinish = {this._sliderIsChangedFinish}
                     />
                 </View>
 
