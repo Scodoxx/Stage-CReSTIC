@@ -2,7 +2,7 @@
 //L'utilisateur va pouvoir changer certaines informations de son profil
 
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput, Picker, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Picker, ScrollView, StyleSheet, Alert } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 
 //Style
@@ -86,21 +86,26 @@ class ProfileSettings extends React.Component {
         }
     }
 
-    //L'interface informe que les données ont été mises à jour
-    _hasBeenUpdated() {
-        if(this.state.updated) {
-            return(
-                <Text style={{ color: '#3C7F3A' }}>Les données ont bien été mises à jour !</Text>
-            )
-        }
-        else {
-            return;
-        }
+    //L'interface informe que les données ont été mises à jour et demande confirmation
+    _updateConfirm = () => {
+        return(
+            Alert.alert(
+                "Attention",
+                "Vos informations vont être mises à jour",
+                [
+                    {
+                        text: "Annuler",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "Continuer", onPress: this._updateProfile }
+                ],
+                { cancelable: false })
+        )
     }
 
     //Les données sont mises à jour dans Firebase
     _updateProfile = () => {
-        this.setState({ updated: true })
         //mettre à jour uniquement les informations de la table "utilisateurs"
         firebase
             .database().
@@ -124,6 +129,7 @@ class ProfileSettings extends React.Component {
     }
 
     render() {
+        console.log(this.state.updated)
         return(
             <View style={styles.main_container}>
                 <ScrollView style={styles.scrollview}>
@@ -201,10 +207,9 @@ class ProfileSettings extends React.Component {
                         />
                     </View>
 
-                    <TouchableOpacity style={[buttons.button, { marginBottom: 20, marginTop: 32 }]} onPress={this._updateProfile}>
+                    <TouchableOpacity style={[buttons.button, { marginBottom: 20, marginTop: 32 }]} onPress={this._updateConfirm}>
                         <Text style={buttons.button_text}>Valider les changements</Text>
                     </TouchableOpacity>
-                    {this._hasBeenUpdated()}
                 </ScrollView>
             </View>
         )
