@@ -51,10 +51,10 @@ class Home extends React.Component {
     _buttonIsPressed = () => {
         firebase
             .database()
-            .ref(`utilisateurs/${this.state.uid}/historique`)
-            .set(
+            .ref(`historiques/${this.state.uid}`)
+            .push(
                 {
-                    degreAvant: this.state.sliderValue
+                    degreAvant: this.state.sliderValue[0]
                 }
             )
         this.props.navigation.navigate("Perception")
