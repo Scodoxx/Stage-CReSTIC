@@ -52,7 +52,7 @@ class Home extends React.Component {
 
                 <View style={styles.form}>
                     <View>
-                        <Text style={inputs.input_tilte}>Adresse mail</Text>
+                        <Text style={inputs.input_title}>Adresse mail</Text>
                         <TextInput 
                             style={inputs.input}
                             keyboardType="email-address"
@@ -62,7 +62,7 @@ class Home extends React.Component {
                     </View>
 
                     <View style={{marginTop: 32}}>
-                        <Text style={inputs.input_tilte}>Mot de passe</Text>
+                        <Text style={inputs.input_title}>Mot de passe</Text>
                         <TextInput
                             style={inputs.input}
                             secureTextEntry

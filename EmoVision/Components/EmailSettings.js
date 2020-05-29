@@ -49,7 +49,7 @@ class EmailSettings extends React.Component {
         return(
             <View style={styles.main_container}>
                 <View>
-                    <Text style={inputs.input_tilte}>Nouvelle adresse mail</Text>
+                    <Text style={inputs.input_title}>Nouvelle adresse mail</Text>
                     <TextInput 
                         style={inputs.input}
                         keyboardType="email-address"
@@ -59,7 +59,7 @@ class EmailSettings extends React.Component {
                 </View>
 
                 <View>
-                    <Text style={inputs.input_tilte}>Mot de passe actuel</Text>
+                    <Text style={inputs.input_title}>Mot de passe actuel</Text>
                     <TextInput 
                         style={inputs.input}
                         secureTextEntry={true}

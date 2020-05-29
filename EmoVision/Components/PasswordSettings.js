@@ -51,7 +51,7 @@ class PasswordSettings extends React.Component {
         return(
             <View style={styles.main_container}>
                 <View>
-                    <Text style={inputs.input_tilte}>Mot de passe actuel</Text>
+                    <Text style={inputs.input_title}>Mot de passe actuel</Text>
                     <TextInput 
                         style={inputs.input}
                         secureTextEntry={true}
@@ -61,7 +61,7 @@ class PasswordSettings extends React.Component {
                 </View>
 
                 <View>
-                    <Text style={inputs.input_tilte}>Nouveau mot de passe</Text>
+                    <Text style={inputs.input_title}>Nouveau mot de passe</Text>
                     <TextInput 
                         style={inputs.input}
                         secureTextEntry={true}

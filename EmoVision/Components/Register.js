@@ -149,7 +149,7 @@ class Register extends React.Component {
 
                     <View style={styles.form}>
                         <View>
-                            <Text style={inputs.input_tilte}>Prénom</Text>
+                            <Text style={inputs.input_title}>Prénom</Text>
                             <TextInput 
                                 style={inputs.input}
                                 onChangeText={name => this.setState({ name })}
@@ -158,7 +158,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Nom</Text>
+                            <Text style={inputs.input_title}>Nom</Text>
                             <TextInput 
                                 style={inputs.input}
                                 onChangeText={surname => this.setState({ surname })}
@@ -167,7 +167,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Date de naissance</Text>
+                            <Text style={inputs.input_title}>Date de naissance</Text>
                             <TextInputMask
                                 type={'datetime'}
                                 style={inputs.input}
@@ -184,7 +184,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Genre</Text>
+                            <Text style={inputs.input_title}>Genre</Text>
                             <View style={[styles.genre, {borderBottomColor: '#8A8F9E', borderBottomWidth: StyleSheet.hairlineWidth}]}>
                                 <View style={{flexDirection: 'column'}}>
                                     <CheckBox
@@ -224,7 +224,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Adresse mail</Text>
+                            <Text style={inputs.input_title}>Adresse mail</Text>
                             <TextInput 
                                 style={inputs.input}
                                 onChangeText={email => this.setState({ email })}
@@ -233,7 +233,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Mot de passe</Text>
+                            <Text style={inputs.input_title}>Mot de passe</Text>
                             <TextInput
                                 style={inputs.input}
                                 secureTextEntry
@@ -243,7 +243,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={inputs.input_tilte}>Confirmez votre mot de passe</Text>
+                            <Text style={inputs.input_title}>Confirmez votre mot de passe</Text>
                             <TextInput
                                 style={inputs.input}
                                 secureTextEntry
