@@ -26,6 +26,7 @@ import Tools from '../Components/Tools'
 import HowItWorks from '../Components/HowItWorks'
 import Telling from '../Components/Telling'
 import PasswordSettings from '../Components/PasswordSettings'
+import EmailSettings from '../Components/EmailSettings'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -70,6 +71,9 @@ const ProfileStack = createStackNavigator({
     },
     "Modifier le mot de passe": {
         screen: PasswordSettings
+    },
+    "Modifier l'adresse mail": {
+        screen: EmailSettings
     }
 })
 

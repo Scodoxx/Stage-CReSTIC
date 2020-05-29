@@ -55,6 +55,7 @@ class Home extends React.Component {
                         <Text style={inputs.input_tilte}>Adresse mail</Text>
                         <TextInput 
                             style={inputs.input}
+                            keyboardType="email-address"
                             onChangeText={email => this.setState({ email })}
                             value={this.state.email}
                         ></TextInput>

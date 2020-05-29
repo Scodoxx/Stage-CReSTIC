@@ -1,5 +1,5 @@
-//PasswordSettings.js
-//L'utilisateur va pouvoir changer son mot de passe
+//EmailSettings.js
+//L'utilisateur va pouvoir changer son adresse email
 
 import React from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
@@ -10,7 +10,7 @@ import { buttons, inputs } from '../styles'
 //Base de données
 import *  as firebase from 'firebase'
 
-class PasswordSettings extends React.Component {
+class EmailSettings extends React.Component {
 
     state = {
         updated: false //le profil a été mis à jour au moins une fois
@@ -28,21 +28,19 @@ class PasswordSettings extends React.Component {
         }
     }
 
-    //Empêche la déconexion après avoir changé un de ses log
     reauthenticate = (currentPassword) => {
         var user = firebase.auth().currentUser;
         var cred = firebase.auth.EmailAuthProvider.credential(
             user.email, currentPassword);
         return user.reauthenticateWithCredential(cred);
     }
-
-
-    //Mettre à jour le et mot de passe
-    onChangePasswordPress = () => {
+    
+    //Mettre à jour l'adresse mail
+    onChangeEmailPress = (currentPassword, newEmail) => {
         this.reauthenticate(this.state.currentPassword).then(() => {
             var user = firebase.auth().currentUser;
-            user.updatePassword(this.state.newPassword).then(() => {
-                console.log("Le mot de passe a été mis à jour");
+            user.updateEmail(this.state.newEmail).then(() => {
+                console.log("Le mail a été mis à jour");
             }).catch((error) => { console.log(error); });
         }).catch((error) => { console.log(error); });
     }
@@ -50,6 +48,16 @@ class PasswordSettings extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
+                <View>
+                    <Text style={inputs.input_tilte}>Nouvelle adresse mail</Text>
+                    <TextInput 
+                        style={inputs.input}
+                        keyboardType="email-address"
+                        onChangeText={(text) => this.setState({ newEmail: text })}
+                        value={this.state.newEmail}
+                    ></TextInput>
+                </View>
+
                 <View>
                     <Text style={inputs.input_tilte}>Mot de passe actuel</Text>
                     <TextInput 
@@ -60,17 +68,7 @@ class PasswordSettings extends React.Component {
                     ></TextInput>
                 </View>
 
-                <View>
-                    <Text style={inputs.input_tilte}>Nouveau mot de passe</Text>
-                    <TextInput 
-                        style={inputs.input}
-                        secureTextEntry={true}
-                        onChangeText={(text) => this.setState({ newPassword: text })}
-                        value={this.state.newPassword}
-                    ></TextInput>
-                </View>
-
-                <TouchableOpacity style={buttons.button} onPress={this.onChangePasswordPress}>
+                <TouchableOpacity style={buttons.button} onPress={this.onChangeEmailPress}>
                     <Text style={buttons.button_text}>Valider les changements</Text>
                 </TouchableOpacity>
                 {this._hasBeenUpdated()}
@@ -87,4 +85,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PasswordSettings
+export default EmailSettings

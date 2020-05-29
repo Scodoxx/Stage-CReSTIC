@@ -25,6 +25,7 @@ class Profile extends React.Component {
     componentDidMount() {
         var that = this
         const utilisateur = firebase.auth().currentUser
+        console.log(utilisateur)
         this.setState({ email: utilisateur.email, uid: utilisateur.uid })
         const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
 

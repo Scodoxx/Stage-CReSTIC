@@ -150,11 +150,11 @@ class ProfileSettings extends React.Component {
 
                 <View>
                     <Text style={inputs.input_tilte}>Adresse mail</Text>
-                    <TextInput 
-                        style={inputs.input}
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
-                    ></TextInput>
+                    <TouchableOpacity>
+                        <Text style={{color: 'blue'}} onPress={() => this.props.navigation.navigate("Modifier l'adresse mail")}>
+                            Modifier l'adresse mail
+                        </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View>
