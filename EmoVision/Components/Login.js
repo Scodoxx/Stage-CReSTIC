@@ -9,7 +9,7 @@ import ResponsiveImage from 'react-native-responsive-image'
 import * as firebase from 'firebase'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, inputs } from '../styles'
 
 class Home extends React.Component {
 
@@ -52,18 +52,18 @@ class Home extends React.Component {
 
                 <View style={styles.form}>
                     <View>
-                        <Text style={styles.input_title}>Adresse mail</Text>
+                        <Text style={inputs.input_tilte}>Adresse mail</Text>
                         <TextInput 
-                            style={styles.input}
+                            style={inputs.input}
                             onChangeText={email => this.setState({ email })}
                             value={this.state.email}
                         ></TextInput>
                     </View>
 
                     <View style={{marginTop: 32}}>
-                        <Text style={styles.input_title}>Mot de passe</Text>
+                        <Text style={inputs.input_tilte}>Mot de passe</Text>
                         <TextInput
-                            style={styles.input}
+                            style={inputs.input}
                             secureTextEntry
                             onChangeText={ password => this.setState({ password })}
                             value={this.state.password}
@@ -133,18 +133,6 @@ const styles = StyleSheet.create({
     form: {
         width: 236,
         marginHorizontal: 30
-    },
-    input_title: {
-        color: '#8A8F9E',
-        fontSize: 10,
-        textTransform: 'uppercase'
-    },
-    input: {
-        borderBottomColor: '#8A8F9E',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        height: 40,
-        fontSize: 15,
-        color: '#161F3D'
     },
     register_icon: {
         width: 38,

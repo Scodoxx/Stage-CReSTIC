@@ -4,6 +4,22 @@ const containers = StyleSheet.create({
 
 })
 
+//Champs de saisie
+const inputs = StyleSheet.create({
+    input_title: {
+        color: '#8A8F9E',
+        fontSize: 10,
+        textTransform: 'uppercase'
+    },
+    input: {
+        borderBottomColor: '#8A8F9E',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        height: 40,
+        fontSize: 15,
+        color: '#161F3D'
+    }
+})
+
 //Boutons de l'application
 const buttons = StyleSheet.create({
     button: {
@@ -34,4 +50,4 @@ const buttons = StyleSheet.create({
     }
 })
 
-export { buttons }  
+export { buttons, inputs }  

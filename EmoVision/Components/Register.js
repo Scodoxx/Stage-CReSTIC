@@ -18,7 +18,7 @@ import *  as firebase from 'firebase'
 import { TextInputMask } from 'react-native-masked-text'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, inputs } from '../styles'
 
 //Récupérer la largeur de l'écran (utilisé dans le style de scrollview)
 const screenWidth = Dimensions.get('window').width
@@ -149,28 +149,28 @@ class Register extends React.Component {
 
                     <View style={styles.form}>
                         <View>
-                            <Text style={styles.input_title}>Prénom</Text>
+                            <Text style={inputs.input_tilte}>Prénom</Text>
                             <TextInput 
-                                style={styles.input}
+                                style={inputs.input}
                                 onChangeText={name => this.setState({ name })}
                                 value={this.state.name}
                             ></TextInput>
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Nom</Text>
+                            <Text style={inputs.input_tilte}>Nom</Text>
                             <TextInput 
-                                style={styles.input}
+                                style={inputs.input}
                                 onChangeText={surname => this.setState({ surname })}
                                 value={this.state.surname}
                             ></TextInput>
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Date de naissance</Text>
+                            <Text style={inputs.input_tilte}>Date de naissance</Text>
                             <TextInputMask
                                 type={'datetime'}
-                                style={styles.input}
+                                style={inputs.input}
                                 options={{
                                     format: 'DD/MM/YYYY'
                                 }}
@@ -184,7 +184,7 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Genre</Text>
+                            <Text style={inputs.input_tilte}>Genre</Text>
                             <View style={[styles.genre, {borderBottomColor: '#8A8F9E', borderBottomWidth: StyleSheet.hairlineWidth}]}>
                                 <View style={{flexDirection: 'column'}}>
                                     <CheckBox
@@ -224,18 +224,18 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Adresse mail</Text>
+                            <Text style={inputs.input_tilte}>Adresse mail</Text>
                             <TextInput 
-                                style={styles.input}
+                                style={inputs.input}
                                 onChangeText={email => this.setState({ email })}
                                 value={this.state.email}
                             ></TextInput>
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Mot de passe</Text>
+                            <Text style={inputs.input_tilte}>Mot de passe</Text>
                             <TextInput
-                                style={styles.input}
+                                style={inputs.input}
                                 secureTextEntry
                                 onChangeText={ password => this.setState({ password })}
                                 value={this.state.password}
@@ -243,9 +243,9 @@ class Register extends React.Component {
                         </View>
 
                         <View style={{marginTop: 32}}>
-                            <Text style={styles.input_title}>Confirmez votre mot de passe</Text>
+                            <Text style={inputs.input_tilte}>Confirmez votre mot de passe</Text>
                             <TextInput
-                                style={styles.input}
+                                style={inputs.input}
                                 secureTextEntry
                                 value={this.state.password}
                             ></TextInput>
@@ -327,18 +327,6 @@ const styles = StyleSheet.create({
     radioButton: {
         backgroundColor: 'transparent',
         borderColor: 'transparent'
-    },
-    input_title: {
-        color: '#8A8F9E',
-        fontSize: 10,
-        textTransform: 'uppercase'
-    },
-    input: {
-        borderBottomColor: '#8A8F9E',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        height: 40,
-        fontSize: 15,
-        color: '#161F3D'
     },
     conditionsG: {
         flexDirection: 'row',

@@ -28,13 +28,14 @@ class Profile extends React.Component {
         this.setState({ email: utilisateur.email, uid: utilisateur.uid })
         const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
 
+        //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, qu'on va ensuite faire correspondre aux states du component
         utilisateurs.on("value", function(snapshot) {
             const json = snapshot.toJSON()
             that.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
-            //this.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
         })
     }
 
+    //On récupère le genre de la personne pour mettre la civilité à Monsieur, Madame ou vide
     _getCivilite(genre) {
         if (genre === 'H') {
             return 'Mr'
@@ -49,10 +50,10 @@ class Profile extends React.Component {
 
     render() {
         return(
-            <View>
+            <View style={styles.main_container}>
                 <View>
                     <Text>Identité</Text>
-                    <Text>{this._getCivilite(this.state.gender)} {this.state.firstname} {this.state.name}</Text>
+                    <Text>{this._getCivilite(this.state.gender)} {this.state.firstname} {this.state.name.toUpperCase()}</Text>
                 </View>
 
                 <View>
@@ -74,7 +75,11 @@ class Profile extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    
+    main_container: {
+        flex: 0.5,
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    }
 })
 
 export default Profile
