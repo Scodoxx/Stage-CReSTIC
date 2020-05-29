@@ -25,6 +25,7 @@ import AppSettings from '../Components/AppSettings'
 import Tools from '../Components/Tools'
 import HowItWorks from '../Components/HowItWorks'
 import Telling from '../Components/Telling'
+import PasswordSettings from '../Components/PasswordSettings'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -65,12 +66,10 @@ const ProfileStack = createStackNavigator({
         }
     },
     "Modifier le profil": {
-        screen: ProfileSettings,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: ProfileSettings
+    },
+    "Modifier le mot de passe": {
+        screen: PasswordSettings
     }
 })
 
