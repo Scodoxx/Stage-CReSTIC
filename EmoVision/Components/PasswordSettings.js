@@ -12,12 +12,17 @@ import *  as firebase from 'firebase'
 
 class PasswordSettings extends React.Component {
 
+    state = {
+        currentPassword: '', //mot de passe actuel
+        newPassword: '' //mot de pass qui va être renseigné
+    }
+
     //L'interface informe que le mot de passe sera mit à jour et demande confirmation
     _updateConfirm = () => {
         return(
             Alert.alert(
                 "Attention",
-                "Votre mot de passe va être modifié, vous serez pas déconnecté",
+                "Votre mot de passe va être modifié, vous ne serez pas déconnecté",
                 [
                     {
                         text: "Annuler",

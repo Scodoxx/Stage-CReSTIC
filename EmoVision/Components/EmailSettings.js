@@ -2,7 +2,7 @@
 //L'utilisateur va pouvoir changer son adresse email
 
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Alert, StyleSheet } from 'react-native'
 
 //Style
 import { buttons, inputs } from '../styles'
@@ -12,12 +12,16 @@ import *  as firebase from 'firebase'
 
 class EmailSettings extends React.Component {
 
+    state = {
+        currentPassword: '' //mot de passe actuel
+    }
+
     //L'interface alrte l'utilisateur que l'adresse mail sera mise à jour et demande confirmation
     _updateConfirm = () => {
         return(
             Alert.alert(
                 "Attention",
-                "Votre adresse mail va être modifiée, vous serez pas déconnecté",
+                "Votre adresse mail va être modifiée, vous ne serez pas déconnecté",
                 [
                     {
                         text: "Annuler",
@@ -74,7 +78,6 @@ class EmailSettings extends React.Component {
                 <TouchableOpacity style={buttons.button} onPress={this._updateConfirm}>
                     <Text style={buttons.button_text}>Valider les changements</Text>
                 </TouchableOpacity>
-                {this._hasBeenUpdated()}
             </View>
         )
     }
