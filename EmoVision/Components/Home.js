@@ -18,15 +18,23 @@ class Home extends React.Component {
 
     state = {
         uid: '', //id unique de firebase
-        displayName: '', //Prénom affiché
+        firstname: '', //Prénom affiché
         isChanged: false, //le slider a été changé au moins une fois
         sliderValue: 0 //valeur du slider
     }
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
+        var that = this
         const utilisateur = firebase.auth().currentUser
-        this.setState({ displayName: utilisateur.displayName, uid: utilisateur.uid })
+        this.setState({ uid: utilisateur.uid })
+        const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
+
+        //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, on prends ici son prénom
+        utilisateurs.on("value", function(snapshot) {
+            const json = snapshot.toJSON()
+            that.setState({ firstname: json.prenom })
+        })
     }
 
     _sliderIsChanged = (values) => {
@@ -66,7 +74,7 @@ class Home extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text style={{ fontSize: 20 }}>Bonjour {this.state.displayName}</Text>
+                <Text style={{ fontSize: 20 }}>Bonjour {this.state.firstname}</Text>
                 <Text>Comment allez vous ?</Text>
 
                 <Text>{this.state.sliderValue}</Text>

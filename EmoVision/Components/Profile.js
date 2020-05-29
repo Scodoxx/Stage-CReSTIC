@@ -21,11 +21,10 @@ class Profile extends React.Component {
         gender: '', //genre
     }
 
-    //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
+    //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
         var that = this
         const utilisateur = firebase.auth().currentUser
-        console.log(utilisateur)
         this.setState({ email: utilisateur.email, uid: utilisateur.uid })
         const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
 
