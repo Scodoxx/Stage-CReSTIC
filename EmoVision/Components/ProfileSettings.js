@@ -7,6 +7,9 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 //Style
 import { buttons, inputs } from '../styles'
 
+//Choisir la date de naissance
+import { TextInputMask } from 'react-native-masked-text'
+
 //Base de données
 import *  as firebase from 'firebase'
 
@@ -35,6 +38,18 @@ class ProfileSettings extends React.Component {
         })
     }
 
+    _updateProfile = () => {
+        firebase
+            .database().
+            ref(`utilisateurs/${this.state.uid}`)
+            .update({
+                prenom: this.state.firstname,
+                nom: this.state.name,
+                dateNaissance: this.state.birthdate,
+                genre: this.state.gender
+            })
+    }
+
     render() {
         return(
             <View style={styles.main_container}>
@@ -58,11 +73,19 @@ class ProfileSettings extends React.Component {
 
                 <View>
                     <Text style={inputs.input_tilte}>Date de naissance</Text>
-                    <TextInput 
+                    <TextInputMask
+                        type={'datetime'}
                         style={inputs.input}
-                        onChangeText={birthdate => this.setState({ birthdate })}
+                        options={{
+                            format: 'DD/MM/YYYY'
+                        }}
                         value={this.state.birthdate}
-                    ></TextInput>
+                        onChangeText={text => {
+                            this.setState({
+                            birthdate: text
+                            })
+                        }}
+                    />
                 </View>
 
                 <View>
@@ -74,7 +97,7 @@ class ProfileSettings extends React.Component {
                     ></TextInput>
                 </View>
 
-                <TouchableOpacity style={buttons.button}>
+                <TouchableOpacity style={buttons.button} onPress={this._updateProfile}>
                     <Text style={buttons.button_text}>Valider les changements</Text>
                 </TouchableOpacity>
             </View>
