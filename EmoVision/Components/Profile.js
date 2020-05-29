@@ -23,18 +23,28 @@ class Profile extends React.Component {
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
+        var that = this
         const utilisateur = firebase.auth().currentUser
         this.setState({ email: utilisateur.email, uid: utilisateur.uid })
         const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
 
-        /*
         utilisateurs.on("value", function(snapshot) {
-            const uid = utilisateur.uid
             const json = snapshot.toJSON()
-            this.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
-            console.log(json.genre)
-        });
-        */
+            that.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
+            //this.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
+        })
+    }
+
+    _getCivilite(genre) {
+        if (genre === 'H') {
+            return 'Mr'
+        }
+        if (genre === 'F') {
+            return 'Mme'
+        }
+        else {
+            return;
+        }
     }
 
     render() {
@@ -42,7 +52,7 @@ class Profile extends React.Component {
             <View>
                 <View>
                     <Text>Identité</Text>
-                    <Text></Text>
+                    <Text>{this._getCivilite(this.state.gender)} {this.state.firstname} {this.state.name}</Text>
                 </View>
 
                 <View>
