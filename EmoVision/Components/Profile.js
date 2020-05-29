@@ -1,7 +1,7 @@
 //Profile.js
 //L'utilisateur va pouvoir visualiser ses informations
 
-import React from 'react'
+import React, { useReducer } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 //Style
@@ -18,15 +18,23 @@ class Profile extends React.Component {
         name: '', //nom
         email: '', //mail
         birthdate: '', //date de naissance
-        genre: '', //genre
+        gender: '', //genre
     }
 
     //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
         const utilisateur = firebase.auth().currentUser
         this.setState({ email: utilisateur.email, uid: utilisateur.uid })
+        const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
 
-        console.log(utilisateur)
+        /*
+        utilisateurs.on("value", function(snapshot) {
+            const uid = utilisateur.uid
+            const json = snapshot.toJSON()
+            this.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
+            console.log(json.genre)
+        });
+        */
     }
 
     render() {
