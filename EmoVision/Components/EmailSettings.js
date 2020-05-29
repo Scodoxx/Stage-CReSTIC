@@ -12,20 +12,22 @@ import *  as firebase from 'firebase'
 
 class EmailSettings extends React.Component {
 
-    state = {
-        updated: false //le profil a été mis à jour au moins une fois
-    }
-
-    //L'interface informe que les données ont été mises à jour
-    _hasBeenUpdated() {
-        if(this.state.updated) {
-            return(
-                <Text style={{ color: '#3C7F3A' }}>Les données ont bien été mises à jour !</Text>
-            )
-        }
-        else {
-            return;
-        }
+    //L'interface alrte l'utilisateur que l'adresse mail sera mise à jour et demande confirmation
+    _updateConfirm = () => {
+        return(
+            Alert.alert(
+                "Attention",
+                "Votre adresse mail va être modifiée, vous serez pas déconnecté",
+                [
+                    {
+                        text: "Annuler",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "Continuer", onPress: this.onChangeEmailPress }
+                ],
+                { cancelable: false })
+        )
     }
 
     reauthenticate = (currentPassword) => {
@@ -41,6 +43,7 @@ class EmailSettings extends React.Component {
             var user = firebase.auth().currentUser;
             user.updateEmail(this.state.newEmail).then(() => {
                 console.log("Le mail a été mis à jour");
+                this.props.navigation.goBack()
             }).catch((error) => { console.log(error); });
         }).catch((error) => { console.log(error); });
     }
@@ -68,7 +71,7 @@ class EmailSettings extends React.Component {
                     ></TextInput>
                 </View>
 
-                <TouchableOpacity style={buttons.button} onPress={this.onChangeEmailPress}>
+                <TouchableOpacity style={buttons.button} onPress={this._updateConfirm}>
                     <Text style={buttons.button_text}>Valider les changements</Text>
                 </TouchableOpacity>
                 {this._hasBeenUpdated()}

@@ -117,6 +117,7 @@ class ProfileSettings extends React.Component {
                 genre: this.state.gender,
                 confidentialite: this.state.confidential
             })
+            .then(() => {this.props.navigation.goBack()})
     }
 
     _toggleConfidential = () => {
