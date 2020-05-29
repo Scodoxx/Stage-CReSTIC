@@ -2,7 +2,8 @@
 //L'utilisateur va pouvoir changer certaines informations de son profil
 
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Picker, StyleSheet } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 
 //Style
 import { buttons, inputs } from '../styles'
@@ -22,6 +23,7 @@ class ProfileSettings extends React.Component {
         email: '', //mail
         birthdate: '', //date de naissance
         gender: '', //genre
+        confidential: false, //confidentialitéa acceptée ou non
         updated: false //le profil a été mis à jour au moins une fois
     }
 
@@ -36,8 +38,13 @@ class ProfileSettings extends React.Component {
         //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, qu'on va ensuite faire correspondre aux states du component
         utilisateurs.on("value", function(snapshot) {
             const json = snapshot.toJSON()
-            that.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre })
+            that.setState({ firstname: json.prenom, name: json.nom, birthdate: json.dateNaissance, gender: json.genre, confidential: json.confidentialite })
         })
+    }
+
+    //Quand le genre est changé par l'utilisateur
+    onDayValueChanged = (gender) => {
+        this.setState({ gender: gender })
     }
 
     //L'interface informe que les données ont été mises à jour
@@ -52,41 +59,8 @@ class ProfileSettings extends React.Component {
         }
     }
 
-    reauthenticate = (currentPassword) => {
-        var user = firebase.auth().currentUser;
-        var cred = firebase.auth.EmailAuthProvider.credential(
-            user.email, currentPassword);
-        return user.reauthenticateWithCredential(cred);
-    }
-
-
-    //Mettre à jour le et mot de passe
-    changePassword(currentPassword, newPassword) {
-        this.reauthenticate(currentPassword).then(() => {
-            var user = firebase.auth().currentUser;
-            user.updatePassword(newPassword).then(() => {
-                console.log("Password updated!");
-            }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-    }
-    
-    //Mettre à jour le et mot de passe
-    changeEmail(currentPassword, newEmail) {
-        this.reauthenticate(currentPassword).then(() => {
-            var user = firebase.auth().currentUser;
-            user.updateEmail(newEmail).then(() => {
-                console.log("Email updated!");
-            }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-    }
-
     //Les données sont mises à jour dans Firebase
     _updateProfile = () => {
-        //utilisateur connecté
-        const utilisateur = firebase.auth().currentUser
-
-        this.changeEmail(currentPassword, newEmail)
-
         this.setState({ updated: true })
         //mettre à jour uniquement les informations de la table "utilisateurs"
         firebase
@@ -96,8 +70,18 @@ class ProfileSettings extends React.Component {
                 prenom: this.state.firstname,
                 nom: this.state.name,
                 dateNaissance: this.state.birthdate,
-                genre: this.state.gender
+                genre: this.state.gender,
+                confidentialite: this.state.confidential
             })
+    }
+
+    _toggleConfidential = () => {
+        if(!this.state.confidential) {
+            this.setState({confidential: true})
+        }
+        else {
+            this.setState({confidential: false})
+        }
     }
 
     render() {
@@ -141,17 +125,17 @@ class ProfileSettings extends React.Component {
 
                 <View>
                     <Text style={inputs.input_tilte}>Genre</Text>
-                    <TextInput 
-                        style={inputs.input}
-                        onChangeText={gender => this.setState({ gender })}
-                        value={this.state.gender}
-                    ></TextInput>
+                    <Picker style={styles.dayPicker} selectedValue={this.state.gender} onValueChange={this.onDayValueChanged}>
+                        <Picker.Item key={0} label={"Homme"} value="H"/>
+                        <Picker.Item key={1} label="Femme" value="F"/>
+                        <Picker.Item key={2} label="Je ne souhaite pas préciser" value="NP"/>
+                    </Picker>
                 </View>
 
                 <View>
                     <Text style={inputs.input_tilte}>Adresse mail</Text>
                     <TouchableOpacity>
-                        <Text style={{color: 'blue'}} onPress={() => this.props.navigation.navigate("Modifier l'adresse mail")}>
+                        <Text style={[inputs.input, {color: 'blue'}]} onPress={() => this.props.navigation.navigate("Modifier l'adresse mail")}>
                             Modifier l'adresse mail
                         </Text>
                     </TouchableOpacity>
@@ -160,10 +144,23 @@ class ProfileSettings extends React.Component {
                 <View>
                     <Text style={inputs.input_tilte}>Mot de passe</Text>
                     <TouchableOpacity>
-                        <Text style={{color: 'blue'}} onPress={() => this.props.navigation.navigate("Modifier le mot de passe")}>
+                        <Text style={[inputs.input, {color: 'blue'}]} onPress={() => this.props.navigation.navigate("Modifier le mot de passe")}>
                             Modifier le mot de passe
                         </Text>
                     </TouchableOpacity>
+                </View>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center'  }}>
+                    <Text>
+                        J'accepte de partager mes données
+                    </Text>
+                    <CheckBox
+                        containerStyle={{padding: 0}}
+                        iconRight={true}
+                        right
+                        checked={this.state.confidential}
+                        onPress={this._toggleConfidential}
+                    />
                 </View>
 
                 <TouchableOpacity style={buttons.button} onPress={this._updateProfile}>

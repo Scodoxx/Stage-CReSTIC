@@ -92,7 +92,7 @@ class Register extends React.Component {
 
     //Sélectionne "Je ne souhaite pas préciser"
     _toggleOther = () => {
-        this.setState({otherChecked: true, manChecked: false, womanChecked: false, gender: null})
+        this.setState({otherChecked: true, manChecked: false, womanChecked: false, gender: "NP"})
     }
 
     _toggleConfidential = () => {
