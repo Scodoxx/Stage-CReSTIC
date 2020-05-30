@@ -130,7 +130,6 @@ class ProfileSettings extends React.Component {
     }
 
     render() {
-        console.log(this.state.updated)
         return(
             <View style={styles.main_container}>
                 <ScrollView style={styles.scrollview}>
@@ -161,6 +160,7 @@ class ProfileSettings extends React.Component {
                                 format: 'DD/MM/YYYY'
                             }}
                             placeholder={this.state.birthdate}
+                            value={this.state.birthdate}
                             onChangeText={text => {
                                 this.setState({
                                 birthdate: text
