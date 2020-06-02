@@ -27,6 +27,7 @@ import HowItWorks from '../Components/HowItWorks'
 import Telling from '../Components/Telling'
 import PasswordSettings from '../Components/PasswordSettings'
 import EmailSettings from '../Components/EmailSettings'
+import SensationPhysique from '../Components/SensationPhysique'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -47,12 +48,10 @@ const HomeStack = createStackNavigator({
         }
     },
     "Je raconte": {
-        screen: Telling,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: Telling
+    },
+    "Sensation physique": {
+        screen: SensationPhysique
     }
 })
 

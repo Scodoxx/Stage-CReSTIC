@@ -14,12 +14,21 @@ class Perception extends React.Component {
 
     state = {
         tellingIsPressed: false, //redirige ou pas vers "je raconte"
+        imFeelingIsPressed: false, //redirige ou pas vers "je me sens"
+        feelingsIsPressed: false //redirige ou pas vers "je ressens"
     }
 
     _buttonIsPressed() {
         if(this.state.tellingIsPressed) {
             return (
                 <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Je raconte") }>
+                    <Text style={buttons.button_text}>J'y vais</Text>
+                </TouchableOpacity>
+            )
+        }
+        if(this.state.feelingsIsPressed) {
+            return (
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Sensation physique") }>
                     <Text style={buttons.button_text}>J'y vais</Text>
                 </TouchableOpacity>
             )
@@ -42,7 +51,7 @@ class Perception extends React.Component {
                 </View>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ tellingIsPressed: true })}>
+                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ tellingIsPressed: true, imFeelingIsPressed: false, feelingsIsPressed: false })}>
                         <Text style={buttons.button_text}>Je raconte ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
@@ -53,7 +62,7 @@ class Perception extends React.Component {
                 </View>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button}>
+                <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ feelingsIsPressed: true, imFeelingIsPressed: false, tellingIsPressed: false })}>
                         <Text style={buttons.button_text}>Je ressens ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
