@@ -122,6 +122,7 @@ class SensationPhysique extends React.Component {
         bodyArea: "" //Zone du corps qui est cliquée
     }
 
+    //Récupère la zone cliquée et affecte un nom a la zone
     _clickedArea(item, idx, event) {
         if (item.id === 1) {
             this.setState({ bodyArea: "la tête" })
@@ -143,6 +144,7 @@ class SensationPhysique extends React.Component {
         }
     }
 
+    //Affiche un message correspondant à la zone sélectionnée ou affiche un autre message pas défaut
     _displayArea(partieDuCorps) {
         if(partieDuCorps === "") {
             return(
