@@ -124,6 +124,7 @@ class MediaPlayer extends React.Component {
         }
     }
 
+    /*
     //Rendu du fichier audio (titre, source...) (Ne se mets pas a jour et reste sur le toucan)
     renderFileInfo() {
         const { playbackInstance, currentIndex } = this.state
@@ -135,6 +136,7 @@ class MediaPlayer extends React.Component {
             </View>
         ) : null
     }
+    */
 
     render() {
         const { currentIndex } = this.props
@@ -161,7 +163,6 @@ class MediaPlayer extends React.Component {
                         <Ionicons name='ios-skip-forward' size={48} color='#C3BCBB' />
                     </TouchableOpacity>
                 </View>
-            {this.renderFileInfo()}
             </View>
         )
     }

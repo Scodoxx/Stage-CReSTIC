@@ -1,8 +1,8 @@
 const audioRessentir = [
     {
-        title: "Toucan",
+        title: "Ressentir la situation",
         //J'upload l'audio avec mon nom de domaine car je n'ai pas trouvé de site qui fait la même  chose pour l'instant
-        source: require("./Media/20191111_Ecran_02_initial.mp3")
+        uri: "https://firebasestorage.googleapis.com/v0/b/emovision-49b33.appspot.com/o/audios%2F20191111_Ecran_02_initial.mp3?alt=media&token=f5a1b4c5-3ca4-440c-ba75-70a78eb41d56"
     }
 ]
 
