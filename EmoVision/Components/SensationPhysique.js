@@ -118,23 +118,57 @@ const getUrlImg = require("../Images/sensation_physique.png")
 
 class SensationPhysique extends React.Component {
 
-    _clickedArea() {
-        if (item.id === 1 ) {
-            this.props.navigation.navigate("Ararauna")
+    state = {
+        bodyArea: "" //Zone du corps qui est cliquée
+    }
+
+    _clickedArea(item, idx, event) {
+        if (item.id === 1) {
+            this.setState({ bodyArea: "la tête" })
+        }
+        if (item.id === 2) {
+            this.setState({ bodyArea: "le tronc" })
+        }
+        if (item.id === 3 || item.id === 4 || item.id === 5) {
+            this.setState({ bodyArea: "le bras gauche" })
+        }
+        if (item.id === 6 || item.id === 7 || item.id === 8) {
+            this.setState({ bodyArea: "le bras droit" })
+        }
+        if (item.id === 9) {
+            this.setState({ bodyArea: "la jambe gauche" })
+        }
+        if (item.id === 10) {
+            this.setState({ bodyArea: "la jambe droite" })
+        }
+    }
+
+    _displayArea(partieDuCorps) {
+        if(partieDuCorps === "") {
+            return(
+                <View><Text>Veuillez sélectionner une zone sur le personnage ci-dessus</Text></View>
+            )
         }
         else{
             return(
-                <View><Text>Veuillez sélectionner une zone sur le personnage ci-dessus</Text></View>
+            <View>
+                <Text>Vous avez sélectionner <Text style={{color: '#3F9BAF'}}>{partieDuCorps}</Text>, appuyez sur suivant pour continuer</Text>
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]}>
+                    <Text style={buttons.button_text}>
+                        Suivant
+                    </Text>
+                </TouchableOpacity>
+            </View>
             )
         }
     }
 
     render() {
         return(
-            <View style={styles.main_container}>
+            <View style={[styles.main_container, {padding: 10}]}>
 
                 <View>
-                    <Text>Où est logée cette sensation physique dans votre corps ?</Text>
+                    <Text style={{ fontSize: 20 }}>Où est logée cette sensation physique dans votre corps ?</Text>
                 </View>
                 
                 <ImageMapper
@@ -147,7 +181,7 @@ class SensationPhysique extends React.Component {
                     containerStyle={{justifyContent: "center"}}
                 />
 
-                {this._displayArea()}
+                {this._displayArea(this.state.bodyArea)}
 
             </View>
         )
