@@ -22,7 +22,6 @@ const bodyMap = [
         id: 1,
         name: "tete",
         shape: "circle",
-        prefill: 'red',
         x1: 88 * coefScreen,
         y1: 0 * coefScreen,
         radius: 70 * coefScreen
@@ -31,7 +30,6 @@ const bodyMap = [
         id: 2,
         name: "tronc",
         shape: "rectangle",
-        prefill: 'green',
         width: 67 * coefScreen,
         height: 95 * coefScreen,
         x1: 90 * coefScreen,
@@ -41,7 +39,6 @@ const bodyMap = [
         id: 3,
         name: "brasGauche1",
         shape: "circle",
-        prefill: 'purple',
         x1: 42 * coefScreen,
         y1: 104 * coefScreen,
         radius: 40
@@ -50,7 +47,6 @@ const bodyMap = [
         id: 4,
         name: "brasGauche2",
         shape: "circle",
-        prefill: 'purple',
         x1: 54 * coefScreen,
         y1: 90 * coefScreen,
         radius: 40
@@ -59,7 +55,6 @@ const bodyMap = [
         id: 5,
         name: "brasGauche3",
         shape: "circle",
-        prefill: 'purple',
         x1: 69 * coefScreen,
         y1: 77 * coefScreen,
         radius: 40
@@ -68,7 +63,6 @@ const bodyMap = [
         id: 6,
         name: "brasDroit1",
         shape: "circle",
-        prefill: 'yellow',
         x1: 151 * coefScreen,
         y1: 77 * coefScreen,
         radius: 40
@@ -77,7 +71,6 @@ const bodyMap = [
         id: 7,
         name: "brasDroit2",
         shape: "circle",
-        prefill: 'yellow',
         x1: 166 * coefScreen,
         y1: 90 * coefScreen,
         radius: 40
@@ -86,7 +79,6 @@ const bodyMap = [
         id: 8,
         name: "brasDroit3",
         shape: "circle",
-        prefill: 'yellow',
         x1: 181 * coefScreen,
         y1: 104 * coefScreen,
         radius: 40
@@ -95,7 +87,6 @@ const bodyMap = [
         id: 9,
         name: "jambeGauche",
         shape: "rectangle",
-        prefill: 'blue',
         width: 54 * coefScreen,
         height: 84 * coefScreen,
         x1: 66 * coefScreen,
@@ -105,7 +96,6 @@ const bodyMap = [
         id: 10,
         name: "jambeDroite",
         shape: "rectangle",
-        prefill: 'blue',
         width: 54 * coefScreen,
         height: 84 * coefScreen,
         x1: 130 * coefScreen,
@@ -155,7 +145,7 @@ class SensationPhysique extends React.Component {
             return(
             <View>
                 <Text>Vous avez sélectionner <Text style={{color: '#3F9BAF'}}>{partieDuCorps}</Text>, appuyez sur suivant pour continuer</Text>
-                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]}>
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]} onPress={() => this.props.navigation.navigate("Ressentir la sensation")}>
                     <Text style={buttons.button_text}>
                         Suivant
                     </Text>

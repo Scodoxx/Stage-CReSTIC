@@ -1,5 +1,5 @@
-//Home.js
-//Écran une fois que l'utilisateur est connecté
+//Meditation.js
+//Les audios de la méditation
 
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
@@ -10,19 +10,20 @@ import { buttons } from '../styles'
 //Media Player
 import MediaPlayer from './MediaPlayer'
 
-import { audioRessentir } from '../pistesAudio'
+//On récupère la piste de tout les audios dans le fichier pistesAudio.js à la racine du projet
+import { audioMeditation } from '../pistesAudio'
 
-class Audio extends React.Component {
+class Meditation extends React.Component {
 
     state = {
-        audio: audioRessentir
+        audio: audioMeditation
     }
 
     render() {
         return(
             <View style={styles.main_container}>
                 
-                <Text>Ressentez l'impact que cette situation émotionnelle a dans votre corps.</Text>
+                <Text>Méditation</Text>
 
                 <MediaPlayer audio={this.state.audio}></MediaPlayer>
 
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Audio
+export default Meditation

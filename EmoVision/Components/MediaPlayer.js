@@ -25,7 +25,7 @@ class MediaPlayer extends React.Component {
             isPlaying: false,
             playbackInstance: null,
             //Numéro de la piste
-            currentIndex: this.props.currentIndex,
+            currentIndex: 0,
             volume: 1.0,
             isBuffering: false
         }
@@ -139,18 +139,11 @@ class MediaPlayer extends React.Component {
     */
 
     render() {
-        const { currentIndex } = this.props
-        console.log(this.state.audio[currentIndex].title)
         return (
             <View style={styles.container}>
-
-                <Image
-                    style={styles.albumCover}
-                    source={this.state.audio[currentIndex].imageSource}
-                />
                 <View style={styles.controls}>
-                    <TouchableOpacity style={styles.control}>
-                        <Ionicons name='ios-skip-backward' size={48} color='#C3BCBB' />
+                    <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
+                        <Ionicons name='ios-skip-backward' size={48} color='#444' />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.control} onPress={this.handlePlayPause}>
                         {this.state.isPlaying ? (
@@ -159,8 +152,8 @@ class MediaPlayer extends React.Component {
                         <Ionicons name='ios-play-circle' size={48} color='#444' />
                         )}
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.control}>
-                        <Ionicons name='ios-skip-forward' size={48} color='#C3BCBB' />
+                    <TouchableOpacity style={styles.control} onPress={this.handleNextTrack}>
+                        <Ionicons name='ios-skip-forward' size={48} color='#444' />
                     </TouchableOpacity>
                 </View>
             </View>
