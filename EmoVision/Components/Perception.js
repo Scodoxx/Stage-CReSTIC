@@ -28,7 +28,7 @@ class Perception extends React.Component {
         }
         if(this.state.feelingsIsPressed) {
             return (
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Sensation physique") }>
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Audio") }>
                     <Text style={buttons.button_text}>J'y vais</Text>
                 </TouchableOpacity>
             )

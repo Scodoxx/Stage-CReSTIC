@@ -28,6 +28,7 @@ import Telling from '../Components/Telling'
 import PasswordSettings from '../Components/PasswordSettings'
 import EmailSettings from '../Components/EmailSettings'
 import SensationPhysique from '../Components/SensationPhysique'
+import Audio from '../Components/Audio'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -52,6 +53,9 @@ const HomeStack = createStackNavigator({
     },
     "Sensation physique": {
         screen: SensationPhysique
+    },
+    "Audio": {
+        screen: Audio
     }
 })
 
