@@ -26,6 +26,13 @@ class Perception extends React.Component {
                 </TouchableOpacity>
             )
         }
+        if(this.state.imFeelingIsPressed) {
+            return (
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Émotions") }>
+                    <Text style={buttons.button_text}>J'y vais</Text>
+                </TouchableOpacity>
+            )
+        }
         if(this.state.feelingsIsPressed) {
             return (
                 <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Audio") }>
@@ -40,7 +47,7 @@ class Perception extends React.Component {
             <View style={styles.main_container}>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button}>
+                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ imFeelingIsPressed: true, tellingIsPressed: false, feelingsIsPressed: false })}>
                         <Text style={buttons.button_text}>Je me sens ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage

@@ -2,7 +2,7 @@
 //Écran d'inscription
 
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, StatusBar, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, StatusBar, Dimensions } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 
 //Îcones

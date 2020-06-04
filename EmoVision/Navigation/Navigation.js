@@ -31,6 +31,8 @@ import SensationPhysique from '../Components/SensationPhysique'
 import Audio from '../Components/Audio'
 import RessentirLaSensation from '../Components/RessentirLaSensation'
 import Meditation from '../Components/Meditation'
+import Questions from '../Components/Questions'
+import FamilleEmotions from '../Components/FamilleEmotions'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -64,6 +66,12 @@ const HomeStack = createStackNavigator({
     },
     "Méditation": {
         screen: Meditation
+    },
+    "Questions": {
+        screen: Questions
+    },
+    "Émotions": {
+        screen: FamilleEmotions
     }
 })
 

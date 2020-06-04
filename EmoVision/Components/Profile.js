@@ -1,7 +1,7 @@
 //Profile.js
 //L'utilisateur va pouvoir visualiser ses informations
 
-import React, { useReducer } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 //Style

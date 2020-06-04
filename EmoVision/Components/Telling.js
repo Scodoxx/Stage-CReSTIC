@@ -15,7 +15,7 @@ class Telling extends React.Component {
 
                 <Text>Que s'est-il passé ?</Text>
                 <TextInput style={styles.input} multiline={true}></TextInput>
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]}>
+                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Audio")}>
                     <Text style={buttons.button_text}>J'y vais</Text>
                 </TouchableOpacity>
             </View>
