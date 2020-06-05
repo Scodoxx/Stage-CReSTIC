@@ -21,8 +21,14 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
+//Redux
+import { Provider } from 'react-redux'
+import Store from './Store/configureStore'
+
 export default function App() {
   return (
-    <Navigation/>
+    <Provider store={Store}>
+      <Navigation/>
+    </Provider>
   );
 }
