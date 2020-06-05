@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 //Barre de navigation en bas
-import { createBottomNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 //Îcones
@@ -37,20 +37,10 @@ import FamilleEmotions from '../Components/FamilleEmotions'
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
     Accueil: {
-        screen: Home,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: Home
     },
     Perception: {
-        screen: Perception,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: Perception
     },
     "Je raconte": {
         screen: Telling
@@ -78,12 +68,7 @@ const HomeStack = createStackNavigator({
 //Consulter et modifier son profil
 const ProfileStack = createStackNavigator({
     Profil: {
-        screen: Profile,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: Profile
     },
     "Modifier le profil": {
         screen: ProfileSettings
@@ -99,89 +84,65 @@ const ProfileStack = createStackNavigator({
 //Accéder aux différents outils pour EmoVision
 const ToolsStack = createStackNavigator({
     Outils: {
-        screen: Tools,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: Tools
     }
 })
 
 //Comment est-ce que l'application fonctionne ?
 const HowItWorksStack = createStackNavigator({
     "Comment ça marche ?": {
-        screen: HowItWorks,
-        navigationOptions: {
-            headerLeft: () => (
-                <Ionicons name="md-menu" size={24} color={'black'}/>
-            ),
-        }
+        screen: HowItWorks
     }
 })
 
 //Modifier certains paramètres de l'application
 const SettingsStack = createStackNavigator({
     Réglages: {
-        screen: AppSettings,
-        navigationOptions: {
-            headerLeft: () => (
-                <TouchableOpacity>
-                    <Ionicons name="md-menu" size={24} color={'black'}/>
-                </TouchableOpacity>
-            ),
-        }
+        screen: AppSettings
     }
 })
 
-//Menu qui permet de naviguer rapidement entre différents écrans
-const AppNavigator = createDrawerNavigator({
-    Accueil: {
-        screen: HomeStack,
-        navigationOptions: {
-            //Icône de maison pour la page home
-            drawerIcon: ({ home }) => (
-                <Ionicons name="md-home" size={24} color={'black'}/>
-            )
-        }
-    },
-    Profil: {
-        screen: ProfileStack,
-        navigationOptions: {
-            //Icône de personnage pour le profil
-            drawerIcon: ({ profile }) => (
-                <Ionicons name="md-person" size={24} color={'black'}/>
-            )
-        }
-    },
-    Outils: {
-        screen: ToolsStack,
-        navigationOptions: {
-            //Icône de personnage pour le profil
-            drawerIcon: ({ profile }) => (
-                <Ionicons name="md-build" size={24} color={'black'}/>
-            )
-        }
-    },
-    "Comment ça marche": {
-        screen: HowItWorksStack,
-        navigationOptions: {
-            //Icône de personnage pour le profil
-            drawerIcon: ({ profile }) => (
-                <Ionicons name="md-help" size={24} color={'black'}/>
-            )
-        }
-    },
-    Paramètres: {
-        screen: SettingsStack,
-        navigationOptions: {
-            //Icône de réglages pour changer les paramètres de l'application
-            drawerIcon: ({ settings }) => (
-                <Ionicons name="md-settings" size={24} color={'black'}/>
-            )
+//On construit une navigation entre les différents écrans
+//Barre de navigation une fois connecté
+const AppTabNavigator = createBottomTabNavigator(
+    {
+        Accueil: {
+            screen: HomeStack,
+            navigationOptions: {
+                //Icône de maison pour la page home
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color={tintColor}></Ionicons>
+            }
+        },
+        Profil: {
+            screen: ProfileStack,
+            navigationOptions: {
+                //Icône de fleur pour la photo des oiseaux
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-person" size={24} color={tintColor}></Ionicons>
+            }
+        },
+        Outils: {
+            screen: ToolsStack,
+            navigationOptions: {
+                //Icône de fleur pour la photo des oiseaux
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-build" size={24} color={tintColor}></Ionicons>
+            }
+        },
+        "Aide": {
+            screen: HowItWorksStack,
+            navigationOptions: {
+                //Icône de fleur pour la photo des oiseaux
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-help" size={24} color={tintColor}></Ionicons>
+            }
+        },
+        Paramètres: {
+            screen: SettingsStack,
+            navigationOptions: {
+                //Icône de fleur pour la photo des oiseaux
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-settings" size={24} color={tintColor}></Ionicons>
+            }
         }
     }
-})
+)
 
 //Authentification
 const AuthStack = createStackNavigator({
@@ -195,7 +156,7 @@ export default createAppContainer(
     createSwitchNavigator({
         Lancement: Landing,
         Chargement: Loading,
-        App: AppNavigator,
+        App: AppTabNavigator,
         Auth: AuthStack
     },
     {
