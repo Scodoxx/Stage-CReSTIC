@@ -14,6 +14,9 @@ import *  as firebase from 'firebase'
 //Style
 import { buttons } from '../styles'
 
+//Redux pour avoir accès à la valeur du slider n'importe où
+import { connect } from 'react-redux'
+
 class Home extends React.Component {
 
     state = {
@@ -57,6 +60,8 @@ class Home extends React.Component {
 
     //Appelée quand on appuie sur le bouton pour passer à la page suivante
     _buttonIsPressed = () => {
+        const action = { type: "GET_DEGRE_VALUE", value: this.state.sliderValue }
+        this.props.dispatch(action)
         firebase
             .database()
             .ref(`historiques/${this.state.uid}`)
@@ -126,4 +131,9 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        sliderValue: state.sliderValue
+    }
+}
+export default connect(mapStateToProps)(Home)
