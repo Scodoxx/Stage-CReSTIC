@@ -1,4 +1,4 @@
-//Questions.js
+//Question.js
 //Si l'utilisateur dit 'avoir déjà ressenti cette sensation il va en renseigner les informations
 
 import React from 'react'
@@ -16,52 +16,11 @@ import { buttons, inputs } from '../styles'
 //Récupérer la largeur de l'écran (utilisé dans le style de scrollview)
 const screenWidth = Dimensions.get('window').width
 
-class Questions extends React.Component {
+class Question extends React.Component {
 
     state = {
-        reponses: [], //tableau des différentes réponses
-        numberOfQuestions: 1, //nombre de questions
-        questionAdded: false, //savoir si une question doit être ajoutée
-    }
-
-    _onWhereChanged(where) {
-
-    }
-
-    _addQuestion() {
-        var questions = (
-            <View style={{ flexDirection: 'row ', justifyContent: "space-around" }}>
-                <View>
-                    <Text style={inputs.input_title}>Où / Avec qui ?</Text>
-                    <TextInput 
-                        style={inputs.input}
-                        onChangeText={where => this.setState({ where })}
-                        value={this.state.where}
-                    />
-                </View>
-                <View>
-                    <Text style={inputs.input_title}>Quand ?</Text>
-                    <TextInputMask
-                        type={'datetime'}
-                        style={inputs.input}
-                        options={{
-                            format: 'DD/MM/YYYY'
-                        }}
-                        value={this.state.questionDate}
-                        onChangeText={text => {
-                            this.setState({
-                            questionDate: text
-                            })
-                        }}
-                    />
-                </View>
-            </View>
-        )
-        for(var i=0; i < this.state.numberOfQuestions; i++) {
-            return(
-                questions   
-            )
-        }
+        where: "", //Réponse de l'utilisateur
+        questionDate: "", //Date de la réponse de l'utilisateur
     }
 
     render() {
@@ -96,14 +55,8 @@ class Questions extends React.Component {
                         </View>
                     </View>
 
-                    {this._addQuestion()}
-
-                    <TouchableOpacity style={styles.back} onPress={() => this.setState({ numberOfQuestions: this.state.numberOfQuestions+1 })}>
-                        <Ionicons name="md-add-circle-outline" size={24} color="black" />
-                    </TouchableOpacity>
-
                     <TouchableOpacity style={buttons.button}>
-                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Méditation") }>Suivant</Text>
+                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Perception") }>Suivant</Text>
                     </TouchableOpacity>
 
                 </ScrollView>
@@ -123,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Questions
+export default Question

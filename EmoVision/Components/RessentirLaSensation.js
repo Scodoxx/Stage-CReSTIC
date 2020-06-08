@@ -19,7 +19,7 @@ class RessentirLaSensation extends React.Component {
 
                 <View style={{flexDirection: "row"}}>
                     <TouchableOpacity style={buttons.button}>
-                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Questions") }>Oui</Text>
+                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Question") }>Oui</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={buttons.button}>

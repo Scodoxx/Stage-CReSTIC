@@ -40,10 +40,9 @@ class FamilleEmotions extends React.Component {
 
     render() {
         let familles = this.state.tableauDesFamilles.map((famille, i) => {
-            console.log(famille, i)
-            return  <View key={i}>
+            return  <TouchableOpacity key={i} onPress={() => this.props.navigation.navigate(famille)}>
                         <Text>{famille}</Text>
-                    </View>
+                    </TouchableOpacity>
         })
         return(
             <View style={styles.main_container}>

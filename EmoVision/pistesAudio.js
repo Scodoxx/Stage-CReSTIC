@@ -1,13 +1,6 @@
 //pistesAudios.js
 //C'est ici que les pistes audio utilisées pour les média player sont gérées 
 
-const audioRessentir = [
-    {
-        title: "Ressentir la situation",
-        uri: "https://firebasestorage.googleapis.com/v0/b/emovision-49b33.appspot.com/o/audios%2F20191111_Ecran_02_initial.mp3?alt=media&token=f5a1b4c5-3ca4-440c-ba75-70a78eb41d56"
-    }
-]
-
 const audioMeditation = [
     {
         title: "Rouge gorge",
@@ -55,4 +48,4 @@ const audioMeditation = [
     }
 ]
 
-export { audioRessentir, audioMeditation }  
+export { audioMeditation }  

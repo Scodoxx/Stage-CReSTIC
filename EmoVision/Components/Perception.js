@@ -62,7 +62,7 @@ class Perception extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.8,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     },
