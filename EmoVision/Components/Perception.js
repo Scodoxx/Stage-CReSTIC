@@ -12,42 +12,12 @@ import ResponsiveImage from 'react-native-responsive-image'
 
 class Perception extends React.Component {
 
-    state = {
-        tellingIsPressed: false, //redirige ou pas vers "je raconte"
-        imFeelingIsPressed: false, //redirige ou pas vers "je me sens"
-        feelingsIsPressed: false //redirige ou pas vers "je ressens"
-    }
-
-    _buttonIsPressed() {
-        if(this.state.tellingIsPressed) {
-            return (
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Je raconte") }>
-                    <Text style={buttons.button_text}>J'y vais</Text>
-                </TouchableOpacity>
-            )
-        }
-        if(this.state.imFeelingIsPressed) {
-            return (
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Émotions") }>
-                    <Text style={buttons.button_text}>J'y vais</Text>
-                </TouchableOpacity>
-            )
-        }
-        if(this.state.feelingsIsPressed) {
-            return (
-                <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Audio") }>
-                    <Text style={buttons.button_text}>J'y vais</Text>
-                </TouchableOpacity>
-            )
-        }
-    }
-
     render() {
         return(
             <View style={styles.main_container}>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ imFeelingIsPressed: true, tellingIsPressed: false, feelingsIsPressed: false })}>
+                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.props.navigation.navigate("Émotions") }>
                         <Text style={buttons.button_text}>Je me sens ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
@@ -58,7 +28,7 @@ class Perception extends React.Component {
                 </View>
 
                 <View style={styles.perception_container}>
-                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ tellingIsPressed: true, imFeelingIsPressed: false, feelingsIsPressed: false })}>
+                    <TouchableOpacity style={buttons.perception_button} onPress={() => this.props.navigation.navigate("Je raconte")}>
                         <Text style={buttons.button_text}>Je raconte ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
@@ -69,7 +39,7 @@ class Perception extends React.Component {
                 </View>
 
                 <View style={styles.perception_container}>
-                <TouchableOpacity style={buttons.perception_button} onPress={() => this.setState({ feelingsIsPressed: true, imFeelingIsPressed: false, tellingIsPressed: false })}>
+                <TouchableOpacity style={buttons.perception_button} onPress={() => this.props.navigation.navigate("Sensation physique") }>
                         <Text style={buttons.button_text}>Je ressens ...</Text>
                     </TouchableOpacity>
                     <ResponsiveImage
@@ -80,7 +50,9 @@ class Perception extends React.Component {
                 </View>
 
                 <View>
-                    {this._buttonIsPressed()}
+                    <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Méditation") }>
+                        <Text style={buttons.button_text}>J'y vais</Text>
+                    </TouchableOpacity>
                 </View>
 
             </View>

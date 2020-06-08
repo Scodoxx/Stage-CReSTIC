@@ -27,20 +27,20 @@ class FamilleEmotions extends React.Component {
             var json = snapshot.toJSON()
             var nombreEmotions = Object.keys(json).length
             that.setState({ nombreEmotions: nombreEmotions })
-            var nomDesEmotions = [] //on rempli le tableau avec le noms des différentes émotions stockées dans firebase
         })
 
         for(var i = 0; i < 6; i++) {
-            var index = i.toString()
-            firebase.database().ref(`utilisateurs/${index}`).on("value", function(snapshot) {
+            firebase.database().ref(`familles/${i}`).on("value", function(snapshot) {
                 var json = snapshot.toJSON()
-                console.log(json)
+                var tableauDesFamilles
+                that.setState({ tableauDesFamilles: that.state.tableauDesFamilles.push(json.libelle) })
             })
         }
 
     }
 
     render() {
+        console.log(this.state.tableauDesFamilles)
         return(
             <View style={styles.main_container}>
                 <Text>familles</Text>

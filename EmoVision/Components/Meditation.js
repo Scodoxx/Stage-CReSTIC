@@ -4,14 +4,14 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-//Style
-import { buttons } from '../styles'
-
 //Media Player
 import MediaPlayer from './MediaPlayer'
 
 //On récupère la piste de tout les audios dans le fichier pistesAudio.js à la racine du projet
 import { audioMeditation } from '../pistesAudio'
+
+//Style
+import { buttons, inputs } from '../styles'
 
 class Meditation extends React.Component {
 
@@ -22,8 +22,6 @@ class Meditation extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                
-                <Text>Méditation</Text>
 
                 <MediaPlayer audio={this.state.audio}></MediaPlayer>
 

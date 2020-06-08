@@ -28,7 +28,6 @@ import Telling from '../Components/Telling'
 import PasswordSettings from '../Components/PasswordSettings'
 import EmailSettings from '../Components/EmailSettings'
 import SensationPhysique from '../Components/SensationPhysique'
-import Audio from '../Components/Audio'
 import RessentirLaSensation from '../Components/RessentirLaSensation'
 import Meditation from '../Components/Meditation'
 import Questions from '../Components/Questions'
@@ -47,9 +46,6 @@ const HomeStack = createStackNavigator({
     },
     "Sensation physique": {
         screen: SensationPhysique
-    },
-    "Audio": {
-        screen: Audio
     },
     "Ressentir la sensation": {
         screen: RessentirLaSensation

@@ -2,10 +2,10 @@
 //L'utilisateur va sélectionner où est-ce qu'il ressent
 
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 'react-native'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, inputs } from '../styles'
 
 //Librairie qui va permettre de mapper l'image
 import ImageMapper from 'react-native-image-mapper'
@@ -109,7 +109,8 @@ const getUrlImg = require("../Images/sensation_physique.png")
 class SensationPhysique extends React.Component {
 
     state = {
-        bodyArea: "" //Zone du corps qui est cliquée
+        bodyArea: "", //Zone du corps qui est cliquée
+        sensation: "" //Nom de la sensation ressentie
     }
 
     //Récupère la zone cliquée et affecte un nom a la zone
@@ -160,7 +161,16 @@ class SensationPhysique extends React.Component {
             <View style={[styles.main_container, {padding: 10}]}>
 
                 <View>
-                    <Text style={{ fontSize: 20 }}>Où est logée cette sensation physique dans votre corps ?</Text>
+                    <Text style={inputs.input_title}>Quelle sensation physique ressentez-vous ?</Text>
+                    <TextInput 
+                        style={inputs.input}
+                        onChangeText={sensation => this.setState({ sensation })}
+                        value={this.state.sensation}
+                    ></TextInput>
+                </View>
+
+                <View>
+                    <Text style={{ fontSize: 14, marginTop: 20 }}>Où est logée cette sensation physique dans votre corps ?</Text>
                 </View>
                 
                 <ImageMapper
@@ -182,7 +192,7 @@ class SensationPhysique extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.8,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     }
