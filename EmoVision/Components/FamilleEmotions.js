@@ -32,22 +32,22 @@ class FamilleEmotions extends React.Component {
         for(var i = 0; i < 6; i++) {
             firebase.database().ref(`familles/${i}`).on("value", function(snapshot) {
                 var json = snapshot.toJSON()
-                var tableauDesFamilles
-                that.setState({ tableauDesFamilles: that.state.tableauDesFamilles.push(json.libelle) })
+                that.state.tableauDesFamilles.push(json.libelle)
             })
         }
 
     }
 
     render() {
-        console.log(this.state.tableauDesFamilles)
+        let familles = this.state.tableauDesFamilles.map((famille, i) => {
+            console.log(famille, i)
+            return  <View key={i}>
+                        <Text>{famille}</Text>
+                    </View>
+        })
         return(
             <View style={styles.main_container}>
-                <Text>familles</Text>
-
-                <TouchableOpacity style={buttons.button} onPress={() => this.props.navigation.navigate("Modifier le profil")}>
-                    <Text style={buttons.button_text}>Modifier des informations</Text>
-                </TouchableOpacity>
+                {familles}
             </View>
         )
     }
@@ -55,7 +55,7 @@ class FamilleEmotions extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.5,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     }
