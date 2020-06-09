@@ -14,7 +14,7 @@ class FamilleEmotions extends React.Component {
 
     state = {
         tableauDesFamilles: [], //tableau qui comprends toutes les familles d'émotions
-        nombreEmotions: 0
+        nombreFamilles: 0
     }
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
@@ -23,18 +23,26 @@ class FamilleEmotions extends React.Component {
         const familles = firebase.database().ref('familles')
 
         //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, qu'on va ensuite faire correspondre aux states du component
-        familles.on("value", function(snapshot) {
-            var json = snapshot.toJSON()
-            var nombreEmotions = Object.keys(json).length
-            that.setState({ nombreEmotions: nombreEmotions })
+        var promise = new Promise((resolve) => {
+            familles.on("value", function(snapshot) {
+                var json = snapshot.toJSON()
+                var nombreFamilles = Object.keys(json).length
+                that.setState({ nombreFamilles: nombreFamilles })
+                resolve(that.state.nombreFamilles)
+            })
         })
 
-        for(var i = 0; i < 6; i++) {
-            firebase.database().ref(`familles/${i}`).on("value", function(snapshot) {
-                var json = snapshot.toJSON()
-                that.state.tableauDesFamilles.push(json.libelle)
-            })
-        }
+        promise.then(() => {
+            const tableauDesFamilles = []
+            for(var i = 0; i < this.state.nombreFamilles; i++) {
+                firebase.database().ref(`familles/${i}`).on("value", function(snapshot) {
+                    var json = snapshot.toJSON()
+                    tableauDesFamilles.push(json.libelle)
+                })
+            }
+            //On rempli le tableau et cela va actualiser le render
+            that.setState({ tableauDesFamilles: tableauDesFamilles })
+        })
 
     }
 
