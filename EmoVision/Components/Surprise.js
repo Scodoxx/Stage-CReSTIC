@@ -1,5 +1,5 @@
-//Joie.js
-//Émotions de la famille de la joie
+//Surprise.js
+//Émotions de la famille de la surprise
 
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
@@ -10,13 +10,13 @@ import { buttons } from '../styles'
 //Les différents types d'émotions
 import EmotionItem from './EmotionItem'
 
-class Joie extends React.Component {
+class Surprise extends React.Component {
 
     //Le indexEmotion du component EmotionItem correspond à l'index de la famille d'émotion
     render() {
         return(
             <View style={styles.main_container}>
-                <EmotionItem indexEmotion={0}/>
+                <EmotionItem indexEmotion={5}/>
             </View>
         )
     }
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Joie
+export default Surprise

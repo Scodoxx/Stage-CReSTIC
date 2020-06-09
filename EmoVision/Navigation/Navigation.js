@@ -33,6 +33,11 @@ import Meditation from '../Components/Meditation'
 import Question from '../Components/Question'
 import FamilleEmotions from '../Components/FamilleEmotions'
 import Joie from '../Components/Joie'
+import Colere from '../Components/Colere'
+import Peur from '../Components/Peur'
+import Tristesse from '../Components/Tristesse'
+import Degout from '../Components/Degout'
+import Surprise from '../Components/Surprise'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -62,6 +67,21 @@ const HomeStack = createStackNavigator({
     },
     "Joie": {
         screen: Joie
+    },
+    "Colère": {
+        screen: Colere
+    },
+    "Peur": {
+        screen: Peur
+    },
+    "Tristesse": {
+        screen: Tristesse
+    },
+    "Dégoût": {
+        screen: Degout
+    },
+    "Surprise": {
+        screen: Surprise
     }
 })
 
