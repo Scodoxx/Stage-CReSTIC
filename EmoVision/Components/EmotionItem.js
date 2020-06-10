@@ -10,16 +10,31 @@ import { buttons } from '../styles'
 //Base de données
 import *  as firebase from 'firebase'
 
+//Redux
+import { connect } from 'react-redux'
+
 class EmotionItem extends React.Component {
 
-    state = {
-        tableauDesEmotions: [], //tableau qui comprends toutes les familles d'émotions
-        nombreEmotions: 0,
-        indexEmotion: this.props.indexEmotion //Correspond a une famille d'émotion (0: joie, 1: colère, 2: peur, 3: tristesse, 4: dégout, 5: surprise)
+    constructor(props) {
+        super(props)
+        this.state = {
+            tableauDesEmotions: [], //tableau qui comprends toutes les familles d'émotions
+            nombreEmotions: 0,
+            indexEmotion: this.props.indexEmotion //Correspond a une famille d'émotion (0: joie, 1: colère, 2: peur, 3: tristesse, 4: dégout, 5: surprise)
+        }
     }
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
+        const emotionIndex = this.props.emotions.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+        if (emotionIndex !== -1) {
+            console.log(emotionIndex)
+            this.setState({
+                emotion: this.props.emotions[emotionIndex]
+            })
+            return
+        }
+
         var that = this
         const emotions = firebase.database().ref(`familles/${this.state.indexEmotion}/emotions`)
 
@@ -39,7 +54,7 @@ class EmotionItem extends React.Component {
             for(var i = 0; i < this.state.nombreEmotions; i++) {
                 firebase.database().ref(`familles/${this.state.indexEmotion}/emotions/${i}`).on("value", function(snapshot) {
                     var json = snapshot.toJSON()
-                    tableauDesEmotions.push(json.libelle)
+                    tableauDesEmotions.push({id: i, libelle: json.libelle})
                 })
             }
             //On rempli le tableau et cela va actualiser le render
@@ -48,11 +63,17 @@ class EmotionItem extends React.Component {
 
     }
 
+    _toggleEmotion = (index) => {
+        const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index] }
+        this.props.dispatch(action)
+    }
+
     render() {
+        console.log(this.state.tableauDesEmotions[1])
         let emotions = this.state.tableauDesEmotions.map((emotion, i) => {
-            return  <View key={i}>
-                        <Text>{emotion}</Text>
-                    </View>
+            return  <TouchableOpacity key={i} onPress={(i) => this._toggleEmotion(i)}>
+                        <Text>{emotion.libelle}</Text>
+                    </TouchableOpacity>
         })
         return(
             <View style={styles.main_container}>
@@ -70,4 +91,9 @@ const styles = StyleSheet.create({
     }
 })
 
-export default EmotionItem
+const mapStateToProps = (state) => {
+    return {
+        emotions: state.emotions
+    }
+}
+export default connect(mapStateToProps)(EmotionItem)

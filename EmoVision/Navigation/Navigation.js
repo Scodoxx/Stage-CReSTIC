@@ -38,6 +38,7 @@ import Peur from '../Components/Peur'
 import Tristesse from '../Components/Tristesse'
 import Degout from '../Components/Degout'
 import Surprise from '../Components/Surprise'
+import QuelleEmotion from '../Components/QuelleEmotion'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -82,6 +83,9 @@ const HomeStack = createStackNavigator({
     },
     "Surprise": {
         screen: Surprise
+    },
+    "Quelle émotion ?": {
+        screen: QuelleEmotion
     }
 })
 
