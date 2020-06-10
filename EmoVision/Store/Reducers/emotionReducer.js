@@ -4,6 +4,7 @@ function toggleEmotion(state = initialState, action) {
     let nextState
     switch (action.type) {
         case 'TOGGLE_EMOTION':
+            console.log(action)
             const emotionIndex = state.emotions.findIndex(item => item.id === action.value.id)
             if (emotionIndex !== -1) {
                 //supression

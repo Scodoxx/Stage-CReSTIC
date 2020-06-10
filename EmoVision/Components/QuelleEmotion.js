@@ -15,10 +15,15 @@ class QuelleEmotion extends React.Component {
     }
 
     render() {
-        console.log(this.state.emotions)
-        return (
-            <View>
-                <Text>test</Text>
+        let selectedEmotions = this.state.emotions.map((emotion, i) => {
+            //console.log(this.state.tableauDesEmotions[i])
+            return  <TouchableOpacity key={i}>
+                        <Text>{emotion}</Text>
+                    </TouchableOpacity>
+        })
+        return(
+            <View style={styles.main_container}>
+                {selectedEmotions}
             </View>
         )
     }

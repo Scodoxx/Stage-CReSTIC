@@ -64,14 +64,15 @@ class EmotionItem extends React.Component {
     }
 
     _toggleEmotion = (index) => {
-        const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index] }
+        console.log(index, this.state.tableauDesEmotions[index].libelle)
+        const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index].libelle }
         this.props.dispatch(action)
     }
 
     render() {
-        console.log(this.state.tableauDesEmotions[1])
         let emotions = this.state.tableauDesEmotions.map((emotion, i) => {
-            return  <TouchableOpacity key={i} onPress={(i) => this._toggleEmotion(i)}>
+            //console.log(this.state.tableauDesEmotions[i])
+            return  <TouchableOpacity key={i} onPress={() => this._toggleEmotion(emotion.id)}>
                         <Text>{emotion.libelle}</Text>
                     </TouchableOpacity>
         })
