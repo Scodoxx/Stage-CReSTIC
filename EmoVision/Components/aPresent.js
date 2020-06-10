@@ -8,36 +8,20 @@ import ResponsiveImage from 'react-native-responsive-image'
 //Barre de sélection
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
-//Base de données
-import *  as firebase from 'firebase'
-
 //Style
 import { buttons } from '../styles'
 
 //Redux pour avoir accès à la valeur du slider n'importe où
 import { connect } from 'react-redux'
 
-class Home extends React.Component {
+class aPresent extends React.Component {
 
-    state = {
-        uid: '', //id unique de firebase
-        firstname: '', //Prénom affiché
-        isChanged: false, //le slider a été changé au moins une fois
-        sliderValue: 0 //valeur du slider
-    }
-
-    //Permet de récupérer le prénom de l'utilisateur pour l'afficher dans le render
-    componentDidMount() {
-        var that = this
-        const utilisateur = firebase.auth().currentUser
-        this.setState({ uid: utilisateur.uid })
-        const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
-
-        //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, on prends ici son prénom
-        utilisateurs.on("value", function(snapshot) {
-            const json = snapshot.toJSON()
-            that.setState({ firstname: json.prenom })
-        })
+    constructor(props) {
+        super(props)
+        this.state = {
+            sliderValueBefore: this.props.sliderValueBefore,
+            sliderValueAfter: 0
+        }
     }
 
     _sliderIsChanged = (values) => {
@@ -46,31 +30,6 @@ class Home extends React.Component {
 
     _sliderIsChangedFinish = () => {
         this.setState({ isChanged: true })
-    }
-
-    _moodIsSet() {
-        if(this.state.isChanged) {
-            return (
-                <TouchableOpacity style={buttons.button} onPress={this._buttonIsPressed}>
-                        <Text style={buttons.button_text}>OK</Text>
-                </TouchableOpacity>
-            )
-        }
-    }
-
-    //Appelée quand on appuie sur le bouton pour passer à la page suivante
-    _buttonIsPressed = () => {
-        const action = { type: 'GET_DEGRE_AVANT', value: this.state.sliderValue }
-        this.props.dispatch(action)
-        firebase
-            .database()
-            .ref(`historiques/${this.state.uid}`)
-            .push(
-                {
-                    degreAvant: this.state.sliderValue[0]
-                }
-            )
-        this.props.navigation.navigate("Perception")
     }
 
     enableScroll = () => this.setState({ scrollEnabled: true });
@@ -82,7 +41,7 @@ class Home extends React.Component {
                 <Text style={{ fontSize: 20 }}>Bonjour {this.state.firstname}</Text>
                 <Text>Comment allez vous ?</Text>
 
-                <Text>{this.state.sliderValue}</Text>
+                <Text>{this.state.sliderValueBefore}</Text>
 
                 <View>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -104,18 +63,15 @@ class Home extends React.Component {
                     </View>
                     <MultiSlider
                         trackWidth = {300}
-                        value={this.state.sliderValue}
+                        value={this.state.sliderValueBefore}
                         min={0}
                         max={10}
                         step={1}
+                        enabledOne={false}
                         defaultTrackColor = {'#3F9BAF'}
                         onValuesChange = {(values) => this._sliderIsChanged(values)}
                         onValuesChangeFinish = {this._sliderIsChangedFinish}
                     />
-                </View>
-
-                <View>
-                    {this._moodIsSet()}
                 </View>
 
             </View>
@@ -131,9 +87,9 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         sliderValueBefore: state.sliderValueBefore
     }
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(aPresent)

@@ -27,7 +27,6 @@ class EmotionItem extends React.Component {
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
         const emotionIndex = this.props.emotions.findIndex(item => item.id === this.state.tableauDesEmotions.id)
-        console.log(this.props.emotions)
         if (emotionIndex !== -1) {
             console.log(emotionIndex)
             this.setState({

@@ -28,7 +28,7 @@ class Meditation extends React.Component {
                 <MediaPlayer audio={this.state.audio}></MediaPlayer>
 
                 <TouchableOpacity style={buttons.button}>
-                    <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("") }>Suivant</Text>
+                    <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("A présent ?") }>Suivant</Text>
                 </TouchableOpacity>
 
             </View>
