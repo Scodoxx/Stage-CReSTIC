@@ -26,7 +26,8 @@ class EmotionItem extends React.Component {
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
-        const emotionIndex = this.props.emotions.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+        const emotionIndex = this.props.emotions.findIndex(item => item.id === this.state.tableauDesEmotions.id)
+        console.log(this.props.emotions)
         if (emotionIndex !== -1) {
             console.log(emotionIndex)
             this.setState({
@@ -63,15 +64,17 @@ class EmotionItem extends React.Component {
 
     }
 
+    componentDidUpdate() {
+        console.log(this.props.emotions);
+    }
+
     _toggleEmotion = (index) => {
-        console.log(index, this.state.tableauDesEmotions[index].libelle)
-        const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index].libelle }
+        const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index] }
         this.props.dispatch(action)
     }
 
     render() {
         let emotions = this.state.tableauDesEmotions.map((emotion, i) => {
-            //console.log(this.state.tableauDesEmotions[i])
             return  <TouchableOpacity key={i} onPress={() => this._toggleEmotion(emotion.id)}>
                         <Text>{emotion.libelle}</Text>
                     </TouchableOpacity>
