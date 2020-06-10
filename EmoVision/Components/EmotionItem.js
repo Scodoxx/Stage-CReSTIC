@@ -55,7 +55,8 @@ class EmotionItem extends React.Component {
             for(var i = 0; i < this.state.nombreEmotions; i++) {
                 firebase.database().ref(`familles/${this.state.indexEmotion}/emotions/${i}`).on("value", function(snapshot) {
                     var json = snapshot.toJSON()
-                    tableauDesEmotions.push({id: 10*that.state.indexEmotion + i, libelle: json.libelle})
+                    //Ici je multiplie par 100 l'index pour qu'il ait au plus 100 possibilités d'émotions pour chaque famille
+                    tableauDesEmotions.push({id: 100*that.state.indexEmotion + i, libelle: json.libelle})
                 })
             }
             //On rempli le tableau et cela va actualiser le render
