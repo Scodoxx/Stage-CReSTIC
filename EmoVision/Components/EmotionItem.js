@@ -55,7 +55,7 @@ class EmotionItem extends React.Component {
             for(var i = 0; i < this.state.nombreEmotions; i++) {
                 firebase.database().ref(`familles/${this.state.indexEmotion}/emotions/${i}`).on("value", function(snapshot) {
                     var json = snapshot.toJSON()
-                    tableauDesEmotions.push({id: i, libelle: json.libelle})
+                    tableauDesEmotions.push({id: 10*that.state.indexEmotion + i, libelle: json.libelle})
                 })
             }
             //On rempli le tableau et cela va actualiser le render
@@ -69,13 +69,14 @@ class EmotionItem extends React.Component {
     }
 
     _toggleEmotion = (index) => {
+        console.log(index)
         const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index] }
         this.props.dispatch(action)
     }
 
     render() {
-        let emotions = this.state.tableauDesEmotions.map((emotion, i) => {
-            return  <TouchableOpacity key={i} onPress={() => this._toggleEmotion(emotion.id)}>
+        let emotions = this.state.tableauDesEmotions.map((emotion, index) => {
+            return  <TouchableOpacity key={index} onPress={() => this._toggleEmotion(index)}>
                         <Text>{emotion.libelle}</Text>
                     </TouchableOpacity>
         })
