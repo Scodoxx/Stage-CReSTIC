@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        sliderValueBefore: state.sliderValueBefore
+        sliderValueBefore: state.getSliderValue.sliderValueBefore
     }
 }
 export default connect(mapStateToProps)(Home)

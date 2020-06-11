@@ -40,6 +40,7 @@ import Degout from '../Components/Degout'
 import Surprise from '../Components/Surprise'
 import QuelleEmotion from '../Components/QuelleEmotion'
 import aPresent from '../Components/aPresent'
+import avantApres from '../Components/avantApres'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
@@ -90,6 +91,9 @@ const HomeStack = createStackNavigator({
     },
     "A présent ?": {
         screen: aPresent
+    },
+    "Avant / Après": {
+        screen: avantApres
     }
 })
 

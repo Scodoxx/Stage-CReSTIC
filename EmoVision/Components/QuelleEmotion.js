@@ -33,7 +33,7 @@ const styles = StyleSheet.create({})
 
 const mapStateToProps = state => {
     return {
-        emotions: state.emotions
+        emotions: state.toggleEmotion.emotions
     }
 }
 

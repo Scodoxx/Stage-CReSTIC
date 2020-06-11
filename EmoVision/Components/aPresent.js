@@ -1,5 +1,5 @@
-//Home.js
-//Écran une fois que l'utilisateur est connecté
+//aPresent.js
+//L'utilisateur va choisir sur une échelle de 0 à 10 après la méditation
 
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
@@ -16,33 +16,45 @@ import { connect } from 'react-redux'
 
 class aPresent extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            sliderValueBefore: this.props.sliderValueBefore,
-            sliderValueAfter: 0
-        }
+    state = {
+        sliderValueAfter: 0 //valeur du slider
     }
 
     _sliderIsChanged = (values) => {
-        this.setState({ sliderValueBefore: values })
+        this.setState({ sliderValueAfter: values })
     }
 
     _sliderIsChangedFinish = () => {
         this.setState({ isChanged: true })
     }
 
+    _moodIsSet() {
+        if(this.state.isChanged) {
+            return (
+                <TouchableOpacity style={buttons.button} onPress={this._buttonIsPressed}>
+                        <Text style={buttons.button_text}>OK</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
+    //Appelée quand on appuie sur le bouton pour passer à la page suivante
+    _buttonIsPressed = () => {
+        const action = { type: 'GET_DEGRE_APRES', value: this.state.sliderValueAfter }
+        this.props.dispatch(action)
+        this.props.navigation.navigate("Avant / Après")
+    }
+
     enableScroll = () => this.setState({ scrollEnabled: true });
     disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
-        console.log(this.state.sliderValueBefore)
         return(
             <View style={styles.main_container}>
-                <Text style={{ fontSize: 20 }}>Bonjour {this.state.firstname}</Text>
-                <Text>Comment allez vous ?</Text>
+                <Text style={{ fontSize: 20 }}>Et à présent ?</Text>
+                <Text style={{ fontSize: 20 }}>Comment vous sentez-vous ?</Text>
 
-                <Text>{this.state.sliderValueBefore}</Text>
+                <Text>{this.state.sliderValueAfter}</Text>
 
                 <View>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -64,13 +76,18 @@ class aPresent extends React.Component {
                     </View>
                     <MultiSlider
                         trackWidth = {300}
-                        value={this.state.sliderValueBefore}
+                        value={this.state.sliderValueAfter}
                         min={0}
                         max={10}
                         step={1}
-                        enabledOne={false}
                         defaultTrackColor = {'#3F9BAF'}
+                        onValuesChange = {(values) => this._sliderIsChanged(values)}
+                        onValuesChangeFinish = {this._sliderIsChangedFinish}
                     />
+                </View>
+
+                <View>
+                    {this._moodIsSet()}
                 </View>
 
             </View>
@@ -86,9 +103,9 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        sliderValueBefore: state.sliderValueBefore
+        sliderValueAfter: state.sliderValueAfter
     }
 }
 export default connect(mapStateToProps)(aPresent)

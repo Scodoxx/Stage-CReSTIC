@@ -33,7 +33,7 @@ const buttons = StyleSheet.create({
         justifyContent: 'center'
     },
     button_text: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
         alignSelf: 'center'
@@ -47,6 +47,23 @@ const buttons = StyleSheet.create({
         backgroundColor: '#FB9999',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    //Bouton orange à la toute fin de la session
+    terminer_button: {
+        backgroundColor: '#E59925',
+        borderRadius: 10,
+        padding: 10,
+        paddingLeft: 20,
+        paddingRight: 20
+    },
+    //Bouton violet à la toute fin de la session pour recommencer
+    replay_button: {
+        backgroundColor: '#8B3FAF',
+        width: '50%',
+        borderRadius: 10,
+        padding: 10,
+        paddingLeft: 20,
+        paddingRight: 20
     }
 })
 

@@ -1,5 +1,10 @@
-import { createStore } from 'redux'
-import getDegreAvant from './Reducers/degreAvantReducer'
+import { combineReducers, createStore } from 'redux'
+import getSliderValue from './Reducers/degreSliderReducer'
 import toggleEmotion from './Reducers/emotionReducer'
 
-export default createStore(getDegreAvant)
+const rootReducer = combineReducers  ({
+                                toggleEmotion,
+                                getSliderValue
+                                })
+
+export default createStore(rootReducer)
