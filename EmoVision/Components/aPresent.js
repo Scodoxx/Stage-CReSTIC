@@ -25,7 +25,7 @@ class aPresent extends React.Component {
     }
 
     _sliderIsChanged = (values) => {
-        this.setState({ sliderValue: values })
+        this.setState({ sliderValueBefore: values })
     }
 
     _sliderIsChangedFinish = () => {
@@ -36,6 +36,7 @@ class aPresent extends React.Component {
     disableScroll = () => this.setState({ scrollEnabled: false });
 
     render() {
+        console.log(this.state.sliderValueBefore)
         return(
             <View style={styles.main_container}>
                 <Text style={{ fontSize: 20 }}>Bonjour {this.state.firstname}</Text>
@@ -69,8 +70,6 @@ class aPresent extends React.Component {
                         step={1}
                         enabledOne={false}
                         defaultTrackColor = {'#3F9BAF'}
-                        onValuesChange = {(values) => this._sliderIsChanged(values)}
-                        onValuesChangeFinish = {this._sliderIsChangedFinish}
                     />
                 </View>
 

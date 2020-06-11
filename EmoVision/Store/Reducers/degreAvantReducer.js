@@ -1,11 +1,12 @@
-const initialState = { sliderValueBefore: 3 }
+const initialState = { sliderValueBefore: 0 }
 
 function getDegreAvant(state = initialState, action) {
     let nextState
     switch (action.type) {
         case 'GET_DEGRE_AVANT':
-            console.log(action.value[0])
-            nextState = action.value[0]
+            nextState = {
+                sliderValueBefore: action.value
+            }
             return nextState || state
     default:
         return state

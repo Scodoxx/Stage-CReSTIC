@@ -4,11 +4,6 @@ import Navigation from './Navigation/Navigation'
 //Base de données
 import * as firebase from 'firebase'
 
-//Redux
-import { createStore } from 'redux'
-import configureStore from './Store/configureStore'
-const store = createStore(configureStore)
-
 //Configuration de la base de données (la même base que celle du MiniProjet)
 var firebaseConfig = {
   apiKey: "AIzaSyCIcI535870dRbWe7G_NN9vAxamuY9Wals",
@@ -32,7 +27,7 @@ import Store from './Store/configureStore'
 
 export default function App() {
   return (
-    <Provider store={store}>
+    <Provider store={Store}>
       <Navigation/>
     </Provider>
   );
