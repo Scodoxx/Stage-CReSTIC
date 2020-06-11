@@ -19,8 +19,13 @@ class avantApres extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            sliderValueBefore: this.props.sliderValueBefore,
-            sliderValueAfter: this.props.sliderValueAfter
+            sliderValueBefore: this.props.sliderValueBefore, //Valeur du slider avant
+            sliderValueAfter: this.props.sliderValueAfter, //Valeur du slider après
+            temoignage: this.props.temoignage, //Témoignage de l'utilisateur
+            sensation: this.props.sensation, //Sensation ressentie par l'utilisateur
+            localisation: this.props.localisation, //Localisation de la douleur
+            where: this.props.where, //Si la personne a déjà ressentie cette sensation, où ça et avec qui?
+            when: this.props.when //Si la personne a déjà ressentie cette sensation, quand?
         }
     }
 
@@ -37,7 +42,6 @@ class avantApres extends React.Component {
     }
 
     render() {
-        console.log(this.state.sliderValueAfter)
         return(
             <View style={styles.main_container}>
 
@@ -128,7 +132,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         sliderValueBefore: state.getSliderValue.sliderValueBefore,
-        sliderValueAfter: state.getSliderValue.sliderValueAfter
+        sliderValueAfter: state.getSliderValue.sliderValueAfter,
+        temoignage: state.getTemoignage.temoignage,
+        sensation: state.getSensation.sensation,
+        localisation: state.getSensation.localisation,
+        where: state.getQuestion.where,
+        when: state.getQuestion.when
     }
 }
 export default connect(mapStateToProps)(avantApres)

@@ -4,8 +4,8 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, TextInput, ScrollView, StyleSheet, Dimensions } from 'react-native'
 
-//Îcones
-import { Ionicons } from '@expo/vector-icons'
+//Redux
+import { connect } from 'react-redux'
 
 //Choisir la date de naissance
 import { TextInputMask } from 'react-native-masked-text'
@@ -20,7 +20,14 @@ class Question extends React.Component {
 
     state = {
         where: "", //Réponse de l'utilisateur
-        questionDate: "", //Date de la réponse de l'utilisateur
+        when: "", //Date de la réponse de l'utilisateur
+    }
+
+    //Déclenché quand le bouton "Suivant" est cliqué
+    _buttonIsPressed = () => {
+        const action = { type: 'GET_QUESTION', value: {where: this.state.where, when: this.state.when} }
+        this.props.dispatch(action)
+        this.props.navigation.navigate("Perception")
     }
 
     render() {
@@ -45,10 +52,10 @@ class Question extends React.Component {
                                 options={{
                                     format: 'DD/MM/YYYY'
                                 }}
-                                value={this.state.questionDate}
+                                value={this.state.when}
                                 onChangeText={text => {
                                     this.setState({
-                                    questionDate: text
+                                    when: text
                                     })
                                 }}
                             />
@@ -56,7 +63,7 @@ class Question extends React.Component {
                     </View>
 
                     <TouchableOpacity style={buttons.button}>
-                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Perception") }>Suivant</Text>
+                        <Text style={buttons.button_text} onPress={this._buttonIsPressed}>Suivant</Text>
                     </TouchableOpacity>
 
                 </ScrollView>
@@ -76,4 +83,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Question
+const mapStateToProps = (state) => {
+    return {
+        where: state.getQuestion.where,
+        when: state.getQuestion.when
+    }
+}
+export default connect(mapStateToProps)(Question)
