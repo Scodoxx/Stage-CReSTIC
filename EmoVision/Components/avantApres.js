@@ -19,14 +19,25 @@ class avantApres extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            uid: '', //id unique de firebase
             sliderValueBefore: this.props.sliderValueBefore, //Valeur du slider avant
             sliderValueAfter: this.props.sliderValueAfter, //Valeur du slider après
             temoignage: this.props.temoignage, //Témoignage de l'utilisateur
             sensation: this.props.sensation, //Sensation ressentie par l'utilisateur
             localisation: this.props.localisation, //Localisation de la douleur
             where: this.props.where, //Si la personne a déjà ressentie cette sensation, où ça et avec qui?
-            when: this.props.when //Si la personne a déjà ressentie cette sensation, quand?
+            when: this.props.when, //Si la personne a déjà ressentie cette sensation, quand?
+            emotionFinale: this.props.emotionFinale, //Emotion la plus forte ressentie par l'utilisateur
+            emotionSlider: this.props.emotionSlider, //Degré de ressentie de l'émotion la plus forte
         }
+    }
+
+    //Permet de récupérer l'id de l'utilisateur
+    componentDidMount() {
+        var that = this
+        const utilisateur = firebase.auth().currentUser
+        this.setState({ uid: utilisateur.uid })
+        const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
     }
 
     //Affiche un message si la personne se sent moins bien à la fin qu'au début
@@ -46,7 +57,7 @@ class avantApres extends React.Component {
             <View style={styles.main_container}>
 
                 <View>
-                    <Text style={{ fontSize: 20 }}>Avant</Text>
+                    <Text style={{ fontSize: 18, marginBottom: 10 }}>Avant</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <ResponsiveImage
                             source={require("../Images/sad.png")}
@@ -76,7 +87,7 @@ class avantApres extends React.Component {
                 </View>
 
                 <View>
-                    <Text style={{ fontSize: 20 }}>Après</Text>
+                    <Text style={{ fontSize: 18, marginBottom: 10 }}>Après</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <ResponsiveImage
                             source={require("../Images/sad.png")}
@@ -137,7 +148,9 @@ const mapStateToProps = state => {
         sensation: state.getSensation.sensation,
         localisation: state.getSensation.localisation,
         where: state.getQuestion.where,
-        when: state.getQuestion.when
+        when: state.getQuestion.when,
+        emotionFinale: state.toggleEmotion.emotionFinale,
+        emotionSlider: state.getSliderValue.emotionSlider
     }
 }
 export default connect(mapStateToProps)(avantApres)

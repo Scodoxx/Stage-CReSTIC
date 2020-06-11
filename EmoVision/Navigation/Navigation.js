@@ -40,6 +40,7 @@ import Tristesse from '../Components/Tristesse'
 import Degout from '../Components/Degout'
 import Surprise from '../Components/Surprise'
 import QuelleEmotion from '../Components/QuelleEmotion'
+import jeMeSens from '../Components/jeMeSens'
 import aPresent from '../Components/aPresent'
 import avantApres from '../Components/avantApres'
 
@@ -92,6 +93,9 @@ const HomeStack = createStackNavigator({
     },
     "Quelle émotion ?": {
         screen: QuelleEmotion
+    },
+    "Je me sens": {
+        screen: jeMeSens
     },
     "A présent ?": {
         screen: aPresent

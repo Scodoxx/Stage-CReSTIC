@@ -2,7 +2,8 @@
 //Différents types d'émotions
 
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
+import Checkbox from './Checkbox'
 
 //Style
 import { buttons } from '../styles'
@@ -20,6 +21,7 @@ class EmotionItem extends React.Component {
         this.state = {
             tableauDesEmotions: [], //tableau qui comprends toutes les familles d'émotions
             nombreEmotions: 0,
+            check: false, //L'élément est coché de base ou pas
             indexEmotion: this.props.indexEmotion //Correspond a une famille d'émotion (0: joie, 1: colère, 2: peur, 3: tristesse, 4: dégout, 5: surprise)
         }
     }
@@ -55,7 +57,22 @@ class EmotionItem extends React.Component {
                 firebase.database().ref(`familles/${this.state.indexEmotion}/emotions/${i}`).on("value", function(snapshot) {
                     var json = snapshot.toJSON()
                     //Ici je multiplie par 100 l'index pour qu'il ait au plus 100 possibilités d'émotions pour chaque famille
-                    tableauDesEmotions.push({id: 100*that.state.indexEmotion + i, libelle: json.libelle})
+                    var idEmotion = 100*that.state.indexEmotion + i
+                    //On va mapper le tableau des émotions choisies, si l'un des id correspond a un des id construit dans la liste, le "check" est marqué a vrai et on ne fait plus rien de le arrayMap
+                    var isBroken = false
+                    that.props.emotions.map((emotion, index) => {
+                        if(!isBroken) {
+                            var id = emotion.id
+                            if(id === idEmotion) {
+                                that.setState({check: true})
+                                isBroken = true
+                            }
+                            else{
+                                that.setState({check: false})
+                            }
+                        }
+                    })
+                    tableauDesEmotions.push({id: idEmotion, libelle: json.libelle, checked: that.state.check, checkAtTheEnd: false})
                 })
             }
             //On rempli le tableau et cela va actualiser le render
@@ -64,25 +81,26 @@ class EmotionItem extends React.Component {
 
     }
 
-    componentDidUpdate() {
-        console.log(this.props.emotions);
-    }
-
     _toggleEmotion = (index) => {
-        console.log(index)
+        this.state.tableauDesEmotions[index].checked = !this.state.tableauDesEmotions[index].checked
         const action = { type: "TOGGLE_EMOTION", value: this.state.tableauDesEmotions[index] }
         this.props.dispatch(action)
     }
 
     render() {
         let emotions = this.state.tableauDesEmotions.map((emotion, index) => {
-            return  <TouchableOpacity key={index} onPress={() => this._toggleEmotion(index)}>
-                        <Text>{emotion.libelle}</Text>
-                    </TouchableOpacity>
+            return  <Checkbox
+                        key={index}
+                        label={emotion.libelle}
+                        checked={emotion.checked}
+                        onPress={() => this._toggleEmotion(index)}
+                    />
         })
         return(
             <View style={styles.main_container}>
-                {emotions}
+                <ScrollView>
+                    {emotions}
+                </ScrollView>
             </View>
         )
     }

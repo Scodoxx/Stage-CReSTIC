@@ -1,4 +1,4 @@
-const initialState = { emotions: [] }
+const initialState = { emotions: [], emotionFinale: "" }
 
 function toggleEmotion(state = initialState, action) {
     let nextState
@@ -18,6 +18,11 @@ function toggleEmotion(state = initialState, action) {
                     ...state,
                     emotions: [ ...state.emotions, action.value ]
                 }
+            }
+            return nextState || state
+        case 'GET_EMOTION_FINALE':
+            nextState = {
+                emotionFinale: action.value
             }
             return nextState || state
         default:

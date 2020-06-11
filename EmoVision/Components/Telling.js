@@ -16,6 +16,7 @@ class Telling extends React.Component {
         temoignage: "" //Témoignage de l'utilisateur
     }
 
+    //L'utilisateur appuie sur le bouton
     _buttonIsPressed = () => {
         const action = { type: 'GET_TEMOIGNAGE', value: this.state.temoignage }
         this.props.dispatch(action)
