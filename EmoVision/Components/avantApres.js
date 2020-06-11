@@ -94,7 +94,6 @@ class avantApres extends React.Component {
     }
 
     render() {
-        console.log(this.state.confidentialite)
         return(
             <View style={styles.main_container}>
 
