@@ -1,4 +1,4 @@
-const initialState = { sliderValueBefore: 0, sliderValueAfter: 0, emotionSlider: 0 }
+const initialState = { sliderValueBefore: 0, sliderValueAfter: 0, sliderEmotion: 0 }
 
 function getSliderValue(state = initialState, action) {
     let nextState
@@ -18,7 +18,7 @@ function getSliderValue(state = initialState, action) {
         case 'GET_DEGRE_EMOTION':
             nextState = {
                 ...state,
-                emotionSlider: action.value
+                sliderEmotion: action.value
             }
             return nextState || state
     default:

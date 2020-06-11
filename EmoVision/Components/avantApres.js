@@ -8,6 +8,9 @@ import ResponsiveImage from 'react-native-responsive-image'
 //Barre de sélection
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
+//Base de données
+import *  as firebase from 'firebase'
+
 //Style
 import { buttons } from '../styles'
 
@@ -20,6 +23,7 @@ class avantApres extends React.Component {
         super(props)
         this.state = {
             uid: '', //id unique de firebase
+            confidentialite: false, //Est-ce les données sont envoyées à la base de données ou non (par défaut à false)
             sliderValueBefore: this.props.sliderValueBefore, //Valeur du slider avant
             sliderValueAfter: this.props.sliderValueAfter, //Valeur du slider après
             temoignage: this.props.temoignage, //Témoignage de l'utilisateur
@@ -28,7 +32,7 @@ class avantApres extends React.Component {
             where: this.props.where, //Si la personne a déjà ressentie cette sensation, où ça et avec qui?
             when: this.props.when, //Si la personne a déjà ressentie cette sensation, quand?
             emotionFinale: this.props.emotionFinale, //Emotion la plus forte ressentie par l'utilisateur
-            emotionSlider: this.props.emotionSlider, //Degré de ressentie de l'émotion la plus forte
+            sliderEmotion: this.props.sliderEmotion //Degré de ressentie de l'émotion la plus forte
         }
     }
 
@@ -38,6 +42,43 @@ class avantApres extends React.Component {
         const utilisateur = firebase.auth().currentUser
         this.setState({ uid: utilisateur.uid })
         const utilisateurs = firebase.database().ref(`utilisateurs/${utilisateur.uid}`)
+
+        //On récupère l'utilisateur qui a l'id correspondant et on accède a ses informations, on récupère le confidentialite pour savoir si on envoie les informations à la base de données
+        utilisateurs.on("value", function(snapshot) {
+            const json = snapshot.toJSON()
+            that.setState({ confidentialite: json.confidentialite })
+        })
+    }
+
+    //Appelée quand on appuie sur le bouton pour passer à la page suivante
+    _buttonIsPressed = () => {
+        if(this.state.confidentialite) {
+            firebase
+                .database()
+                .ref(`historiques/${this.state.uid}`)
+                .push(
+                    {
+                        degreAvant: this.state.sliderValueBefore[0],
+                        degreApres: this.state.sliderValueAfter[0],
+                        douleur: {
+                            localisation: this.state.localisation,
+                            sensation: this.state.sensation
+                        },
+                        emotionRessentie: {
+                            echelle: this.state.sliderEmotion[0],
+                            emotion: this.state.emotionFinale
+                        },
+                        ressenti: {
+                            raconte: {
+                                date: this.state.when,
+                                localisation: this.state.where
+                            }
+                        },
+                        temoignage: this.state.temoignage
+                    }
+                )
+        }
+        this.props.navigation.navigate("Accueil")
     }
 
     //Affiche un message si la personne se sent moins bien à la fin qu'au début
@@ -53,6 +94,7 @@ class avantApres extends React.Component {
     }
 
     render() {
+        console.log(this.state.confidentialite)
         return(
             <View style={styles.main_container}>
 
@@ -122,7 +164,7 @@ class avantApres extends React.Component {
                     <TouchableOpacity style={buttons.replay_button}>
                         <Text style={buttons.button_text}>Et maintenant je me sens...</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={buttons.terminer_button}>
+                    <TouchableOpacity style={buttons.terminer_button} onPress={this._buttonIsPressed}>
                         <Text style={buttons.button_text}>Terminer</Text>
                     </TouchableOpacity>
                 </View>
@@ -150,7 +192,7 @@ const mapStateToProps = state => {
         where: state.getQuestion.where,
         when: state.getQuestion.when,
         emotionFinale: state.toggleEmotion.emotionFinale,
-        emotionSlider: state.getSliderValue.emotionSlider
+        sliderEmotion: state.getSliderValue.sliderEmotion
     }
 }
 export default connect(mapStateToProps)(avantApres)

@@ -62,14 +62,6 @@ class Home extends React.Component {
     _buttonIsPressed = () => {
         const action = { type: 'GET_DEGRE_AVANT', value: this.state.sliderValue }
         this.props.dispatch(action)
-        firebase
-            .database()
-            .ref(`historiques/${this.state.uid}`)
-            .push(
-                {
-                    degreAvant: this.state.sliderValue[0]
-                }
-            )
         this.props.navigation.navigate("Perception")
     }
 

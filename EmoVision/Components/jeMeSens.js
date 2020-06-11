@@ -21,7 +21,7 @@ class jeMeSens extends React.Component {
     }
 
     _sliderIsChanged = (values) => {
-        this.setState({ emotionSlider: values })
+        this.setState({ sliderEmotion: values })
     }
 
     _sliderIsChangedFinish = () => {
@@ -40,7 +40,7 @@ class jeMeSens extends React.Component {
 
     //Appelée quand on appuie sur le bouton pour passer à la page suivante
     _buttonIsPressed = () => {
-        const action = { type: 'GET_DEGRE_EMOTION', value: this.emotionSlider }
+        const action = { type: 'GET_DEGRE_EMOTION', value: this.state.sliderEmotion }
         this.props.dispatch(action)
         this.props.navigation.navigate("Perception")
     }
@@ -54,11 +54,11 @@ class jeMeSens extends React.Component {
                 <Text style={{ fontSize: 20 }}>{this.state.emotionFinale}</Text>
 
                 <View>
-                    <Text>{this.state.emotionSlider}</Text>
+                    <Text>{this.state.sliderEmotion}</Text>
                     <MultiSlider
                         trackWidth = {300}
                         vertical={true}
-                        value={this.state.emotionSlider}
+                        value={this.state.sliderEmotion}
                         min={0}
                         max={10}
                         step={1}
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        emotionFinale: state.toggleEmotion.emotionFinale
+        emotionFinale: state.toggleEmotion.emotionFinale,
+        sliderEmotion: state.getSliderValue.sliderEmotion
     }
 }
 export default connect(mapStateToProps)(jeMeSens)
