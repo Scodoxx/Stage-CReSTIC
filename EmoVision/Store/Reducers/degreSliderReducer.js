@@ -5,13 +5,11 @@ function getSliderValue(state = initialState, action) {
     switch (action.type) {
         case 'GET_DEGRE_AVANT':
             nextState = {
-                ...state,
                 sliderValueBefore: action.value
             }
             return nextState || state
         case 'GET_DEGRE_APRES':
             nextState = {
-                ...state,
                 sliderValueAfter: action.value
             }
             return nextState || state

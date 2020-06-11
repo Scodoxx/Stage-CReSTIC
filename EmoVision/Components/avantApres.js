@@ -31,7 +31,7 @@ class avantApres extends React.Component {
 
     //Affiche un message si la personne se sent moins bien à la fin qu'au début
     _siNegatif() {
-        if(this.state.sliderValueBefore > this.state.sliderValueAfter) {
+        if(this.state.sliderValueBefore >= this.state.sliderValueAfter) {
             return(
                 <View style={{width: '70%'}}>
                     <Text style={{textAlign: 'center', fontSize: 16, marginBottom: 10}}>N'hésitez pas à refaire le parcours pour continuer sur la voie du bien-être.</Text>
