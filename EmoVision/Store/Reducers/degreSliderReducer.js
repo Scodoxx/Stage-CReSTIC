@@ -2,7 +2,6 @@ const initialState = { sliderValueBefore: 0, sliderValueAfter: 0 }
 
 function getSliderValue(state = initialState, action) {
     let nextState
-    console.log(state)
     switch (action.type) {
         case 'GET_DEGRE_AVANT':
             nextState = {

@@ -25,6 +25,7 @@ import AppSettings from '../Components/AppSettings'
 import Tools from '../Components/Tools'
 import HowItWorks from '../Components/HowItWorks'
 import Telling from '../Components/Telling'
+import Temoignage from '../Components/Temoignage'
 import PasswordSettings from '../Components/PasswordSettings'
 import EmailSettings from '../Components/EmailSettings'
 import SensationPhysique from '../Components/SensationPhysique'
@@ -44,14 +45,17 @@ import avantApres from '../Components/avantApres'
 
 //Accueil une fois l'utilisateur connecté
 const HomeStack = createStackNavigator({
-    Accueil: {
+    "Accueil": {
         screen: Home
     },
-    Perception: {
+    "Perception": {
         screen: Perception
     },
     "Je raconte": {
         screen: Telling
+    },
+    "Votre témoignage": {
+        screen: Temoignage
     },
     "Sensation physique": {
         screen: SensationPhysique
