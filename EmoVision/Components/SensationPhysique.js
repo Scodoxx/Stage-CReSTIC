@@ -7,6 +7,9 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 
 //Style
 import { buttons, inputs } from '../styles'
 
+//Redux
+import { connect } from 'react-redux'
+
 //Librairie qui va permettre de mapper l'image
 import ImageMapper from 'react-native-image-mapper'
 
@@ -109,29 +112,29 @@ const getUrlImg = require("../Images/sensation_physique.png")
 class SensationPhysique extends React.Component {
 
     state = {
-        bodyArea: "", //Zone du corps qui est cliquée
+        localisation: "", //Zone du corps qui est cliquée
         sensation: "" //Nom de la sensation ressentie
     }
 
     //Récupère la zone cliquée et affecte un nom a la zone
     _clickedArea(item, idx, event) {
         if (item.id === 1) {
-            this.setState({ bodyArea: "la tête" })
+            this.setState({ localisation: "la tête" })
         }
         if (item.id === 2) {
-            this.setState({ bodyArea: "le tronc" })
+            this.setState({ localisation: "le tronc" })
         }
         if (item.id === 3 || item.id === 4 || item.id === 5) {
-            this.setState({ bodyArea: "le bras gauche" })
+            this.setState({ localisation: "le bras gauche" })
         }
         if (item.id === 6 || item.id === 7 || item.id === 8) {
-            this.setState({ bodyArea: "le bras droit" })
+            this.setState({ localisation: "le bras droit" })
         }
         if (item.id === 9) {
-            this.setState({ bodyArea: "la jambe gauche" })
+            this.setState({ localisation: "la jambe gauche" })
         }
         if (item.id === 10) {
-            this.setState({ bodyArea: "la jambe droite" })
+            this.setState({ localisation: "la jambe droite" })
         }
     }
 
@@ -146,7 +149,7 @@ class SensationPhysique extends React.Component {
             return(
             <View>
                 <Text>Vous avez sélectionner <Text style={{color: '#3F9BAF'}}>{partieDuCorps}</Text>, appuyez sur suivant pour continuer</Text>
-                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]} onPress={() => this.props.navigation.navigate("Ressentir la sensation")}>
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]} onPress={this._buttonIsPressed}>
                     <Text style={buttons.button_text}>
                         Suivant
                     </Text>
@@ -154,6 +157,13 @@ class SensationPhysique extends React.Component {
             </View>
             )
         }
+    }
+
+    //Le bouton "Suivant" est cliqué
+    _buttonIsPressed = () => {
+        const action = { type: 'GET_SENSATION', value: {localisation: this.state.localisation, sensation: this.state.sensation} }
+        this.props.dispatch(action)
+        this.props.navigation.navigate("Ressentir la sensation")
     }
 
     render() {
@@ -183,7 +193,7 @@ class SensationPhysique extends React.Component {
                     containerStyle={{justifyContent: "center"}}
                 />
 
-                {this._displayArea(this.state.bodyArea)}
+                {this._displayArea(this.state.localisation)}
 
             </View>
         )
@@ -198,4 +208,11 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SensationPhysique
+
+const mapStateToProps = (state) => {
+    return {
+        localisation: state.getSensation.localisation,
+        sensation: state.getSensation.sensation
+    }
+}
+export default connect(mapStateToProps)(SensationPhysique)
