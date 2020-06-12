@@ -20,6 +20,15 @@ const inputs = StyleSheet.create({
     }
 })
 
+const titles = StyleSheet.create({
+    title_2: {
+        textAlign: 'center',
+        fontSize: 20,
+        marginLeft: 20,
+        marginRight: 20
+    }
+})
+
 //Boutons de l'application
 const buttons = StyleSheet.create({
     button: {
@@ -76,4 +85,4 @@ const buttons = StyleSheet.create({
     }
 })
 
-export { buttons, inputs }  
+export { buttons, inputs, titles }  

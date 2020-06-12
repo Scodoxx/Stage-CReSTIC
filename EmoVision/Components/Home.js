@@ -12,7 +12,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import *  as firebase from 'firebase'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, titles } from '../styles'
 
 //Redux pour avoir accès à la valeur du slider n'importe où
 import { connect } from 'react-redux'
@@ -73,7 +73,7 @@ class Home extends React.Component {
             <View style={styles.main_container}>
                 <View>
                     <Text style={{ fontSize: 30, textAlign: 'center' }}>Bonjour {this.state.firstname}</Text>
-                    <Text style={{ fontSize: 20, textAlign: 'center' }}>Comment allez vous ?</Text>
+                    <Text style={titles.title_2}>Comment allez vous ?</Text>
                 </View>
 
                 

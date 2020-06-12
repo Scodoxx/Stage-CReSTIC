@@ -7,7 +7,7 @@ import Checkbox from './Checkbox'
 import { connect } from 'react-redux'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, titles } from '../styles'
 
 class QuelleEmotion extends React.Component {
 
@@ -35,7 +35,6 @@ class QuelleEmotion extends React.Component {
     }
 
     render() {
-        console.log(this.props.emotions)
         let selectedEmotions = this.state.emotions.map((emotion, index) => {
             return  <Checkbox
                         key={index}
@@ -47,9 +46,9 @@ class QuelleEmotion extends React.Component {
         return(
             <View style={styles.main_container}>
                 <ScrollView>
-                    <Text>Quelle émotion est la plus présente ?</Text>
+                    <Text style={[titles.title_2, {marginTop: 30, marginBottom: 30}]}>Quelle émotion est la plus présente ?</Text>
                     {selectedEmotions}
-                    <TouchableOpacity style={buttons.button} onPress={this._buttonIsPressed}>
+                    <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginRight: 20, marginTop: 10}]} onPress={this._buttonIsPressed}>
                         <Text style={buttons.button_text}>Ok</Text>
                     </TouchableOpacity>
                 </ScrollView>

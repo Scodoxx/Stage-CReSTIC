@@ -20,6 +20,7 @@ class EmotionItem extends React.Component {
         super(props)
         this.state = {
             tableauDesEmotions: [], //tableau qui comprends toutes les familles d'émotions
+            emotions: this.props.emotions, //Tableau des émotions qui viendra se remplir
             nombreEmotions: 0,
             check: false, //L'élément est coché de base ou pas
             indexEmotion: this.props.indexEmotion //Correspond a une famille d'émotion (0: joie, 1: colère, 2: peur, 3: tristesse, 4: dégout, 5: surprise)
@@ -28,11 +29,11 @@ class EmotionItem extends React.Component {
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
-        const emotionIndex = this.props.emotions.findIndex(item => item.id === this.state.tableauDesEmotions.id)
+        const emotionIndex = this.state.emotions.findIndex(item => item.id === this.state.tableauDesEmotions.id)
         if (emotionIndex !== -1) {
             console.log(emotionIndex)
             this.setState({
-                emotion: this.props.emotions[emotionIndex]
+                emotion: this.state.emotions[emotionIndex]
             })
             return
         }
@@ -88,7 +89,6 @@ class EmotionItem extends React.Component {
     }
 
     render() {
-        console.log(this.props.emotions)
         let emotions = this.state.tableauDesEmotions.map((emotion, index) => {
             return  <Checkbox
                         key={index}
