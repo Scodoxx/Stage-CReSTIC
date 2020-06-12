@@ -71,12 +71,15 @@ class Home extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text style={{ fontSize: 20 }}>Bonjour {this.state.firstname}</Text>
-                <Text>Comment allez vous ?</Text>
+                <View>
+                    <Text style={{ fontSize: 30, textAlign: 'center' }}>Bonjour {this.state.firstname}</Text>
+                    <Text style={{ fontSize: 20, textAlign: 'center' }}>Comment allez vous ?</Text>
+                </View>
 
-                <Text>{this.state.sliderValue}</Text>
+                
 
                 <View>
+                    <Text style={{textAlign: 'center', marginBottom: 20}}>{this.state.sliderValue}</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <ResponsiveImage
                             source={require("../Images/sad.png")}
@@ -117,7 +120,7 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 0.5,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     }
