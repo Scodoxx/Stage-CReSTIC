@@ -8,7 +8,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, titles } from '../styles'
 
 //Redux pour avoir accès à la valeur du slider n'importe où
 import { connect } from 'react-redux'
@@ -51,7 +51,7 @@ class jeMeSens extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text style={{ fontSize: 20 }}>{this.state.emotionFinale}</Text>
+                <Text style={titles.title_2}>{this.state.emotionFinale}</Text>
 
                 <View>
                     <Text>{this.state.sliderEmotion}</Text>

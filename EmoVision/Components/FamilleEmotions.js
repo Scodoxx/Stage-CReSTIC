@@ -7,6 +7,9 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from
 //Style
 import { buttons } from '../styles'
 
+//Redux
+import { connect } from 'react-redux'
+
 //On récupère la largeur de l'écran
 const windowWidth = Dimensions.get('window').width;
 
@@ -17,7 +20,8 @@ class FamilleEmotions extends React.Component {
 
     state = {
         tableauDesFamilles: [], //tableau qui comprends toutes les familles d'émotions
-        nombreFamilles: 0
+        nombreFamilles: 0,
+        emotions: this.props.emotions //émotions sélectionnées
     }
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
@@ -49,6 +53,19 @@ class FamilleEmotions extends React.Component {
 
     }
 
+    _emotionIsSet() {
+        if(Object.keys(this.props.emotions).length > 0) {
+            return(
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 20}]} onPress={() => this.props.navigation.navigate("Quelle émotion ?")}>
+                    <Text style={buttons.button_text}>Ok</Text>
+                </TouchableOpacity>
+            )
+        }
+        else{
+            <Text>Veuillez sélectionner au moins une émotions parmis les différentes familles ci-dessus.</Text>
+        }
+    }
+
     render() {
         let familles = this.state.tableauDesFamilles.map((famille, i) => {
             return  <TouchableOpacity style={[buttons.famille_button, {marginBottom: 30}]} key={i} onPress={() => this.props.navigation.navigate(famille)}>
@@ -59,9 +76,7 @@ class FamilleEmotions extends React.Component {
             <View style={[styles.main_container, {marginTop: 20}]}>
                 <ScrollView style={{width: '100%'}}>
                     {familles}
-                    <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 20}]} onPress={() => this.props.navigation.navigate("Quelle émotion ?")}>
-                        <Text style={buttons.button_text}>Ok</Text>
-                    </TouchableOpacity>
+                    {this._emotionIsSet()}
                 </ScrollView>
             </View>
         )
@@ -76,4 +91,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default FamilleEmotions
+const mapStateToProps = state => {
+    return {
+        emotions: state.toggleEmotion.emotions
+    }
+}
+
+export default connect(mapStateToProps)(FamilleEmotions)

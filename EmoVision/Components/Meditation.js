@@ -18,12 +18,12 @@ class Meditation extends React.Component {
     state = {
         audio: audioMeditation
     }
-    
+
     render() {
         return(
             <View style={styles.main_container}>
 
-                <View style={{backgroundColor: 'blue', borderRadius: 20, width: 20, height: 20}}/>
+                <View style={{backgroundColor: 'blue', borderRadius: 20, width: 20, height: 20, alignSelf: 'center'}}/>
 
                 <MediaPlayer audio={this.state.audio}></MediaPlayer>
 
