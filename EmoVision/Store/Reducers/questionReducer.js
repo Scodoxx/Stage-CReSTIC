@@ -9,8 +9,9 @@ function getQuestion(state = initialState, action) {
                 when: action.value.when
             }
             return nextState || state
-        case 'GET_QUESTION':
+        case 'SET_DEJA_RESSENTI':
             nextState = {
+                ...state,
                 dejaRessenti: action.value
             }
             return nextState || state

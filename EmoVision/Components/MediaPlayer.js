@@ -54,7 +54,6 @@ class MediaPlayer extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("unmount")
         this.setState({_isMounted: false})
     }
 

@@ -54,7 +54,13 @@ class FamilleEmotions extends React.Component {
     }
 
     _emotionIsSet() {
-        if(Object.keys(this.props.emotions).length > 0) {
+        if (typeof this.props.emotions === 'undefined') {
+            var nombreEmotionsChoisies = 0
+        }
+        else{
+            var nombreEmotionsChoisies = Object.keys(this.props.emotions).length
+        }
+        if(nombreEmotionsChoisies > 0) {
             return(
                 <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 20}]} onPress={() => this.props.navigation.navigate("Quelle émotion ?")}>
                     <Text style={buttons.button_text}>Ok</Text>
@@ -62,7 +68,9 @@ class FamilleEmotions extends React.Component {
             )
         }
         else{
-            <Text>Veuillez sélectionner au moins une émotions parmis les différentes familles ci-dessus.</Text>
+            return(
+                <Text style={{alignSelf: 'flex-start', marginLeft: 20, width: '70%'}}>Veuillez sélectionner au moins une émotions parmis les différentes familles ci-dessus.</Text>
+            )
         }
     }
 

@@ -108,6 +108,7 @@ class avantApres extends React.Component {
     }
 
     render() {
+        console.log(this.state.dejaRessenti)
         return(
             <View style={styles.main_container}>
 
