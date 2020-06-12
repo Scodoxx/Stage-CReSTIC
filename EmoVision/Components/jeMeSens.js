@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         emotionFinale: state.toggleEmotion.emotionFinale,
-        sliderEmotion: state.getSliderValue.sliderEmotion
+        sliderEmotion: state.getSliderValue.sliderEmotion,
+        emotions: state.toggleEmotion.emotions
     }
 }
 export default connect(mapStateToProps)(jeMeSens)

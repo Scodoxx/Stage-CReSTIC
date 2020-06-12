@@ -29,13 +29,8 @@ class EmotionItem extends React.Component {
 
     //Permet de récupérer les informations de l'utilisateur pour l'afficher dans le render
     componentDidMount() {
-        const emotionIndex = this.state.emotions.findIndex(item => item.id === this.state.tableauDesEmotions.id)
-        if (emotionIndex !== -1) {
-            console.log(emotionIndex)
-            this.setState({
-                emotion: this.state.emotions[emotionIndex]
-            })
-            return
+        if (typeof this.props.emotions === 'undefined') {
+            this.setState({emotions: []})
         }
 
         var that = this
@@ -61,7 +56,7 @@ class EmotionItem extends React.Component {
                     var idEmotion = 100*that.state.indexEmotion + i
                     //On va mapper le tableau des émotions choisies, si l'un des id correspond a un des id construit dans la liste, le "check" est marqué a vrai et on ne fait plus rien de le arrayMap
                     var isBroken = false
-                    that.props.emotions.map((emotion, index) => {
+                    that.state.emotions.map((emotion, index) => {
                         if(!isBroken) {
                             var id = emotion.id
                             if(id === idEmotion) {

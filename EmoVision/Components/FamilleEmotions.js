@@ -74,9 +74,14 @@ class FamilleEmotions extends React.Component {
         }
     }
 
+    //Déclenché quand j'appuie le le bouton d'une famille, navigation jusqu'à l'écran des émotions de cette famille
+    _familleIsPressed = (famille) => {
+        this.props.navigation.navigate(famille)
+    }
+
     render() {
         let familles = this.state.tableauDesFamilles.map((famille, i) => {
-            return  <TouchableOpacity style={[buttons.famille_button, {marginBottom: 30}]} key={i} onPress={() => this.props.navigation.navigate(famille)}>
+            return  <TouchableOpacity style={[buttons.famille_button, {marginBottom: 30}]} key={i} onPress={() => this._familleIsPressed(famille)}>
                         <Text style={buttons.button_text}>{famille}</Text>
                     </TouchableOpacity>
         })
