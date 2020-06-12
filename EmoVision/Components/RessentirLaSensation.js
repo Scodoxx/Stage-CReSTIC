@@ -8,7 +8,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, titles } from '../styles'
 
 class RessentirLaSensation extends React.Component {
 
@@ -35,16 +35,16 @@ class RessentirLaSensation extends React.Component {
         return(
             <View style={styles.main_container}>
                 
-                <Text>Repensez à la situation qui a fait émerger cette émotion :</Text>
-                <Text>Ressentez la sensation corporelle qu'elle sucite</Text>
-                <Text>Avez-vous déjà ressenti cette sensation corporelle avant aujourd'hui ?</Text>
+                <Text style={titles.title_2}>Repensez à la situation qui a fait émerger cette émotion :</Text>
+                <Text style={titles.title_2}>Ressentez la sensation corporelle qu'elle sucite</Text>
+                <Text style={titles.title_2}>Avez-vous déjà ressenti cette sensation corporelle avant aujourd'hui ?</Text>
 
                 <View style={{flexDirection: "row"}}>
-                    <TouchableOpacity style={buttons.button}>
+                    <TouchableOpacity style={[buttons.button, {marginRight: 20}]}>
                         <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Question") }>Oui</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={buttons.button}>
+                    <TouchableOpacity style={[buttons.button, {marginLeft: 20}]}>
                         <Text style={buttons.button_text} onPress={this._noIsPressed}>Non</Text>
                     </TouchableOpacity>
                 </View>
