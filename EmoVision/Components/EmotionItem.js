@@ -88,6 +88,7 @@ class EmotionItem extends React.Component {
     }
 
     render() {
+        console.log(this.props.emotions)
         let emotions = this.state.tableauDesEmotions.map((emotion, index) => {
             return  <Checkbox
                         key={index}

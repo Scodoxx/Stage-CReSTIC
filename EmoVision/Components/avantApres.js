@@ -29,6 +29,7 @@ class avantApres extends React.Component {
             temoignage: this.props.temoignage, //Témoignage de l'utilisateur
             sensation: this.props.sensation, //Sensation ressentie par l'utilisateur
             localisation: this.props.localisation, //Localisation de la douleur
+            dejaRessenti: this.props.dejaRessenti, //boolean si la personne avait déjà ressenti cette sensation
             where: this.props.where, //Si la personne a déjà ressentie cette sensation, où ça et avec qui?
             when: this.props.when, //Si la personne a déjà ressentie cette sensation, quand?
             emotionFinale: this.props.emotionFinale, //Emotion la plus forte ressentie par l'utilisateur
@@ -50,6 +51,17 @@ class avantApres extends React.Component {
         })
     }
 
+    //Retourne la date du jour
+    _getDateOfTheDay() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0')
+        var mm = String(today.getMonth() + 1).padStart(2, '0')
+        var yyyy = today.getFullYear()
+        today = dd + '/' + mm + '/' + yyyy
+
+        return(today)
+    }
+
     //Appelée quand on appuie sur le bouton pour passer à la page suivante
     _buttonIsPressed = () => {
         if(this.state.confidentialite) {
@@ -58,6 +70,7 @@ class avantApres extends React.Component {
                 .ref(`historiques/${this.state.uid}`)
                 .push(
                     {
+                        date: this._getDateOfTheDay(),
                         degreAvant: this.state.sliderValueBefore[0],
                         degreApres: this.state.sliderValueAfter[0],
                         douleur: {
@@ -65,10 +78,11 @@ class avantApres extends React.Component {
                             sensation: this.state.sensation
                         },
                         emotionRessentie: {
-                            echelle: this.state.sliderEmotion[0],
+                            echelle: this.state.sliderEmotion,
                             emotion: this.state.emotionFinale
                         },
                         ressenti: {
+                            dejaRessenti: this.state.dejaRessenti,
                             raconte: {
                                 date: this.state.when,
                                 localisation: this.state.where
@@ -188,6 +202,7 @@ const mapStateToProps = state => {
         temoignage: state.getTemoignage.temoignage,
         sensation: state.getSensation.sensation,
         localisation: state.getSensation.localisation,
+        dejaRessenti: state.getQuestion.dejaRessenti,
         where: state.getQuestion.where,
         when: state.getQuestion.when,
         emotionFinale: state.toggleEmotion.emotionFinale,

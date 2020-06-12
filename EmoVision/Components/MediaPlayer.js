@@ -42,7 +42,7 @@ class MediaPlayer extends React.Component {
                     playsInSilentModeIOS: true,
                     interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
                     shouldDuckAndroid: true,
-                    staysActiveInBackground: true,
+                    staysActiveInBackground: false,
                     playThroughEarpieceAndroid: true
                 })
 
@@ -54,8 +54,8 @@ class MediaPlayer extends React.Component {
     }
 
     componentWillUnmount() {
-        this._isMounted = false
-        this.isPlaying = false
+        console.log("unmount")
+        this.setState({_isMounted: false})
     }
 
     onPlaybackStatusUpdate = status => {

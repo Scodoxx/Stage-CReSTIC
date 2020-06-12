@@ -18,7 +18,7 @@ function getSliderValue(state = initialState, action) {
         case 'GET_DEGRE_EMOTION':
             nextState = {
                 ...state,
-                sliderEmotion: action.value
+                sliderEmotion: action.value[0]
             }
             return nextState || state
     default:

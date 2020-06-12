@@ -18,7 +18,7 @@ class Meditation extends React.Component {
     state = {
         audio: audioMeditation
     }
-
+    
     render() {
         return(
             <View style={styles.main_container}>

@@ -35,6 +35,7 @@ class QuelleEmotion extends React.Component {
     }
 
     render() {
+        console.log(this.props.emotions)
         let selectedEmotions = this.state.emotions.map((emotion, index) => {
             return  <Checkbox
                         key={index}

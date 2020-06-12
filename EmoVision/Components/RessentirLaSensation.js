@@ -4,10 +4,32 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
+//Redux
+import { connect } from 'react-redux'
+
 //Style
 import { buttons } from '../styles'
 
 class RessentirLaSensation extends React.Component {
+
+    state= {
+        dejaRessenti: false //l'utilisateur a déjà ressentie ou non cette sensation
+    }
+
+    //Si l'utilisateur appuie sur le bouton "Non", dejaRessenti est égal a false et sera stocké dans le store
+    _noIsPressed = () => {
+        this.setState({dejaRessenti: false})
+        const action = { type: 'SET_DEJA_RESSENTI', value: this.state.dejaRessenti }
+        this.props.dispatch(action)
+        this.props.navigation.navigate("Perception")
+    }
+
+    _noIsPressed = () => {
+        this.setState({dejaRessenti: true})
+        const action = { type: 'SET_DEJA_RESSENTI', value: this.state.dejaRessenti }
+        this.props.dispatch(action)
+        this.props.navigation.navigate("Perception")
+    }
 
     render() {
         return(
@@ -23,7 +45,7 @@ class RessentirLaSensation extends React.Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={buttons.button}>
-                        <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("Méditation") }>Non</Text>
+                        <Text style={buttons.button_text} onPress={this._noIsPressed}>Non</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -40,4 +62,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default RessentirLaSensation
+const mapStateToProps = state => {
+    return {
+        dejaRessenti: state.getQuestion.dejaRessenti
+    }
+}
+
+export default connect(mapStateToProps)(RessentirLaSensation)
