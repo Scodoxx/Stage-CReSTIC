@@ -2,10 +2,10 @@
 //L'utilisateur va sélectionner où est-ce qu'il ressent
 
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView, Dimensions } from 'react-native'
 
 //Style
-import { buttons, inputs } from '../styles'
+import { buttons, inputs, titles } from '../styles'
 
 //Redux
 import { connect } from 'react-redux'
@@ -142,14 +142,14 @@ class SensationPhysique extends React.Component {
     _displayArea(partieDuCorps) {
         if(partieDuCorps === "") {
             return(
-                <View><Text>Veuillez sélectionner une zone sur le personnage ci-dessus</Text></View>
+                <View><Text style={[titles.title_2, {marginTop: 20, marginBottom: 20}]}>Veuillez sélectionner une zone sur le personnage ci-dessus</Text></View>
             )
         }
         else{
             return(
             <View>
-                <Text>Vous avez sélectionner <Text style={{color: '#3F9BAF'}}>{partieDuCorps}</Text>, appuyez sur suivant pour continuer</Text>
-                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end'}]} onPress={this._buttonIsPressed}>
+                <Text style={[titles.title_2, {marginTop: 20, marginBottom: 20}]}>Vous avez sélectionner <Text style={{color: '#3F9BAF'}}>{partieDuCorps}</Text>, appuyez sur suivant pour continuer</Text>
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 25}]} onPress={this._buttonIsPressed}>
                     <Text style={buttons.button_text}>
                         Suivant
                     </Text>
@@ -168,33 +168,33 @@ class SensationPhysique extends React.Component {
 
     render() {
         return(
-            <View style={[styles.main_container, {padding: 10}]}>
+            <View style={styles.main_container}>
+                <ScrollView style={{padding: 10}}>
+                    <View>
+                        <Text style={inputs.input_title}>Quelle sensation physique ressentez-vous ?</Text>
+                        <TextInput 
+                            style={inputs.input}
+                            onChangeText={sensation => this.setState({ sensation })}
+                            value={this.state.sensation}
+                        ></TextInput>
+                    </View>
 
-                <View>
-                    <Text style={inputs.input_title}>Quelle sensation physique ressentez-vous ?</Text>
-                    <TextInput 
-                        style={inputs.input}
-                        onChangeText={sensation => this.setState({ sensation })}
-                        value={this.state.sensation}
-                    ></TextInput>
-                </View>
+                    <View>
+                        <Text style={[titles.title_2, {marginTop: 20, marginBottom: 20}]}>Où est logée cette sensation physique dans votre corps ?</Text>
+                    </View>
+                    
+                    <ImageMapper
+                        style={{justifyContent: "center"}}
+                        imgSource={getUrlImg}
+                        imgMap={bodyMap}
+                        imgWidth={windowWidth}
+                        imgHeight={windowWidth}
+                        onPress={(item, idx, event) => this._clickedArea(item, idx, event)}
+                        containerStyle={{justifyContent: "center"}}
+                    />
 
-                <View>
-                    <Text style={{ fontSize: 14, marginTop: 20 }}>Où est logée cette sensation physique dans votre corps ?</Text>
-                </View>
-                
-                <ImageMapper
-                    style={{justifyContent: "center"}}
-                    imgSource={getUrlImg}
-                    imgMap={bodyMap}
-                    imgWidth={windowWidth}
-                    imgHeight={windowWidth}
-                    onPress={(item, idx, event) => this._clickedArea(item, idx, event)}
-                    containerStyle={{justifyContent: "center"}}
-                />
-
-                {this._displayArea(this.state.localisation)}
-
+                    {this._displayArea(this.state.localisation)}
+                </ScrollView>
             </View>
         )
     }

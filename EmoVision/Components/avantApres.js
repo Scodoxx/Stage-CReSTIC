@@ -108,7 +108,6 @@ class avantApres extends React.Component {
     }
 
     render() {
-        console.log(this.state.dejaRessenti)
         return(
             <View style={styles.main_container}>
 
@@ -175,10 +174,10 @@ class avantApres extends React.Component {
                 {this._siNegatif()}
 
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity style={buttons.replay_button}>
+                    <TouchableOpacity style={[buttons.replay_button, {marginRight: 10}]}>
                         <Text style={buttons.button_text}>Et maintenant je me sens...</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={buttons.terminer_button} onPress={this._buttonIsPressed}>
+                    <TouchableOpacity style={[buttons.terminer_button, {marginLeft: 10}]} onPress={this._buttonIsPressed}>
                         <Text style={buttons.button_text}>Terminer</Text>
                     </TouchableOpacity>
                 </View>

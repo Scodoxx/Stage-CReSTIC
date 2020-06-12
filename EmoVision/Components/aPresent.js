@@ -9,7 +9,7 @@ import ResponsiveImage from 'react-native-responsive-image'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 //Style
-import { buttons } from '../styles'
+import { buttons, titles } from '../styles'
 
 //Redux pour avoir accès à la valeur du slider n'importe où
 import { connect } from 'react-redux'
@@ -51,8 +51,8 @@ class aPresent extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text style={{ fontSize: 20 }}>Et à présent ?</Text>
-                <Text style={{ fontSize: 20 }}>Comment vous sentez-vous ?</Text>
+                <Text style={titles.title_2}>Et à présent ?</Text>
+                <Text style={titles.title_2}>Comment vous sentez-vous ?</Text>
 
                 <Text>{this.state.sliderValueAfter}</Text>
 

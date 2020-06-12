@@ -33,40 +33,35 @@ class Question extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                
-                <ScrollView style={styles.scrollview}>
-                    <View style={{ flexDirection: 'row', justifyContent: "space-around" }}>
-                        <View>
-                            <Text style={inputs.input_title}>Où / Avec qui ?</Text>
-                            <TextInput 
-                                style={inputs.input}
-                                onChangeText={where => this.setState({ where })}
-                                value={this.state.where}
-                            />
-                        </View>
-                        <View>
-                            <Text style={inputs.input_title}>Quand ?</Text>
-                            <TextInputMask
-                                type={'datetime'}
-                                style={inputs.input}
-                                options={{
-                                    format: 'DD/MM/YYYY'
-                                }}
-                                value={this.state.when}
-                                onChangeText={text => {
-                                    this.setState({
-                                    when: text
-                                    })
-                                }}
-                            />
-                        </View>
+
+                    <View>
+                        <Text style={[inputs.input_title, {width: screenWidth/1.5}]}>Où / Avec qui ?</Text>
+                        <TextInput 
+                            style={inputs.input}
+                            onChangeText={where => this.setState({ where })}
+                            value={this.state.where}
+                        />
+                    </View>
+                    <View>
+                        <Text style={[inputs.input_title, {width: screenWidth/3}]}>Quand ?</Text>
+                        <TextInputMask
+                            type={'datetime'}
+                            style={inputs.input}
+                            options={{
+                                format: 'DD/MM/YYYY'
+                            }}
+                            value={this.state.when}
+                            onChangeText={text => {
+                                this.setState({
+                                when: text
+                                })
+                            }}
+                        />
                     </View>
 
-                    <TouchableOpacity style={buttons.button}>
-                        <Text style={buttons.button_text} onPress={this._buttonIsPressed}>Suivant</Text>
-                    </TouchableOpacity>
-
-                </ScrollView>
+                <TouchableOpacity style={buttons.button}>
+                    <Text style={buttons.button_text} onPress={this._buttonIsPressed}>Suivant</Text>
+                </TouchableOpacity>
 
             </View>
         )
@@ -76,10 +71,8 @@ class Question extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 0.7,
-        alignItems: 'center'
-    },
-    scrollview: {
-        width: screenWidth
+        alignItems: 'center',
+        justifyContent: 'space-around'
     }
 })
 

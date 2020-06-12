@@ -23,11 +23,11 @@ class Meditation extends React.Component {
         return(
             <View style={styles.main_container}>
 
-                <View style={{backgroundColor: 'blue', borderRadius: 20, width: 20, height: 20, alignSelf: 'center'}}/>
+                <View style={{marginTop: '60%', backgroundColor: 'blue', borderRadius: 20, width: 20, height: 20}}/>
 
                 <MediaPlayer audio={this.state.audio}></MediaPlayer>
 
-                <TouchableOpacity style={buttons.button}>
+                <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 20}]}>
                     <Text style={buttons.button_text} onPress={() => this.props.navigation.navigate("A présent ?") }>Suivant</Text>
                 </TouchableOpacity>
 
@@ -39,8 +39,7 @@ class Meditation extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
+        alignItems: 'center'
     }
 })
 
