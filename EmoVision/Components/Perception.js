@@ -49,8 +49,8 @@ class Perception extends React.Component {
                     />
                 </View>
 
-                <View>
-                    <TouchableOpacity style={[buttons.button, { alignSelf: 'flex-end', marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Méditation") }>
+                <View style={{ alignSelf: 'flex-end' }}>
+                    <TouchableOpacity style={[buttons.button, { marginBottom : 20, marginRight : 20 }]} onPress={() => this.props.navigation.navigate("Méditation") }>
                         <Text style={buttons.button_text}>J'y vais</Text>
                     </TouchableOpacity>
                 </View>

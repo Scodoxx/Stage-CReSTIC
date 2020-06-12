@@ -48,6 +48,15 @@ const buttons = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    //Boutons pour la page FamilleEmotions.js
+    famille_button: {
+        width: 300,
+        height: 47,
+        borderRadius: 20,
+        backgroundColor: '#FB9999',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
     //Bouton orange à la toute fin de la session
     terminer_button: {
         backgroundColor: '#E59925',

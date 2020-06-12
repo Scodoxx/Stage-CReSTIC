@@ -2,7 +2,7 @@
 //L'utilisateur va pouvoir sélectionner une famille d'émotion qu'il ressent
 
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native'
 
 //Style
 import { buttons } from '../styles'
@@ -51,16 +51,18 @@ class FamilleEmotions extends React.Component {
 
     render() {
         let familles = this.state.tableauDesFamilles.map((famille, i) => {
-            return  <TouchableOpacity style={styles.familles} key={i} onPress={() => this.props.navigation.navigate(famille)}>
-                        <Text>{famille}</Text>
+            return  <TouchableOpacity style={[buttons.famille_button, {marginBottom: 30}]} key={i} onPress={() => this.props.navigation.navigate(famille)}>
+                        <Text style={buttons.button_text}>{famille}</Text>
                     </TouchableOpacity>
         })
         return(
-            <View style={styles.main_container}>
-                {familles}
-                <TouchableOpacity style={buttons.button} onPress={() => this.props.navigation.navigate("Quelle émotion ?")}>
-                    <Text style={buttons.button_text}>Ok</Text>
-                </TouchableOpacity>
+            <View style={[styles.main_container, {marginTop: 20}]}>
+                <ScrollView style={{width: '100%'}}>
+                    {familles}
+                    <TouchableOpacity style={[buttons.button, {alignSelf: 'flex-end', marginBottom: 20, marginRight: 20}]} onPress={() => this.props.navigation.navigate("Quelle émotion ?")}>
+                        <Text style={buttons.button_text}>Ok</Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
         )
     }
@@ -71,12 +73,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
-    },
-    familles: {
-        width: windowWidth,
-        height: "16%",
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 })
 
